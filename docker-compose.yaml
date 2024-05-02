@@ -1,8 +1,13 @@
 version: "3.8"
+
 services:
   web:
+    # Define el servicio "web"
     build: .
+    # Construye la imagen del contenedor a partir del contexto actual
     ports:
       - "8080:80"
+      # Mapea el puerto 8080 del host al puerto 80 del contenedor
     volumes:
       - ./src:/var/www/html
+      # Monta el directorio ./src del host en /var/www/html dentro del contenedor
