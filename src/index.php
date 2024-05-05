@@ -3,53 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
-    <!-- Encabezado -->
-    <div class='flex'>
-        <header class="bg-sky-500 text-white p-4 flex justify-between items-center fixed w-full z-20">
-            <div class="container mx-auto flex justify-between items-center">
-                <!-- Menú hamburguesa -->
-                <div class="flex-initial relative">
-                    <button id="hamburger-btn" class="text-white focus:outline-none">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                    </button>
-                </div>
 
-                <!-- Logo -->
-                <div class="flex-grow text-center">
-                    <a href="#" class="flex justify-center items-center">
-                        <img src="assets/imagenes/huella.png" alt="Logo" class="h-8">
-                    </a>
-                </div>
-                
-                <!-- Botón de inicio de sesión -->
-                <div class="flex-initial">
-                    <a href="#" class="bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                        Inicio Sesión
-                    </a>
-                </div>
-            </div>
-        </header>
+    <div class='flex'>
+        <?php include "components/header.html"; ?>
 
         <div class="flex-1">
             <!-- Menú Lateral -->
-            <aside id="menu" class="fixed inset-y-0 left-0 transform -translate-x-full bg-blue-800 text-white w-64 overflow-auto transition-transform duration-300 ease-in-out z-10" style="top: 4rem; height: calc(100% - 4rem);">
-                <a href="#" class="block p-4">Adopta</a>
-                <a href="#" class="block p-4">Nosotros</a>
-                <a href="#" class="block p-4">Sedes</a>
-                <a href="#" class="block p-4">Donar</a>
-                <a href="#contacto" class="block p-4">Contactos</a>
-                <a href="#" class="block p-4">Testimonios</a>
-                <a href="#" class="block p-4">Redes</a>
-            </aside>
+            <?php include "components/sidebar.html"; ?>
 
             <!-- Contenido principal de la página -->
-            <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4" style="top: 4rem; height: calc(100% - 4rem);">
-                <!-- Agrega aquí el contenido de tu página -->
-                <p>Aquí va el contenido principal de la página.</p>
+            <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4" style="top: 4rem; height: calc(100% - 4rem)">
+                <p>Salto de la linea en la pagina para evitar que se solapen.</p>
                 <br><br>
                 <div class="relative w-full h-96 overflow-hidden">
                     <video autoplay muted loop class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 z-0">
@@ -61,7 +30,6 @@
                     </div>
                 </div>
 
-                <!-- Sección de bienvenida -->
                 <section class="text-center py-10 bg-white">
                     <div class="container mx-auto">
                         <h2 class="text-3xl font-bold mb-4">Lost Paws</h2>
@@ -72,29 +40,56 @@
                     </div>
                 </section>
 
-                <section id="servicios" class="py-10 bg-gray-100">
-                    <div class="container mx-auto grid grid-cols-3 gap-4">
-                        <div class="bg-white p-4 shadow rounded">
-                            <h3 class="font-bold text-lg">Consultas Generales</h3>
-                            <p class="text-gray-600">Chequeos completos para asegurar la salud de tu mascota.</p>
-                        </div>
-
-                        <div class="bg-white p-4 shadow rounded">
-                            <h3 class="font-bold text-lg">Vacunación</h3>
-                            <p class="text-gray-600">Protege a tus mascotas de enfermedades y virus.</p>
-                        </div>
-
-                        <div class="bg-white p-4 shadow rounded">
-                            <h3 class="font-bold text-lg">Emergencias</h3>
-                            <p class="text-gray-600">Servicio de urgencias disponible 24/7 para atender cualquier imprevisto.</p>
-                        </div>
+                <section id="adopta" class="text-center py-10 bg-white">
+                    <div class="container mx-auto">
+                        <h2 class="text-3xl font-bold mb-4">Adopta una Mascota</h2>
+                        <p class="text-gray-700 mb-6">Explora las opciones para adoptar y dar un hogar a una mascota que lo necesita.</p>
                     </div>
+                    <a href="#adopta" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                        Adopta
+                    </a>
                 </section>
 
-                <section id="nosotros" class="py-10 bg-white">
+                <!-- Nosotros -->
+                <section id="nosotros" class="py-10 bg-gray-100">
                     <div class="container mx-auto text-center">
                         <h2 class="text-3xl font-bold mb-4">Conoce a nuestro equipo</h2>
                         <p class="text-gray-700">Un equipo profesional y dedicado a cuidar de tus mascotas.</p>
+                    </div>
+                </section>
+
+                <!-- Sección de Sedes -->
+                <section id="sedes" class="py-10 bg-white">
+                    <div class="container mx-auto">
+                        <h2 class="text-3xl font-bold mb-4">Nuestras Sedes</h2>
+                        <p class="text-gray-700 mb-6">Encuentra nuestra sede más cercana y ven a visitarnos.</p>
+                    </div>
+                    <div id="map" style="height: 400px;"></div>
+                </section>
+                <!-- Sección de Donación -->
+                <section id="donar" class="py-10 bg-gray-100">
+                    <div class="container mx-auto text-center">
+                        <h2 class="text-3xl font-bold mb-4">Cómo Puedes Ayudar</h2>
+                        <p class="text-gray-700">Tu donación hace la diferencia para muchas mascotas.</p><br>
+                        <a href="#donar" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            Donar
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Sección de Testimonios -->
+                <section id="testimonios" class="py-10 bg-white">
+                    <div class="container mx-auto text-center">
+                        <h2 class="text-3xl font-bold mb-4">Historias de Éxito</h2>
+                        <p class="text-gray-700">Descubre las historias de mascotas y dueños felices gracias a nuestra ayuda.</p>
+                    </div>
+                </section>
+
+                <!-- Sección de Redes Sociales -->
+                <section id="redes" class="py-10 bg-gray-100">
+                    <div class="container mx-auto text-center">
+                        <h2 class="text-3xl font-bold mb-4">Síguenos en Redes</h2>
+                        <p class="text-gray-700">Mantente al día con nuestras últimas noticias y eventos en nuestras redes sociales.</p>
                     </div>
                 </section>
 
@@ -123,20 +118,10 @@
         </div>
     </div>
 
-    <footer class="bg-blue-900 text-white text-center p-4">
-        <p>Veterinaria Cruz Azul &copy; 2024</p>
-    </footer>
+    <?php include "components/footer.html"; ?>
 
-    <script>
-        document.getElementById('hamburger-btn').addEventListener
-        ('click', function() 
-            {
-                var menu = document.getElementById('menu');
-                var pageContent = document.getElementById('page-content');
-                menu.classList.toggle('-translate-x-full');
-                pageContent.classList.toggle('ml-64');
-            }
-        );
-    </script>
+    <script src="scripts/dynamic.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="scripts/map.js"></script>
 </body>
 </html>
