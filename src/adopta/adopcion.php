@@ -103,7 +103,7 @@ $perros = array(
         foreach ($perros as $perro) {
             echo "<div class='grid-item'>";
             echo "  <div class='card' style='width: 18rem;'>";
-            echo "      <img class='card-img-top' src='".$perro['imagen']."' alt='Imagen del canino'>";
+            echo "      <img style='width: 100%' src='../assets/imagenes/perros-ejemplo/".$perro['imagen']."' alt='Imagen del canino'>";
             echo "      <div class='card-body'>";
             echo "          <h5 class='card-title'>".$perro['nombre']."</h5>";
             echo "          <p class='card-text'>".$perro['descripcion']."</p>";
