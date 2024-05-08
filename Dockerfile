@@ -1,12 +1,19 @@
 FROM php:8.2-apache
-# Usa la imagen base php:8.2-apache
 
-RUN apt-get update && apt-get install -y libpq-dev \
-    # Actualiza el repositorio de paquetes e instala libpq-dev
+RUN apt-get update && apt-get install -y libpq-dev libzip-dev git \
     && docker-php-ext-install pdo pdo_pgsql pgsql \
-    # Instala extensiones de PHP necesarias para PostgreSQL
-    && a2enmod rewrite
-    # Habilita el módulo de Apache rewrite
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && a2enmod rewrite \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www/html
-# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /var/www/html/
+
+COPY . /var/www/html/
+
+# Ejecuta Composer para instalar las dependencias
+RUN composer install
+
+EXPOSE 80
