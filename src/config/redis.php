@@ -1,5 +1,5 @@
 <?php
-
+#sale de config y src y entra a la carpeta vendor (en docker)
 require "../../vendor/autoload.php";
 
 function getRedisConnection()

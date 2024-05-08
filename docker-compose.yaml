@@ -1,5 +1,5 @@
 version: "3.8"
-
+#docker compose sirve para que los servicios se puedan comunicar entre si
 services:
   web:
     build: .
