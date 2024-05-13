@@ -27,7 +27,7 @@
                 <div class="bg-blue-100 p-6 rounded-lg">
                     <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Iniciar Sesión</h2>
 
-                <form action="../negocio/usuarioNegocio.php" method="post" class="space-y-6">
+                <form action="../negocio/procesarLogin.php" method="post" class="space-y-6">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
                         <input type="text" name="email" id="email" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">

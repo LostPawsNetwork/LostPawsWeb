@@ -1,6 +1,6 @@
 <?php
-    include '../config/neonManguito.php';
-
+    require '../config/neonManguito.php';
+    
     class Usuario
     {
         private $conn;
