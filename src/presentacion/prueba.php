@@ -1,5 +1,5 @@
 <?php
-require_once "config/neon.php";
+require_once "../config/neon.php";
 $pdo = getPDOConnection();
 
 $query = "SELECT * FROM playing_with_neon";
