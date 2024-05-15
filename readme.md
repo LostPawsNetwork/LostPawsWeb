@@ -7,5 +7,5 @@ Para correr el proyecto se tiene que tener instalado Docker y Docker Compose. Un
 Una vez que se haya terminado de construir y correr el proyecto, se puede acceder a la aplicación en el siguiente enlace:
 
 ```bash
-    http://localhost:8080
+    http://localhost:8080/lostpaws
 ```
