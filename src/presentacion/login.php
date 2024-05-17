@@ -27,15 +27,15 @@
                 <div class="bg-blue-100 p-6 rounded-lg">
                     <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Iniciar Sesión</h2>
 
-                <form action="../utils/recaptcha.php" method="post" class="space-y-6">
+                <form action="../negocio/procesarLogin.php"  method="post" class="space-y-6">
                     <div>
-                        <label for="user" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
-                        <input type="text" name="user" id="user" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
+                        <input type="text" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                        <input type="password" name="password" id="password" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="passwd" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                        <input type="password" name="passwd" id="passwd" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div class="items-center">
                         <div class="g-recaptcha mb-4 w-full" data-sitekey="6LfVXgspAAAAAD82ltcbTlmK1rvhUfwR2R1MGCuf"></div>
@@ -43,7 +43,9 @@
 
                     <div class="flex flex-col items-center space-y-4">
                         <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Ingresar</button>
-                        <a href="register" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Registrarse</a>
+                        <div>
+                        ¿No tienes cuenta?<a href="registrar" class="text-green-600 hover:underline"> Registrate</a>
+                        </div>
                         <a href="recuperar" class="text-green-600 hover:underline">¿Has olvidado tu contraseña?</a>
                     </div>
                 </form>
