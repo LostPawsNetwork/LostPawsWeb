@@ -1,5 +1,5 @@
 <?php
-    include '../datos/usuario.php';
+    require_once '../datos/Usuario.php';
 
     class LoginManager 
     {
