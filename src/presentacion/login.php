@@ -34,8 +34,8 @@
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                        <input type="password" name="password" id="password" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="passwd" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                        <input type="password" name="passwd" id="passwd" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div class="items-center">
                         <div class="g-recaptcha mb-4 w-full" data-sitekey="6LfVXgspAAAAAD82ltcbTlmK1rvhUfwR2R1MGCuf"></div>
