@@ -1,15 +1,15 @@
 <?php
     session_start();
 
-    include 'LoginManager.php';
+    include 'loginManager.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $correo = $_POST['correo'];
+        $passwd = $_POST['passwd'];
 
         $loginManager = new LoginManager();
-        $loginExitoso = $loginManager->iniciarSesion($email, $password);
+        $loginExitoso = $loginManager->iniciarSesion($correo, $passwd);
 
         if ($loginExitoso) 
         {

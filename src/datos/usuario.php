@@ -1,5 +1,5 @@
 <?php
-    require_once '../config/neonManguito.php';
+    require_once '../config/neon.php';
     
     class Usuario
     {
@@ -10,17 +10,17 @@
             $this->conn = getPDOConnection();
         }
 
-        function validarUsuario($email, $password) 
+        function validarUsuario($correo, $passwd) 
         {
-            $sql = "SELECT password FROM tbUsuario WHERE email = :email";
+            $sql = "SELECT passwd FROM usuario WHERE correo = :correo";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':correo', $correo);
             $stmt->execute();
             
             if ($stmt->rowCount() > 0) 
             {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                if (password_verify($password, $row['password'])) 
+                if (password_verify($passwd, $row['passwd'])) 
                 {
                     return true;
                 }
@@ -28,19 +28,18 @@
             return false;
         }
 
-        function registrarUsuario($email, $password, $nombre, $apellido, $fechaNacimiento, $celular, $sexo, $idCargo) 
+        function registrarUsuario($correo, $passwd, $nombre, $apellido, $fechaNacimiento, $dni, $tipoUsuario) 
         {
-            $sql = "INSERT INTO tbusuario (email, password, nombre, apellido, fechaNacimiento, celular, sexo, idCargo) 
-                    VALUES (:email, :password, :nombre, :apellido, :fechaNacimiento, :celular, :sexo, :idCargo)";
+            $sql = "INSERT INTO usuario (correo, passwd, nombre, apellido, fechaNacimiento, dni, tipoUsuario) 
+                    VALUES (:correo, :passwd, :nombre, :apellido, :fechaNacimiento, :dni, :tipoUsuario)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', password_hash($password, PASSWORD_BCRYPT));
+            $stmt->bindParam(':correo', $correo);
+            $stmt->bindParam(':passwd', password_hash($passwd, PASSWORD_BCRYPT));
             $stmt->bindParam(':nombre', $nombre);
             $stmt->bindParam(':apellido', $apellido);
             $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
-            $stmt->bindParam(':celular', $celular);
-            $stmt->bindParam(':sexo', $sexo);
-            $stmt->bindParam(':idCargo', $idCargo);
+            $stmt->bindParam(':dni', $dni);
+            $stmt->bindParam(':tipoUsuario', $tipoUsuario);
             return $stmt->execute();
         }
     }

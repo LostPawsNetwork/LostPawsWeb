@@ -1,28 +1,27 @@
 <?php
     session_start();
 
-    require_once 'RegistroManager.php';
+    require_once '../datos/usuario.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $correo = $_POST['correo'];
+        $passwd = $_POST['passwd'];
         $confirmPassword = $_POST['confirmPassword'];
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $fechaNacimiento = $_POST['fechaNacimiento'];
-        $celular = $_POST['celular'];
-        $sexo = $_POST['sexo'];
-        $idCargo = 1;
+        $dni = $_POST['dni'];
+        $tipoUsuario = 1;
 
-        if ($password !== $confirmPassword) 
+        if ($passwd !== $confirmPassword) 
         {
             echo "Las contraseñas no coinciden.";
             exit();
         }
 
-        $registroManager = new RegistroManager();
-        $registroExitoso = $registroManager->registrarUsuario($email, $password, $nombre, $apellido, $fechaNacimiento, $celular, $sexo, $idCargo);
+        $user = new Usuario();
+        $registroExitoso = $user->registrarUsuario($correo, $passwd, $nombre, $apellido, $fechaNacimiento, $dni, $tipoUsuario);
 
         if ($registroExitoso) 
         {

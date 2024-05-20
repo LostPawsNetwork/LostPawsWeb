@@ -1,11 +1,11 @@
 <?php
     session_start();
 
-    if (isset($_SESSION['email'])) 
+    if (isset($_SESSION['correo'])) 
     {
-        $email = $_SESSION['email'];
+        $correo = $_SESSION['correo'];
 
-        echo "Bienvenido, $email. Estás logueado.";
+        echo "Bienvenido, $correo. Estás logueado.";
     } 
     else
     {

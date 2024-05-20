@@ -10,13 +10,13 @@
             $this->usuario = new Usuario();
         }
 
-        public function iniciarSesion($email, $password) 
+        public function iniciarSesion($correo, $passwd) 
         {
-            $usuarioValido = $this->usuario->validarUsuario($email, $password);
+            $usuarioValido = $this->usuario->validarUsuario($correo, $passwd);
             
             if ($usuarioValido) 
             {
-                $_SESSION['email'] = $email;
+                $_SESSION['correo'] = $correo;
 
                 return true;
             } 
@@ -34,7 +34,7 @@
 
         public function sesionActual() 
         {
-            return isset($_SESSION['email']);
+            return isset($_SESSION['correo']);
         }
     }
 ?>

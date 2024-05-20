@@ -29,8 +29,8 @@
 
                 <form action="../negocio/procesarLogin.php" method="post" class="space-y-6">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
-                        <input type="text" name="email" id="email" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
+                        <input type="email" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
 
                     <div>
