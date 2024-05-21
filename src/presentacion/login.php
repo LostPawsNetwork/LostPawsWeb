@@ -27,10 +27,10 @@
                 <div class="bg-blue-100 p-6 rounded-lg">
                     <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Iniciar Sesión</h2>
 
-                <form action="../negocio/procesarLogin.php"  method="post" class="space-y-6">
+                <form action="../negocio/procesarLogin.php" method="post" class="space-y-6">
                     <div>
                         <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
-                        <input type="text" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <input type="email" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
 
                     <div>
@@ -43,9 +43,7 @@
 
                     <div class="flex flex-col items-center space-y-4">
                         <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Ingresar</button>
-                        <div>
-                        ¿No tienes cuenta?<a href="registrar" class="text-green-600 hover:underline"> Registrate</a>
-                        </div>
+                        <a href="registroUsuario.php" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Registrarse</a>
                         <a href="recuperar" class="text-green-600 hover:underline">¿Has olvidado tu contraseña?</a>
                     </div>
                 </form>

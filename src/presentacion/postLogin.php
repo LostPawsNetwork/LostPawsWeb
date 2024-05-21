@@ -1,12 +1,15 @@
 <?php
-session_start();
+    session_start();
 
-if (isset($_SESSION["email"])) {
-    $email = $_SESSION["email"];
+    if (isset($_SESSION['correo'])) 
+    {
+        $correo = $_SESSION['correo'];
 
-    echo "Bienvenido, $email. Estás logueado.";
-} else {
-    header("Location: ../presentacion/iniciarSesion.php");
-    exit();
-}
+        echo "Bienvenido, $correo. Estás logueado.";
+    } 
+    else
+    {
+        header("Location: ../presentacion/iniciarSesion.php");
+        exit();
+    }
 ?>

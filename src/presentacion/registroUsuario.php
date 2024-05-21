@@ -26,39 +26,39 @@
             <div class="bg-blue-100 p-6 rounded-lg">
                 <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Registrar Usuario</h2>
 
-                <form action="../utils/register.php" method="post" class="space-y-6">
+                <form action="../negocio/procesarRegistro.php" method="post" class="space-y-6">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                        <input type="email" name="email" id="email" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nombre y Apellido</label>
-                        <input type="text" name="name" id="name" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido</label>
+                        <input type="text" name="apellido" id="apellido" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>
                         <label for="dni" class="block text-sm font-medium text-gray-700">DNI</label>
                         <input type="text" name="dni" id="dni" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Celular</label>
-                        <input type="tel" name="phone" id="phone" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="fechaNacimiento" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+                        <input type="date" name="fechaNacimiento" id="fechaNacimiento" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>
-                        <label for="dob" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
-                        <input type="date" name="dob" id="dob" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <input type="email" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                        <input type="password" name="password" id="password" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="passwd" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                        <input type="password" name="passwd" id="passwd" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>
-                        <label for="confirm_password" class="block text-sm font-medium text-gray-700">Repetir Contraseña</label>
-                        <input type="password" name="confirm_password" id="confirm_password" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
 
                     <div class="flex flex-col items-center space-y-4">
                         <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Registrar</button>
-                        <a href="login" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Iniciar Sesión</a>
+                        <a href="login.php" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Iniciar Sesión</a>
                     </div>
                 </form>
             </div>
