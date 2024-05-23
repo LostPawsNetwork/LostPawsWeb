@@ -49,7 +49,7 @@ $perros = array(
                 foreach ($perros as $perro) {
                     echo "  <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>";
                     echo "      <div class='h-64'>";
-                    echo "          <img class='rounded-md size-full' src='./assets/imagenes/perros-ejemplo/".$perro['imagen']."' alt='Imagen del canino'>";
+                    echo "          <img class='rounded-md size-full' src='../assets/imagenes/perros-ejemplo/".$perro['imagen']."' alt='Imagen del canino'>";
                     echo "      </div>";
                     echo "      <div class='pb-4 pl-2 h-28'>";
                     echo "          <h5>".$perro['nombre']."</h5>";
@@ -68,42 +68,46 @@ $perros = array(
                 ?>
             </div>
         </div>
-        <div class="basis-1/5 pl-3">
+        <div class="basis-1/5 pl-3 pr-2 shadow-lg shadow-black-100 outline outline-offset-2 outline-black-200 rounded text-center">
             <?php
             //todo cuando se activen los filtros se re carga toda la página para hacer la consulta en base a lo filtrado
             ?>
             <fieldset>
-                <legend>Filtros</legend>
+                <div class="mb-2 mt-3 text-2xl text-bold ">
+                    <legend>Filtros</legend>
+                </div>
                 <form action="">
-                    <label>Tamaño</label>
-                    <div class="filtros-opcion">
-                        <select name="dog-size" id="dog-size">
-                            <option value="">...</option>
-                            <option value="xl">Grande</option>
-                            <option value="x">Mediano</option>
-                            <option value="xs">Pequeño</option>
-                        </select>
+                    <div>
+                        <label>Tamaño</label>
+                        <div>
+                            <select name="dog-size" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 border-gray-600 dark:placeholder-gray-400">
+                                <option value="">...</option>
+                                <option value="xl">Grande</option>
+                                <option value="x">Mediano</option>
+                                <option value="xs">Pequeño</option>
+                            </select>
+                        </div>
+                        <label>Sexo</label>
+                        <div>
+                            <select name="dog-sex" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 border-gray-600 dark:placeholder-gray-400">
+                                <option value="">...</option>
+                                <option  value="macho">Macho</option>
+                                <option value="hembra">Hembra</option>
+                            </select>
+                        </div>
+                        <label>Edad</label>
+                        <div class="">
+                            <select name="dog-age" id="dog-age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 border-gray-600 dark:placeholder-gray-400">
+                                <option value="">...</option>
+                                <option value="1">0 a 1 año</option>
+                                <option value="2">1 a 3 años</option>
+                                <option value="3">3 a 6 años</option>
+                                <option value="4">6 o más años</option>
+                            </select>
+                        </div>
                     </div>
-                    <label>Sexo</label>
-                    <div class="filtros-opcion">
-                        <select name="dog-sex" id="dog-size">
-                            <option value="">...</option>
-                            <option  value="macho">Macho</option>
-                            <option value="hembra">Hembra</option>
-                        </select>
-                    </div>
-                    <label>Edad</label>
-                    <div class="filtros-opcion">
-                        <select name="dog-age" id="dog-age">
-                            <option value="">...</option>
-                            <option value="1">0 a 1 año</option>
-                            <option value="2">1 a 3 años</option>
-                            <option value="3">3 a 6 años</option>
-                            <option value="4">6 o más años</option>
-                        </select>
-                    </div>
-                    <div class="filtros-footer">
-                        <button style="border-radius: 1rem;" type="submit">Filtrar</button>
+                    <div class="outline outline-offset-2 outline-black-100 mt-4 bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
+                        <button type="submit">Filtrar</button>
                     </div>
                 </form>
             </fieldset>
