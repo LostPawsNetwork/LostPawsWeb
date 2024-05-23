@@ -1,13 +1,17 @@
 version: "3.8"
-
+#docker compose sirve para que los servicios se puedan comunicar entre si
 services:
   web:
-    # Define el servicio "web"
     build: .
-    # Construye la imagen del contenedor a partir del contexto actual
     ports:
       - "8080:80"
-      # Mapea el puerto 8080 del host al puerto 80 del contenedor
     volumes:
-      - ./src:/var/www/html
-      # Monta el directorio ./src del host en /var/www/html dentro del contenedor
+      - ./src:/var/www/html/lostpaws
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
