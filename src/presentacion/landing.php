@@ -10,11 +10,11 @@
 <body class="bg-gray-100">
 
     <div class='flex'>
-        <?php include "components/header.html"; ?>
+        <?php include "../components/header2.html"; ?>
 
         <div class="flex-1">
             <!-- Menú Lateral -->
-            <?php include "components/sidebar.html"; ?>
+            <?php include "../components/sidebar2.html"; ?>
 
             <!-- Contenido principal de la página -->
             <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4" style="top: 4rem; height: calc(100% - 4rem)">
@@ -22,7 +22,7 @@
                 <br><br>
                 <div class="relative w-full h-96 overflow-hidden">
                     <video autoplay muted loop class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 z-0">
-                        <source src="assets/videos/landing.mp4" type="video/mp4">
+                        <source src="../assets/videos/landing.mp4" type="video/mp4">
                         Tu navegador no soporta videos HTML5.
                     </video>
                     <div class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center z-10">
@@ -118,10 +118,10 @@
         </div>
     </div>
 
-    <?php include "components/footer.html"; ?>
+    <?php include "../components/footer.html"; ?>
 
-    <script src="scripts/dynamic.js"></script>
+    <script src="../scripts/dynamic.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="scripts/map.js"></script>
+    <script src="../scripts/map.js"></script>
 </body>
 </html>
