@@ -7,9 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($nuevaContrasena === $repetirContrasena) {
         $hashedContrasena = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
 
-        // Conectar a la base de datos y actualizar la contraseña
-        require_once "../config/neon.php"; // Asegúrate de tener tu archivo de configuración de la base de datos aquí
-
+        require_once "../config/neon.php";
         $conn = getPDOConnection();
         $stmt = $conn->prepare(
             "UPDATE usuario SET contrasena = :hashedContrasena WHERE email = :correo"

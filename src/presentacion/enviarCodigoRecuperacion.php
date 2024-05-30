@@ -3,7 +3,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST["correo"];
     $command = escapeshellcmd("python3 ../utils/correo.py $correo");
 
-    // Capturar tanto la salida estándar como los errores
     $output = shell_exec($command . " 2>&1");
 
     if ($output !== null) {

@@ -3,8 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST["correo"];
     $codigo = $_POST["codigo"];
 
-    // Conectar a la base de datos y verificar el código de recuperación
-    require_once "../config/neon.php"; // Asegúrate de tener tu archivo de configuración de la base de datos aquí
+    require_once "../config/neon.php";
 
     $conn = getPDOConnection();
     $stmt = $conn->prepare(
@@ -15,13 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        // Código válido, redirigir al usuario a la página para restablecer la contraseña
         header(
             "Location: restablecerPassword.php?correo=" . urlencode($correo)
         );
         exit();
     } else {
-        // Código inválido
         $error = "El código de recuperación es incorrecto.";
     }
 } ?>
