@@ -6,7 +6,7 @@ if (!isset($_SESSION["correo"])) {
     exit();
 }
 
-require_once "../datos/Can.php";
+require_once "../datos/can.php";
 
 $can = new Can();
 $listaDeCans = $can->obtenerCanes();
