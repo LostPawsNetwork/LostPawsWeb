@@ -1,5 +1,5 @@
 <?php
-require_once '../config/neon.php';
+require_once "../config/neon.php";
 
 class Usuario
 {
@@ -15,23 +15,21 @@ class Usuario
     private $tipoDocumento;
     private $numeroDocumento;
 
-    function __construct() 
+    function __construct()
     {
         $this->conn = getPDOConnection();
     }
 
-    function validarUsuario($correo, $passwd) 
+    function validarUsuario($correo, $passwd)
     {
-        $sql = "SELECT Contrasena FROM Usuario WHERE Email = :correo";
+        $sql = "SELECT contrasena FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':correo', $correo);
+        $stmt->bindParam(":correo", $correo);
         $stmt->execute();
-        
-        if ($stmt->rowCount() > 0) 
-        {
+
+        if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($passwd, $row['Contrasena'])) 
-            {
+            if ($passwd == $row["contrasena"]) {
                 return true;
             }
         }
@@ -46,99 +44,127 @@ class Usuario
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function registrarUsuario($correo, $passwd, $nombre, $apellido, $fechaNacimiento, $tipoDocumento, $numeroDocumento, $tipoUsuario) 
-    {
-        $sql = "INSERT INTO Usuario (Email, Contrasena, Nombre, Apellido, FechaNacimiento, TipoDocumento, NumeroDocumento, tipoUsuario) 
+    function registrarUsuario(
+        $correo,
+        $passwd,
+        $nombre,
+        $apellido,
+        $fechaNacimiento,
+        $tipoDocumento,
+        $numeroDocumento,
+        $tipoUsuario
+    ) {
+        $sql = "INSERT INTO Usuario (Email, Contrasena, Nombre, Apellido, FechaNacimiento, TipoDocumento, NumeroDocumento, tipoUsuario)
                 VALUES (:correo, :passwd, :nombre, :apellido, :fechaNacimiento, :tipoDocumento, :numeroDocumento, :tipoUsuario)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':correo', $correo);
-        $stmt->bindParam(':passwd', password_hash($passwd, PASSWORD_BCRYPT));
-        $stmt->bindParam(':nombre', $nombre);
-        $stmt->bindParam(':apellido', $apellido);
-        $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
-        $stmt->bindParam(':tipoDocumento', $tipoDocumento);
-        $stmt->bindParam(':numeroDocumento', $numeroDocumento);
-        $stmt->bindParam(':tipoUsuario', $tipoUsuario);
+        $stmt->bindParam(":correo", $correo);
+        $stmt->bindParam(":passwd", password_hash($passwd, PASSWORD_BCRYPT));
+        $stmt->bindParam(":nombre", $nombre);
+        $stmt->bindParam(":apellido", $apellido);
+        $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
+        $stmt->bindParam(":tipoDocumento", $tipoDocumento);
+        $stmt->bindParam(":numeroDocumento", $numeroDocumento);
+        $stmt->bindParam(":tipoUsuario", $tipoUsuario);
         return $stmt->execute();
     }
 
-    function getIdUsuario() {
+    function getIdUsuario()
+    {
         return $this->idUsuario;
     }
 
-    function getNombre() {
+    function getNombre()
+    {
         return $this->nombre;
     }
 
-    function getEmail() {
+    function getEmail()
+    {
         return $this->email;
     }
 
-    function getContrasena() {
+    function getContrasena()
+    {
         return $this->contrasena;
     }
 
-    function getFechaNacimiento() {
+    function getFechaNacimiento()
+    {
         return $this->fechaNacimiento;
     }
 
-    function getTipoUsuario() {
+    function getTipoUsuario()
+    {
         return $this->tipoUsuario;
     }
 
-    function getToken() {
+    function getToken()
+    {
         return $this->token;
     }
 
-    function getCodigo() {
+    function getCodigo()
+    {
         return $this->codigo;
     }
 
-    function getTipoDocumento() {
+    function getTipoDocumento()
+    {
         return $this->tipoDocumento;
     }
 
-    function getNumeroDocumento() {
+    function getNumeroDocumento()
+    {
         return $this->numeroDocumento;
     }
 
-    function setIdUsuario($idUsuario) {
+    function setIdUsuario($idUsuario)
+    {
         $this->idUsuario = $idUsuario;
     }
 
-    function setNombre($nombre) {
+    function setNombre($nombre)
+    {
         $this->nombre = $nombre;
     }
 
-    function setEmail($email) {
+    function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    function setContrasena($contrasena) {
+    function setContrasena($contrasena)
+    {
         $this->contrasena = $contrasena;
     }
 
-    function setFechaNacimiento($fechaNacimiento) {
+    function setFechaNacimiento($fechaNacimiento)
+    {
         $this->fechaNacimiento = $fechaNacimiento;
     }
 
-    function setTipoUsuario($tipoUsuario) {
+    function setTipoUsuario($tipoUsuario)
+    {
         $this->tipoUsuario = $tipoUsuario;
     }
 
-    function setToken($token) {
+    function setToken($token)
+    {
         $this->token = $token;
     }
 
-    function setCodigo($codigo) {
+    function setCodigo($codigo)
+    {
         $this->codigo = $codigo;
     }
 
-    function setTipoDocumento($tipoDocumento) {
+    function setTipoDocumento($tipoDocumento)
+    {
         $this->tipoDocumento = $tipoDocumento;
     }
 
-    function setNumeroDocumento($numeroDocumento) {
+    function setNumeroDocumento($numeroDocumento)
+    {
         $this->numeroDocumento = $numeroDocumento;
     }
 }
