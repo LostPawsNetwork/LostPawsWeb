@@ -7,7 +7,7 @@ class Usuario
     private $idUsuario;
     private $nombre;
     private $email;
-    private $password;
+    private $contrasena;
     private $fechaNacimiento;
     private $tipoUsuario;
     private $token;
@@ -22,7 +22,7 @@ class Usuario
 
     function validarUsuario($correo, $passwd) 
     {
-        $sql = "SELECT Password FROM Usuario WHERE Email = :correo";
+        $sql = "SELECT Contrasena FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':correo', $correo);
         $stmt->execute();
@@ -30,7 +30,7 @@ class Usuario
         if ($stmt->rowCount() > 0) 
         {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($passwd, $row['Password'])) 
+            if (password_verify($passwd, $row['Contrasena'])) 
             {
                 return true;
             }
@@ -38,9 +38,17 @@ class Usuario
         return false;
     }
 
+    function obtenerUsuarios()
+    {
+        $sql = "SELECT * FROM Usuario";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function registrarUsuario($correo, $passwd, $nombre, $apellido, $fechaNacimiento, $tipoDocumento, $numeroDocumento, $tipoUsuario) 
     {
-        $sql = "INSERT INTO Usuario (Email, Password, Nombre, Apellido, FechaNacimiento, TipoDocumento, NumeroDocumento, tipoUsuario) 
+        $sql = "INSERT INTO Usuario (Email, Contrasena, Nombre, Apellido, FechaNacimiento, TipoDocumento, NumeroDocumento, tipoUsuario) 
                 VALUES (:correo, :passwd, :nombre, :apellido, :fechaNacimiento, :tipoDocumento, :numeroDocumento, :tipoUsuario)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':correo', $correo);
@@ -66,8 +74,8 @@ class Usuario
         return $this->email;
     }
 
-    function getPassword() {
-        return $this->password;
+    function getContrasena() {
+        return $this->contrasena;
     }
 
     function getFechaNacimiento() {
@@ -106,8 +114,8 @@ class Usuario
         $this->email = $email;
     }
 
-    function setPassword($password) {
-        $this->password = $password;
+    function setContrasena($contrasena) {
+        $this->contrasena = $contrasena;
     }
 
     function setFechaNacimiento($fechaNacimiento) {

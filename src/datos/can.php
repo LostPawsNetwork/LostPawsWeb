@@ -136,5 +136,12 @@ class Can{
         return $stmt->execute();
     }
 
+    function obtenerCanes()
+    {
+        $sql = "SELECT * FROM Can";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }

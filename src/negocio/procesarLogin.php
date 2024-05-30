@@ -13,7 +13,7 @@
 
         if ($loginExitoso) 
         {
-            header("Location: ../presentacion/postLogin.php");
+            header("Location: ../presentacion/dashboard.php");
             exit();
         } 
         else 
