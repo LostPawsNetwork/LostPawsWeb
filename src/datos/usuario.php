@@ -45,21 +45,6 @@ class Usuario
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerContrasena($correo)
-    {
-        $sql = "SELECT contrasena FROM Usuario WHERE Email = :correo";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":correo", $correo);
-        $stmt->execute();
-    
-        if ($stmt->rowCount() > 0) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $row["contrasena"];
-        } else {
-            return false;
-        }
-    }
-
     function obtenerToken() {
         $sql = "SELECT token FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
@@ -96,7 +81,8 @@ class Usuario
                 VALUES (:correo, :passwd, :nombre, :apellido, :tipoDocumento, :numeroDocumento, :fechaNacimiento, :tipoUsuario)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":correo", $correo);
-        $stmt->bindParam(":passwd", password_hash($passwd, PASSWORD_BCRYPT));
+        $hashedPassword = password_hash($passwd, PASSWORD_BCRYPT);
+        $stmt->bindParam(":passwd", $hashedPassword);
         $stmt->bindParam(":nombre", $nombre);
         $stmt->bindParam(":apellido", $apellido);
         $stmt->bindParam(":tipoDocumento", $tipoDocumento);

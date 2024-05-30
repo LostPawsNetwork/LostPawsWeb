@@ -14,12 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($loginExitoso) {
         if ($_SESSION['tipoUsuario'] == 'admin') {
-            $token = $loginManager->generarToken(32);
-            $loginManager->enviarToken($correo, $token);
+            //$token = $loginManager->generarToken(32);
+            //$loginManager->enviarToken($correo, $token);
             
-            $datosUsuario = new Usuario();
-            $datosUsuario->almacenarToken($correo, $token);
+            //$datosUsuario = new Usuario();
+            //$datosUsuario->almacenarToken($correo, $token);
             //header("Location: ../presentacion/ingresarToken.php");
+            header("Location: ../presentacion/dashboard.php");
         } else {
             header("Location: ../presentacion/landing.php");
         }
