@@ -36,7 +36,15 @@
                         <input type="text" name="apellido" id="apellido" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>
-                        <label for="dni" class="block text-sm font-medium text-gray-700">DNI</label>
+                        <label for="tipoDocumento" class="block text-sm font-medium text-gray-700">Tipo de Documento</label>
+                        <select name="tipoDocumento" id="tipoDocumento" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                            <option value="dni">DNI</option>
+                            <option value="cedula de identidad">Cedula de Identidad</option>
+                            <option value="pasaporte">Pasaporte</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dni" class="block text-sm font-medium text-gray-700">Número de Documento</label>
                         <input type="text" name="dni" id="dni" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
                     <div>

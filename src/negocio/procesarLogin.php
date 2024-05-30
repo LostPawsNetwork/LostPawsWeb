@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include "loginManager.php";
+require_once 'loginManager.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST["correo"];
@@ -10,8 +10,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loginManager = new LoginManager();
     $loginExitoso = $loginManager->iniciarSesion($correo, $passwd);
 
+    $datosUsuario = new Usuario();
+
     if ($loginExitoso) {
-        header("Location: ../presentacion/dashboard.php");
+        if ($_SESSION['tipoUsuario'] == 'admin') {
+            $token = $loginManager->generarToken(32);
+            $loginManager->enviarToken($correo, $token);
+            
+            $datosUsuario = new Usuario();
+            $datosUsuario->almacenarToken($correo, $token);
+            //header("Location: ../presentacion/ingresarToken.php");
+        } else {
+            header("Location: ../presentacion/landing.php");
+        }
         exit();
     } else {
         echo "Email y/o contraseña incorrectos.";
