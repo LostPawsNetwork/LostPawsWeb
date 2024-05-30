@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    <title>Recuperar Contraseña</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body class="bg-black h-screen font-sans relative overflow-hidden">
@@ -25,26 +24,16 @@
                </div>
                <br>
                 <div class="bg-blue-100 p-6 rounded-lg">
-                    <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Iniciar Sesión</h2>
+                    <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Recuperar Contraseña</h2>
 
-                <form action="../negocio/procesarLogin.php" method="post" class="space-y-6">
+                <form action="enviarCodigoRecuperacion.php" method="post" class="space-y-6">
                     <div>
-                        <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
+                        <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
                         <input type="email" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
-
-                    <div>
-                        <label for="passwd" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                        <input type="password" name="passwd" id="passwd" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
-                    </div>
-                    <div class="items-center">
-                        <div class="g-recaptcha mb-4 w-full" data-sitekey="6LfVXgspAAAAAD82ltcbTlmK1rvhUfwR2R1MGCuf"></div>
-                    </div>
-
                     <div class="flex flex-col items-center space-y-4">
-                        <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Ingresar</button>
-                        <a href="registroUsuario.php" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Registrarse</a>
-                        <a href="recuperarPassword.php" class="text-green-600 hover:underline">¿Has olvidado tu contraseña?</a>
+                        <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Enviar Código</button>
+                        <a href="index.php" class="text-green-600 hover:underline">Volver al Inicio</a>
                     </div>
                 </form>
             </div>
