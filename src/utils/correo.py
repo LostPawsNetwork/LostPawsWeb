@@ -8,7 +8,8 @@ import psycopg2
 from psycopg2 import sql
 import random
 import string
-load_dotenv()
+# load_dotenv()
+load_dotenv(dotenv_path='../config/.env')
 email_sender = 'lostpaws7@gmail.com'
 email_password = os.getenv('EMAIL_PASSWORD')
 email_receiver = sys.argv[1]
@@ -25,7 +26,7 @@ try:
     conn.commit()
 except(Exception, psycopg2.Error) as error:
     print("Error al actualizar el codigo: ", error)
-subject = 'Recuperación Contraseña Sustain Partners'
+subject = 'Recuperación Contraseña Lost Paws'
 
 body = """
    Tu código de recuperación es: """ + codigo + """
