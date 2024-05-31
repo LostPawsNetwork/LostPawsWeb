@@ -1,5 +1,8 @@
 <?php
+// tests/UsuarioTest.php
 use PHPUnit\Framework\TestCase;
+
+require_once __DIR__ . '/../config/neon.php';  // Ruta correcta para incluir el archivo
 
 class UsuarioTest extends TestCase
 {
@@ -55,4 +58,5 @@ class UsuarioTest extends TestCase
         $this->assertTrue($result);
     }
 }
+
 ?>

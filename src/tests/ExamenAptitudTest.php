@@ -1,5 +1,8 @@
 <?php
+// tests/ExamenAptitudTest.php
 use PHPUnit\Framework\TestCase;
+
+require_once __DIR__ . '/../config/neon.php';  
 
 class ExamenAptitudTest extends TestCase
 {
@@ -69,4 +72,6 @@ class ExamenAptitudTest extends TestCase
         $this->assertTrue($result);
     }
 }
+
+
 ?>

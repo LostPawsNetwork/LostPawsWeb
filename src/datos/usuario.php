@@ -1,5 +1,5 @@
 <?php
-require_once "../config/neon.php";
+require_once __DIR__ . '/../config/neon.php';
 
 class Usuario
 {
