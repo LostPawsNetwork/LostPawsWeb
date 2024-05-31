@@ -15,6 +15,12 @@ class Can
     private $foto1;
     private $foto2;
     private $foto3;
+    private $estado;
+
+    function __construct()
+    {
+        $this->conn = getPDOConnection();
+    }
 
     function listarCanPorId($idCan)
     {
@@ -44,10 +50,11 @@ class Can
         $descripcion,
         $foto1,
         $foto2,
-        $foto3
+        $foto3,
+        $estado
     ) {
         $sql =
-            "UPDATE Can SET nombre = :nombre, raza = :raza, edad = :edad, tamano = :tamano, genero = :genero, observacionesMedicas = :observacionesMedicas, descripcion = :descripcion, foto1 = :foto1, foto2 = :foto2, foto3 = :foto3 WHERE idCan = :idCan";
+            "UPDATE Can SET nombre = :nombre, raza = :raza, edad = :edad, tamano = :tamano, genero = :genero, observacionesMedicas = :observacionesMedicas, descripcion = :descripcion, foto1 = :foto1, foto2 = :foto2, foto3 = :foto3, estado = :estado WHERE idCan = :idCan";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":idCan", $idCan);
         $stmt->bindParam(":nombre", $nombre);
@@ -60,6 +67,7 @@ class Can
         $stmt->bindParam(":foto1", $foto1);
         $stmt->bindParam(":foto2", $foto2);
         $stmt->bindParam(":foto3", $foto3);
+        $stmt->bindParam(":estado", $estado);
         return $stmt->execute();
     }
 
@@ -73,10 +81,11 @@ class Can
         $descripcion,
         $foto1,
         $foto2,
-        $foto3
+        $foto3,
+        $estado
     ) {
-        $sql = "INSERT INTO Can (nombre, raza, edad, tamano, genero, observacionesMedicas, descripcion, foto1, foto2, foto3)
-                VALUES (:nombre, :raza, :edad, :tamano, :genero, :observacionesMedicas, :descripcion, :foto1, :foto2, :foto3)";
+        $sql = "INSERT INTO Can (nombre, raza, edad, tamano, genero, observacionesMedicas, descripcion, foto1, foto2, foto3, estado)
+                VALUES (:nombre, :raza, :edad, :tamano, :genero, :observacionesMedicas, :descripcion, :foto1, :foto2, :foto3, :estado)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":nombre", $nombre);
         $stmt->bindParam(":raza", $raza);
@@ -88,10 +97,10 @@ class Can
         $stmt->bindParam(":foto1", $foto1);
         $stmt->bindParam(":foto2", $foto2);
         $stmt->bindParam(":foto3", $foto3);
+        $stmt->bindParam(":estado", $estado);
         return $stmt->execute();
     }
 
-    // es para cambiar el estado
     function eliminarCan($idCan)
     {
         $sql = "DELETE FROM Can WHERE idCan = :idCan";
@@ -100,10 +109,45 @@ class Can
         return $stmt->execute();
     }
 
-    function __construct()
-    {
-        $this->conn = getPDOConnection();
+    function registrarCan(
+        $nombre,
+        $raza,
+        $edad,
+        $tamano,
+        $genero,
+        $observacionesMedicas,
+        $descripcion,
+        $foto1,
+        $foto2,
+        $foto3,
+        $estado
+    ) {
+        $sql = "INSERT INTO Can (nombre, raza, edad, tamano, genero, observacionesMedicas, descripcion, foto1, foto2, foto3, estado)
+                VALUES (:nombre, :raza, :edad, :tamano, :genero, :observacionesMedicas, :descripcion, :foto1, :foto2, :foto3, :estado)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":nombre", $nombre);
+        $stmt->bindParam(":raza", $raza);
+        $stmt->bindParam(":edad", $edad);
+        $stmt->bindParam(":tamano", $tamano);
+        $stmt->bindParam(":genero", $genero);
+        $stmt->bindParam(":observacionesMedicas", $observacionesMedicas);
+        $stmt->bindParam(":descripcion", $descripcion);
+        $stmt->bindParam(":foto1", $foto1);
+        $stmt->bindParam(":foto2", $foto2);
+        $stmt->bindParam(":foto3", $foto3);
+        $stmt->bindParam(":estado", $estado);
+        return $stmt->execute();
     }
+
+    function obtenerCanes()
+    {
+        $sql = "SELECT * FROM Can";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Getters y Setters
 
     function getIdCan()
     {
@@ -158,6 +202,11 @@ class Can
     function getFoto3()
     {
         return $this->foto3;
+    }
+
+    function getEstado()
+    {
+        return $this->estado;
     }
 
     function setIdCan($idCan)
@@ -215,39 +264,9 @@ class Can
         $this->foto3 = $foto3;
     }
 
-    function registrarCan(
-        $nombre,
-        $raza,
-        $edad,
-        $tamano,
-        $genero,
-        $observacionesMedicas,
-        $descripcion,
-        $foto1,
-        $foto2,
-        $foto3
-    ) {
-        $sql = "INSERT INTO Can (nombre, raza, edad, tamano, genero, observacionesmedicas, descripcion, foto1, foto2, foto3)
-                VALUES (:nombre, :raza, :edad, :tamano, :genero, :observacionesMedicas, :descripcion, :foto1, :foto2, :foto3)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":nombre", $nombre);
-        $stmt->bindParam(":raza", $raza);
-        $stmt->bindParam(":edad", $edad);
-        $stmt->bindParam(":tamano", $tamano);
-        $stmt->bindParam(":genero", $genero);
-        $stmt->bindParam(":observacionesMedicas", $observacionesMedicas);
-        $stmt->bindParam(":descripcion", $descripcion);
-        $stmt->bindParam(":foto1", $foto1);
-        $stmt->bindParam(":foto2", $foto2);
-        $stmt->bindParam(":foto3", $foto3);
-        return $stmt->execute();
-    }
-
-    function obtenerCanes()
+    function setEstado($estado)
     {
-        $sql = "SELECT * FROM Can";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->estado = $estado;
     }
 }
+?>
