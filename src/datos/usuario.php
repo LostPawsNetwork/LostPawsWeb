@@ -22,21 +22,25 @@ class Usuario
 
     function validarUsuario($correo, $passwd)
     {
-        $sql = "SELECT contrasena, tipoUsuario FROM Usuario WHERE Email = :correo";
+        $sql =
+            "SELECT contrasena, tipoUsuario FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":correo", $correo);
         $stmt->execute();
-    
+
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($passwd, $row["contrasena"])) {
-                return ['success' => true, 'tipoUsuario' => $row["tipousuario"]];
+                return [
+                    "success" => true,
+                    "tipoUsuario" => $row["tipousuario"],
+                ];
             }
         }
-        return ['success' => false, 'tipoUsuario' => null];
+        return ["success" => false, "tipoUsuario" => null];
     }
-    
+
     function obtenerUsuarios()
     {
         $sql = "SELECT * FROM Usuario";
@@ -45,13 +49,14 @@ class Usuario
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     function obtenerToken($correo) 
     {
         $sql = "SELECT token FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":correo", $correo);
         $stmt->execute();
-    
+
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             return $row["token"];
@@ -59,7 +64,17 @@ class Usuario
             return null;
         }
     }
-    
+
+
+    function almacenarToken($correo, $token)
+    {
+        $sql = "UPDATE Usuario SET token = :token WHERE Email = :correo";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":token", $token);
+        $stmt->bindParam(":correo", $correo);
+        $stmt->execute();
+    }
+
     function registrarUsuario(
         $correo,
         $passwd,
