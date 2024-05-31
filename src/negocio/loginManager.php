@@ -1,5 +1,5 @@
 <?php
-    require_once '../datos/Usuario.php';
+    require_once '../datos/usuario.php';
 
     class LoginManager 
     {
@@ -8,6 +8,10 @@
         public function __construct() 
         {
             $this->usuario = new Usuario();
+            if(session_status() == PHP_SESSION_NONE) 
+            {
+                session_start();
+            }
         }
 
         public function iniciarSesion($correo, $passwd) 
@@ -31,6 +35,8 @@
         {
             session_unset();
             session_destroy();
+            header("Location: ../presentacion/login.php");
+            exit();
         }
 
         public function sesionActual() 

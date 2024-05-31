@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/neon.php';
+require_once "../config/neon.php";
 
 class Usuario
 {
@@ -49,7 +49,8 @@ class Usuario
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function obtenerToken()
+
+    function obtenerToken($correo) 
     {
         $sql = "SELECT token FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
@@ -63,6 +64,7 @@ class Usuario
             return null;
         }
     }
+
 
     function almacenarToken($correo, $token)
     {

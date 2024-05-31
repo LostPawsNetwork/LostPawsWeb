@@ -11,6 +11,14 @@
 </head>
 
 <body class="bg-black h-screen font-sans relative overflow-hidden">
+    
+    <?php
+    session_start();
+
+    header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+    header("Pragma: no-cache");
+    header("Expires: 0");
+    ?>
 
     <video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 filter blur-lg">
         <source src="../assets/videos/login.mp4" type="video/mp4">
