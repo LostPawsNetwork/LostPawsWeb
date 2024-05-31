@@ -10,21 +10,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loginManager = new LoginManager();
     $loginExitoso = $loginManager->iniciarSesion($correo, $passwd);
 
-    $datosUsuario = new Usuario();
-
     if ($loginExitoso) {
-        if ($_SESSION['tipoUsuario'] == 'admin') {
-            //$token = $loginManager->generarToken(32);
-            //$loginManager->enviarToken($correo, $token);
-            
-            //$datosUsuario = new Usuario();
-            //$datosUsuario->almacenarToken($correo, $token);
-            //header("Location: ../presentacion/ingresarToken.php");
-            header("Location: ../presentacion/dashboard.php");
+        if ($_SESSION['tipoUsuario'] == 'admin') 
+        {
+            $command = escapeshellcmd("python3 ../utils/token.py $correo");
+            $output = shell_exec($command . " 2>&1");
+
+            if ($output !== null) 
+            {
+                $correoEnviado = strpos($output, "Correo enviado exitosamente") !== false;
+                if ($correoEnviado) {
+                    header("Location: ../presentacion/ingresarToken.php");
+                } else {
+                    echo "Error al enviar el correo.";
+                }
+            } else {
+                echo "Error al ejecutar el script.";
+            }
         } else {
             header("Location: ../presentacion/landing.php");
         }
-        exit();
     } else {
         echo "Email y/o contraseña incorrectos.";
     }

@@ -9,9 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $usuario = new Usuario();
     $tokenEnviado = $usuario->obtenerToken($_SESSION["correo"]);
+    
 
-    if ($tokenIngresado === $tokenEnviado) {
-        // El token ingresado es válido
+    if ($tokenIngresado === $tokenEnviado) 
+    {
         $_SESSION["correo"];
         header("Location: ../presentacion/dashboard.php");
         exit();

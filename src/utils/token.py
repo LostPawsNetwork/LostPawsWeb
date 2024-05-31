@@ -6,14 +6,13 @@ import ssl
 from email.message import EmailMessage
 import psycopg2
 from psycopg2 import sql
-import random
-import string
+import secrets
 
 # Cargar las variables de entorno
-def load_correo_env():
+def load_token_env():
     from ..utils.env_loader import load_env
     load_env()
-load_correo_env(dotenv_path='../config/.env')
+load_token_env(dotenv_path='../config/.env')
 
 email_sender = 'lostpaws7@gmail.com'
 email_password = os.getenv('EMAIL_PASSWORD')
@@ -33,22 +32,22 @@ except (Exception, psycopg2.Error) as error:
     print(f"Error al conectar a la base de datos: {error}")
     sys.exit(1)
 
-# Generar código de recuperación
-codigo = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+# Generar token de acceso
+token = secrets.token_urlsafe(32)
 
-# Actualizar código en la base de datos
+# Actualizar token en la base de datos
 try:
-    cursor.execute(sql.SQL("UPDATE usuario SET codigo = %s WHERE email = %s"), (codigo, email_receiver))
+    cursor.execute(sql.SQL("UPDATE usuario SET token = %s WHERE correo = %s"), (token, email_receiver))
     conn.commit()
-    print("Código actualizado exitosamente")
+    print("Token actualizado exitosamente")
 except (Exception, psycopg2.Error) as error:
-    print(f"Error al actualizar el código: {error}")
+    print(f"Error al actualizar el token: {error}")
     sys.exit(1)
 
 # Enviar el correo electrónico
-subject = 'Recuperación Contraseña Lost Paws'
+subject = 'Token de Acceso Lost Paws'
 body = f"""
-Tu código de recuperación es: {codigo}
+Tu token de acceso es: {token}
 """
 
 em = EmailMessage()
