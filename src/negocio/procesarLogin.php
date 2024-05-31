@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error al ejecutar el script.";
             }
         } else {
-            echo "Error: Token incorrecto.";
+            header("Location: ../presentacion/landing.php");
         }
     } else {
         echo "Email y/o contraseña incorrectos.";
