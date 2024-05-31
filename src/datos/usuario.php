@@ -22,21 +22,25 @@ class Usuario
 
     function validarUsuario($correo, $passwd)
     {
-        $sql = "SELECT contrasena, tipoUsuario FROM Usuario WHERE Email = :correo";
+        $sql =
+            "SELECT contrasena, tipoUsuario FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":correo", $correo);
         $stmt->execute();
-    
+
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($passwd, $row["contrasena"])) {
-                return ['success' => true, 'tipoUsuario' => $row["tipousuario"]];
+                return [
+                    "success" => true,
+                    "tipoUsuario" => $row["tipousuario"],
+                ];
             }
         }
-        return ['success' => false, 'tipoUsuario' => null];
+        return ["success" => false, "tipoUsuario" => null];
     }
-    
+
     function obtenerUsuarios()
     {
         $sql = "SELECT * FROM Usuario";
@@ -45,12 +49,13 @@ class Usuario
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function obtenerToken() {
+    function obtenerToken()
+    {
         $sql = "SELECT token FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":correo", $correo);
         $stmt->execute();
-    
+
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             return $row["token"];
@@ -59,14 +64,15 @@ class Usuario
         }
     }
 
-    function almacenarToken($correo, $token) {
+    function almacenarToken($correo, $token)
+    {
         $sql = "UPDATE Usuario SET token = :token WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":token", $token);
         $stmt->bindParam(":correo", $correo);
         $stmt->execute();
     }
-    
+
     function registrarUsuario(
         $correo,
         $passwd,
@@ -90,6 +96,36 @@ class Usuario
         $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
         $stmt->bindParam(":tipoUsuario", $tipoUsuario);
         return $stmt->execute();
+    }
+
+    function editarUsuario(
+        $correo,
+        $nombre,
+        $apellido,
+        $tipoDocumento,
+        $numeroDocumento,
+        $fechaNacimiento
+    ) {
+        $sql =
+            "UPDATE Usuario SET Nombre = :nombre, Apellido = :apellido, TipoDocumento = :tipoDocumento, NumeroDocumento = :numeroDocumento, FechaNacimiento = :fechaNacimiento WHERE Email = :correo";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":correo", $correo);
+        $stmt->bindParam(":nombre", $nombre);
+        $stmt->bindParam(":apellido", $apellido);
+        $stmt->bindParam(":tipoDocumento", $tipoDocumento);
+        $stmt->bindParam(":numeroDocumento", $numeroDocumento);
+        $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
+        return $stmt->execute();
+    }
+
+    //falta terminar consulta
+    function listarUsuariosDesaprobados()
+    {
+        $sql =
+            "SELECT * FROM Usuario INNER JOIN examenaptitud ON Usuario.idUsuario = examenaptitud.idUsuario WHERE examenaptitud.estado = 'Desaprobado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getIdUsuario()
