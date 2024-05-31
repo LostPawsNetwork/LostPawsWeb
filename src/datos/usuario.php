@@ -85,6 +85,36 @@ class Usuario
         return $stmt->execute();
     }
 
+    function editarUsuario(
+        $correo,
+        $nombre,
+        $apellido,
+        $tipoDocumento,
+        $numeroDocumento,
+        $fechaNacimiento
+    ) {
+        $sql =
+            "UPDATE Usuario SET Nombre = :nombre, Apellido = :apellido, TipoDocumento = :tipoDocumento, NumeroDocumento = :numeroDocumento, FechaNacimiento = :fechaNacimiento WHERE Email = :correo";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":correo", $correo);
+        $stmt->bindParam(":nombre", $nombre);
+        $stmt->bindParam(":apellido", $apellido);
+        $stmt->bindParam(":tipoDocumento", $tipoDocumento);
+        $stmt->bindParam(":numeroDocumento", $numeroDocumento);
+        $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
+        return $stmt->execute();
+    }
+
+    //falta terminar consulta
+    function listarUsuariosDesaprobados()
+    {
+        $sql =
+            "SELECT * FROM Usuario INNER JOIN examenaptitud ON Usuario.idUsuario = examenaptitud.idUsuario WHERE examenaptitud.estado = 'Desaprobado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function getIdUsuario()
     {
         return $this->idUsuario;
