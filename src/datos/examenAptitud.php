@@ -1,5 +1,5 @@
 <?php
-require_once '../config/neon.php';
+require_once "../config/neon.php";
 
 class ExamenAptitud
 {
@@ -9,19 +9,19 @@ class ExamenAptitud
     private $link;
     private $idUsuario;
 
-    function __construct() 
+    function __construct()
     {
         $this->conn = getPDOConnection();
     }
 
-    function registrarExamenAptitud($estado, $link, $idUsuario) 
+    function registrarExamenAptitud($estado, $link, $idUsuario)
     {
-        $sql = "INSERT INTO ExamenAptitud (estado, link, idUsuario) 
+        $sql = "INSERT INTO ExamenAptitud (estado, link, idUsuario)
                 VALUES (:estado, :link, :idUsuario)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':estado', $estado);
-        $stmt->bindParam(':link', $link);
-        $stmt->bindParam(':idUsuario', $idUsuario);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":link", $link);
+        $stmt->bindParam(":idUsuario", $idUsuario);
         return $stmt->execute();
     }
 
@@ -33,35 +33,61 @@ class ExamenAptitud
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function getIdExamen() {
+    function aprobarExamenAptitud($idExamen)
+    {
+        $sql =
+            "UPDATE ExamenAptitud SET estado = 'Aprobado' WHERE idExamen = :idExamen";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":idExamen", $idExamen);
+        return $stmt->execute();
+    }
+
+    function rechazarExamenAptitud($idExamen)
+    {
+        $sql =
+            "UPDATE ExamenAptitud SET estado = 'Rechazado' WHERE idExamen = :idExamen";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":idExamen", $idExamen);
+        return $stmt->execute();
+    }
+
+    function getIdExamen()
+    {
         return $this->idExamen;
     }
 
-    function getEstado() {
+    function getEstado()
+    {
         return $this->estado;
     }
 
-    function getLink() {
+    function getLink()
+    {
         return $this->link;
     }
 
-    function getIdUsuario() {
+    function getIdUsuario()
+    {
         return $this->idUsuario;
     }
 
-    function setIdExamen($idExamen) {
+    function setIdExamen($idExamen)
+    {
         $this->idExamen = $idExamen;
     }
 
-    function setEstado($estado) {
+    function setEstado($estado)
+    {
         $this->estado = $estado;
     }
 
-    function setLink($link) {
+    function setLink($link)
+    {
         $this->link = $link;
     }
 
-    function setIdUsuario($idUsuario) {
+    function setIdUsuario($idUsuario)
+    {
         $this->idUsuario = $idUsuario;
     }
 }

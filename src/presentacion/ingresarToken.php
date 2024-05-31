@@ -18,7 +18,7 @@
                     <label for="token" class="block text-sm font-medium text-gray-700">Token</label>
                     <input type="text" name="token" id="token" class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300" required>
                 </div>
-                <div class="flex justify-center">
+                    <div class="flex justify-center">
                     <button type="submit" class="bg-blue-600 text-white w-full p-2 rounded-md hover:bg-blue-700">Ingresar</button>
                 </div>
             </form>

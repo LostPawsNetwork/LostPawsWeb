@@ -18,5 +18,7 @@ COPY . /var/www/html/
 # Ejecuta Composer para instalar las dependencias
 # genera carpeta vendor con las dependencias
 RUN composer install
+
+
 RUN cd src/utils && pip3 install --break-system-packages -r requirements.txt
 EXPOSE 80
