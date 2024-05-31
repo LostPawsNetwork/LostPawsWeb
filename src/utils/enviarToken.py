@@ -9,14 +9,14 @@ from psycopg2 import sql
 import secrets
 
 # Cargar las variables de entorno
-def load_token_env():
-    from ..utils.env_loader import load_env
-    load_env()
-load_token_env(dotenv_path='../config/.env')
+load_dotenv(dotenv_path='../config/.env')
 
 email_sender = 'lostpaws7@gmail.com'
 email_password = os.getenv('EMAIL_PASSWORD')
 email_receiver = sys.argv[1]
+
+print(f"Email sender: {email_sender}")
+print(f"Email receiver: {email_receiver}")
 
 # Conectar a la base de datos
 try:
@@ -34,10 +34,11 @@ except (Exception, psycopg2.Error) as error:
 
 # Generar token de acceso
 token = secrets.token_urlsafe(32)
+print(f"Token generado: {token}")
 
 # Actualizar token en la base de datos
 try:
-    cursor.execute(sql.SQL("UPDATE usuario SET token = %s WHERE correo = %s"), (token, email_receiver))
+    cursor.execute(sql.SQL("UPDATE usuario SET token = %s WHERE email = %s"), (token, email_receiver))
     conn.commit()
     print("Token actualizado exitosamente")
 except (Exception, psycopg2.Error) as error:
@@ -61,7 +62,7 @@ try:
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(email_sender, email_password)
         smtp.sendmail(email_sender, email_receiver, em.as_string())
-    print("Correo enviado exitosamente")
+        print("Correo enviado exitosamente")
 except Exception as e:
     print(f"Error al enviar el correo: {e}")
     sys.exit(1)

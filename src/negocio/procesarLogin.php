@@ -11,13 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loginExitoso = $loginManager->iniciarSesion($correo, $passwd);
 
     if ($loginExitoso) {
-        if ($_SESSION['tipoUsuario'] == 'admin') 
-        {
-            $command = escapeshellcmd("python3 ../utils/token.py $correo");
+        if ($_SESSION['tipoUsuario'] == 'admin') {
+            // Usar 'python3' si estás en un entorno donde 'python' puede referirse a Python 2
+            $command = escapeshellcmd("python3 ../utils/enviarToken.py $correo");
             $output = shell_exec($command . " 2>&1");
 
-            if ($output !== null) 
-            {
+            if ($output !== null) {
                 $correoEnviado = strpos($output, "Correo enviado exitosamente") !== false;
                 if ($correoEnviado) {
                     header("Location: ../presentacion/ingresarToken.php");
