@@ -1,74 +1,88 @@
 <?php
 // Dearreglo de perros
-//todo hacer consulta a base de datos para traer la info de los perros, ver formato con post nos traemos los datos del filtro
+require_once "../datos/can.php";
+
+
+if (!isset($_SESSION["correo"])) {
+    header("Location: login.php");
+    exit();
+}
+else{
+    $correo = $_SESSION["correo"];
+    $tipoUsuario = $_SESSION['tipoUsuario'];
+}
+
+
+$can = new Can();
+$listaDeCans = $can->listarCanes();
 
 $size = $_POST['dog-size'] ?? '';
 $sexo = $_POST['dog-sex'] ?? '';
 $edad_min = $_POST['dog-edad-min']?? '';
 $edad_max = $_POST['dog-edad-max']?? '';
 
-$perros = array(
-    array(
-        "id" => 1,
-        "sexo" => 'macho',
-        "edad" => '3 años',
-        "size" => 'Grande',
-        "obsmed" => 'Can con el gen de bipolaridad',
-        "nombre" => "Georgeth",
-        "imagen" => "perro1.jpg",
-        "descripcion" => "Descripción del perro 1, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 2,
-        "sexo" => 'hembra',
-        "edad" => '2 años',
-        "size" => 'Pequeño',
-        "obsmed" => '-',
-        "nombre" => "Thomas",
-        "imagen" => "perro2.jpg",
-        "descripcion" => "Descripción del perro 2, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 3,
-        "sexo" => 'macho',
-        "edad" => '1 años',
-        "size" => 'Grande',
-        "obsmed" => 'Apego emocional al responsable se recomienda estar presente la mayoria del tiempo',
-        "nombre" => "Mohamed",
-        "imagen" => "perro3.jpg",
-        "descripcion" => "Descripción del perro 3, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 4,
-        "sexo" => 'macho',
-        "edad" => '13 años',
-        "size" => 'Grande',
-        "obsmed" => '-',
-        "nombre" => "Ryan",
-        "imagen" => "perro4.jpg",
-        "descripcion" => "Descripción del perro 4, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 5,
-        "sexo" => 'hembra',
-        "edad" => '6 meses',
-        "size" => 'grande',
-        "obsmed" => '-',
-        "nombre" => "Alex",
-        "imagen" => "perro5.jpg",
-        "descripcion" => "Descripción del perro 5, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 1,
-        "sexo" => 'hembra',
-        "edad" => '2 años',
-        "size" => 'Mediano',
-        "obsmed" => 'Tiene un problema en el ojo izquierdo por el que se tiene que estar aplicando gotas todos los días',
-        "nombre" => "perro 6",
-        "imagen" => "perro6.jpg",
-        "descripcion" => "Descripción del perro 6, tomando en cuenta tamaño, sexo y edad"
-    )
-);
+// $perros = array(
+//     array(
+//         "id" => 1,
+//         "sexo" => 'macho',
+//         "edad" => '3 años',
+//         "size" => 'Grande',
+//         "obsmed" => 'Can con el gen de bipolaridad',
+//         "nombre" => "Georgeth",
+//         "imagen" => "perro1.jpg",
+//         "descripcion" => "Descripción del perro 1, tomando en cuenta tamaño, sexo y edad"
+//     ),
+//     array(
+//         "id" => 2,
+//         "sexo" => 'hembra',
+//         "edad" => '2 años',
+//         "size" => 'Pequeño',
+//         "obsmed" => '-',
+//         "nombre" => "Thomas",
+//         "imagen" => "perro2.jpg",
+//         "descripcion" => "Descripción del perro 2, tomando en cuenta tamaño, sexo y edad"
+//     ),
+//     array(
+//         "id" => 3,
+//         "sexo" => 'macho',
+//         "edad" => '1 años',
+//         "size" => 'Grande',
+//         "obsmed" => 'Apego emocional al responsable se recomienda estar presente la mayoria del tiempo',
+//         "nombre" => "Mohamed",
+//         "imagen" => "perro3.jpg",
+//         "descripcion" => "Descripción del perro 3, tomando en cuenta tamaño, sexo y edad"
+//     ),
+//     array(
+//         "id" => 4,
+//         "sexo" => 'macho',
+//         "edad" => '13 años',
+//         "size" => 'Grande',
+//         "obsmed" => '-',
+//         "nombre" => "Ryan",
+//         "imagen" => "perro4.jpg",
+//         "descripcion" => "Descripción del perro 4, tomando en cuenta tamaño, sexo y edad"
+//     ),
+//     array(
+//         "id" => 5,
+//         "sexo" => 'hembra',
+//         "edad" => '6 meses',
+//         "size" => 'grande',
+//         "obsmed" => '-',
+//         "nombre" => "Alex",
+//         "imagen" => "perro5.jpg",
+//         "descripcion" => "Descripción del perro 5, tomando en cuenta tamaño, sexo y edad"
+//     ),
+//     array(
+//         "id" => 1,
+//         "sexo" => 'hembra',
+//         "edad" => '2 años',
+//         "size" => 'Mediano',
+//         "obsmed" => 'Tiene un problema en el ojo izquierdo por el que se tiene que estar aplicando gotas todos los días',
+//         "nombre" => "perro 6",
+//         "imagen" => "perro6.jpg",
+//         "descripcion" => "Descripción del perro 6, tomando en cuenta tamaño, sexo y edad"
+//     )
+// );
 ?>
 
 <style>
@@ -107,11 +121,11 @@ $perros = array(
         <div class="basis-5/6 pr-7">
             <div class="grid grid-cols-3 gap-5">
                 <?php
-                foreach ($perros as $perro) {
+                foreach ($listaDeCans as $perro) {
                 ?>
                     <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
                         <div class='h-64'>
-                            <img class='rounded-md size-full' src='assets/imagenes/perros-ejemplo/<?php echo $perro['imagen'];?>' alt='Imagen del canino'>
+                            <img class='rounded-md size-full' src='assets/imagenes/perros-ejemplo/<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
                         </div>
                         <div class='pt-3 pb-4 pl-2 h-28'>
                             <h5><?php echo $perro['nombre']?></h5>
@@ -119,7 +133,7 @@ $perros = array(
                         </div>
                         <div class='flex flex-row h-10 bg-gray-200'>
                     <?php
-                    if(isset($admin)){
+                    if($tipoUsuario == 'admin'){
                     ?>
                         <button class='w-full hover:bg-gray-400'>
                             Editar can
@@ -129,11 +143,11 @@ $perros = array(
                     else{
                     ?>
                         <button class='w-full hover:bg-gray-400 verDetalle'
-                            data-id=<?php echo $perro['id'] ?>
+                            data-id=<?php echo $perro['idcan'] ?>
                             data-descrip='<?php echo $perro['descripcion'] ?>'
-                            data-img='<?php echo $perro['imagen']; ?>'
-                            data-obsmed='<?php echo $perro['obsmed'] ?>'
-                            data-datos='<?php echo $perro['sexo']." - ".$perro['edad']. " - ".$perro['size']?>'
+                            data-img='<?php echo $perro['foto1']; ?>'
+                            data-obsmed='<?php echo $perro['observacionesMedicas'] ?>'
+                            data-datos='<?php echo $perro['genero']." - ".$perro['edad']. " - ".$perro['tamano']?>'
                         >
                             Adoptar
                         </button>
@@ -201,7 +215,7 @@ $perros = array(
         </div>
     </div>
     
-    <!-- <button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md" id="verDetalle">Open Modal</button> -->
+    <a href="./"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
 
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-0">
