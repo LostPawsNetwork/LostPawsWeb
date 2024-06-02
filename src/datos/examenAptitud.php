@@ -13,14 +13,13 @@ class ExamenAptitud
     {
         $this->conn = getPDOConnection();
     }
-
-    function registrarExamenAptitud($estado, $link, $idUsuario)
+    // cambiar link al de la aplicacion despues
+    function registrarExamenAptitud($estado, $idUsuario)
     {
         $sql = "INSERT INTO ExamenAptitud (estado, link, idUsuario)
-                VALUES (:estado, :link, :idUsuario)";
+                VALUES (:estado, 'https://docs.google.com/forms/d/19aCQadja3H2zL19ci82w9sg4H7YnwsssdHxm70djwXQ/edit#response=ACYDBNhGTBo_xbBZLT_ZmZx_XGG1iFmstuUDiikwKZuQjLzjAErJdoTry-CZkXgG88qCaXc', :idUsuario)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":estado", $estado);
-        $stmt->bindParam(":link", $link);
         $stmt->bindParam(":idUsuario", $idUsuario);
         return $stmt->execute();
     }

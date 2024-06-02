@@ -49,8 +49,7 @@ class Usuario
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
-    function obtenerToken($correo) 
+    function obtenerToken($correo)
     {
         $sql = "SELECT token FROM Usuario WHERE Email = :correo";
         $stmt = $this->conn->prepare($sql);
@@ -64,7 +63,6 @@ class Usuario
             return null;
         }
     }
-
 
     function almacenarToken($correo, $token)
     {
@@ -100,23 +98,15 @@ class Usuario
         return $stmt->execute();
     }
 
-    function editarUsuario(
-        $correo,
-        $nombre,
-        $apellido,
-        $tipoDocumento,
-        $numeroDocumento,
-        $fechaNacimiento
-    ) {
+    function editarUsuario($idUsuario, $correo, $nombre, $apellido)
+    {
         $sql =
-            "UPDATE Usuario SET Nombre = :nombre, Apellido = :apellido, TipoDocumento = :tipoDocumento, NumeroDocumento = :numeroDocumento, FechaNacimiento = :fechaNacimiento WHERE Email = :correo";
+            "UPDATE Usuario SET Email = :correo, Nombre = :nombre, Apellido = :apellido WHERE idUsuario = :idUsuario";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":correo", $correo);
         $stmt->bindParam(":nombre", $nombre);
         $stmt->bindParam(":apellido", $apellido);
-        $stmt->bindParam(":tipoDocumento", $tipoDocumento);
-        $stmt->bindParam(":numeroDocumento", $numeroDocumento);
-        $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
+        $stmt->bindParam(":idUsuario", $idUsuario);
         return $stmt->execute();
     }
 

@@ -71,44 +71,6 @@ class Can
         return $stmt->execute();
     }
 
-    function agregarCan(
-        $nombre,
-        $raza,
-        $edad,
-        $tamano,
-        $genero,
-        $observacionesMedicas,
-        $descripcion,
-        $foto1,
-        $foto2,
-        $foto3,
-        $estado
-    ) {
-        $sql = "INSERT INTO Can (nombre, raza, edad, tamano, genero, observacionesMedicas, descripcion, foto1, foto2, foto3, estado)
-                VALUES (:nombre, :raza, :edad, :tamano, :genero, :observacionesMedicas, :descripcion, :foto1, :foto2, :foto3, :estado)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":nombre", $nombre);
-        $stmt->bindParam(":raza", $raza);
-        $stmt->bindParam(":edad", $edad);
-        $stmt->bindParam(":tamano", $tamano);
-        $stmt->bindParam(":genero", $genero);
-        $stmt->bindParam(":observacionesMedicas", $observacionesMedicas);
-        $stmt->bindParam(":descripcion", $descripcion);
-        $stmt->bindParam(":foto1", $foto1);
-        $stmt->bindParam(":foto2", $foto2);
-        $stmt->bindParam(":foto3", $foto3);
-        $stmt->bindParam(":estado", $estado);
-        return $stmt->execute();
-    }
-
-    function eliminarCan($idCan)
-    {
-        $sql = "DELETE FROM Can WHERE idCan = :idCan";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":idCan", $idCan);
-        return $stmt->execute();
-    }
-
     function registrarCan(
         $nombre,
         $raza,
@@ -139,10 +101,49 @@ class Can
         return $stmt->execute();
     }
 
-    function obtenerCanes()
+    function cambiarEstadoCan($idCan, $estado)
     {
-        $sql = "SELECT * FROM Can";
+        $sql = "UPDATE Can SET estado = :estado WHERE idCan = :idCan";
         $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":idCan", $idCan);
+        $stmt->bindParam(":estado", $estado);
+        return $stmt->execute();
+    }
+
+    function listarCanesPorTamano($tamano)
+    {
+        $sql = "SELECT * FROM Can WHERE tamano = :tamano";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":tamano", $tamano);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function listarCanesPorGenero($genero)
+    {
+        $sql = "SELECT * FROM Can WHERE genero = :genero";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":genero", $genero);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function listarCanesPorRangoEdad($edadMin, $edadMax)
+    {
+        $sql = "SELECT * FROM Can WHERE edad BETWEEN :edadMin AND :edadMax";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":edadMin", $edadMin);
+        $stmt->bindParam(":edadMax", $edadMax);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //disponible, adoptado, en proceso
+    function listarCanesPorEstado($estado)
+    {
+        $sql = "SELECT * FROM Can WHERE estado = :estado";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":estado", $estado);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
