@@ -201,7 +201,9 @@ $perros = array(
         </div>
     </div>
     
-    <!-- <button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md" id="verDetalle">Open Modal</button> -->
+    <a href="./">
+        <button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button>
+    </a>
 
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-0">
