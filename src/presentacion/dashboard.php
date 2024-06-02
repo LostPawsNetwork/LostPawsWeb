@@ -9,7 +9,7 @@ if (!isset($_SESSION["correo"])) {
 require_once "../datos/can.php";
 
 $can = new Can();
-$listaDeCans = $can->obtenerCanes();
+$listaDeCans = $can->listarCanes();
 ?>
 
 <!DOCTYPE html>
