@@ -1,5 +1,4 @@
 <?php
-// Dearreglo de perros
 require_once "../datos/can.php";
 
 
@@ -21,66 +20,66 @@ $sexo = $_POST['dog-sex'] ?? '';
 $edad_min = $_POST['dog-edad-min']?? '';
 $edad_max = $_POST['dog-edad-max']?? '';
 
-// $perros = array(
+// $listaDeCans = array(
 //     array(
-//         "id" => 1,
-//         "sexo" => 'macho',
+//         "idcan" => 1,
+//         "genero" => 'macho',
 //         "edad" => '3 años',
-//         "size" => 'Grande',
-//         "obsmed" => 'Can con el gen de bipolaridad',
+//         "tamano" => 'Grande',
+//         "observacionesMedicas" => 'Can con el gen de bipolaridad',
 //         "nombre" => "Georgeth",
-//         "imagen" => "perro1.jpg",
-//         "descripcion" => "Descripción del perro 1, tomando en cuenta tamaño, sexo y edad"
+//         "foto1" => "perro1.jpg",
+//         "descripcion" => "Descripción del perro 1, tomando en cuenta tamaño, genero y edad"
 //     ),
 //     array(
-//         "id" => 2,
-//         "sexo" => 'hembra',
+//         "idcan" => 2,
+//         "genero" => 'hembra',
 //         "edad" => '2 años',
-//         "size" => 'Pequeño',
-//         "obsmed" => '-',
+//         "tamano" => 'Pequeño',
+//         "observacionesMedicas" => '-',
 //         "nombre" => "Thomas",
-//         "imagen" => "perro2.jpg",
-//         "descripcion" => "Descripción del perro 2, tomando en cuenta tamaño, sexo y edad"
+//         "foto1" => "perro2.jpg",
+//         "descripcion" => "Descripción del perro 2, tomando en cuenta tamaño, genero y edad"
 //     ),
 //     array(
-//         "id" => 3,
-//         "sexo" => 'macho',
+//         "idcan" => 3,
+//         "genero" => 'macho',
 //         "edad" => '1 años',
-//         "size" => 'Grande',
-//         "obsmed" => 'Apego emocional al responsable se recomienda estar presente la mayoria del tiempo',
+//         "tamano" => 'Grande',
+//         "observacionesMedicas" => 'Apego emocional al responsable se recomienda estar presente la mayoria del tiempo',
 //         "nombre" => "Mohamed",
-//         "imagen" => "perro3.jpg",
-//         "descripcion" => "Descripción del perro 3, tomando en cuenta tamaño, sexo y edad"
+//         "foto1" => "perro3.jpg",
+//         "descripcion" => "Descripción del perro 3, tomando en cuenta tamaño, genero y edad"
 //     ),
 //     array(
-//         "id" => 4,
-//         "sexo" => 'macho',
+//         "idcan" => 4,
+//         "genero" => 'macho',
 //         "edad" => '13 años',
-//         "size" => 'Grande',
-//         "obsmed" => '-',
+//         "tamano" => 'Grande',
+//         "observacionesMedicas" => '-',
 //         "nombre" => "Ryan",
-//         "imagen" => "perro4.jpg",
-//         "descripcion" => "Descripción del perro 4, tomando en cuenta tamaño, sexo y edad"
+//         "foto1" => "perro4.jpg",
+//         "descripcion" => "Descripción del perro 4, tomando en cuenta tamaño, genero y edad"
 //     ),
 //     array(
-//         "id" => 5,
-//         "sexo" => 'hembra',
+//         "idcan" => 5,
+//         "genero" => 'hembra',
 //         "edad" => '6 meses',
-//         "size" => 'grande',
-//         "obsmed" => '-',
+//         "tamano" => 'grande',
+//         "observacionesMedicas" => '-',
 //         "nombre" => "Alex",
-//         "imagen" => "perro5.jpg",
-//         "descripcion" => "Descripción del perro 5, tomando en cuenta tamaño, sexo y edad"
+//         "foto1" => "perro5.jpg",
+//         "descripcion" => "Descripción del perro 5, tomando en cuenta tamaño, genero y edad"
 //     ),
 //     array(
-//         "id" => 1,
-//         "sexo" => 'hembra',
+//         "idcan" => 6,
+//         "genero" => 'hembra',
 //         "edad" => '2 años',
-//         "size" => 'Mediano',
-//         "obsmed" => 'Tiene un problema en el ojo izquierdo por el que se tiene que estar aplicando gotas todos los días',
+//         "tamano" => 'Mediano',
+//         "observacionesMedicas" => 'Tiene un problema en el ojo izquierdo por el que se tiene que estar aplicando gotas todos los días',
 //         "nombre" => "perro 6",
-//         "imagen" => "perro6.jpg",
-//         "descripcion" => "Descripción del perro 6, tomando en cuenta tamaño, sexo y edad"
+//         "foto1" => "perro6.jpg",
+//         "descripcion" => "Descripción del perro 6, tomando en cuenta tamaño, genero y edad"
 //     )
 // );
 ?>
@@ -117,6 +116,11 @@ $edad_max = $_POST['dog-edad-max']?? '';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
 </head>
 <body>
+    <?php if($tipoUsuario == 'admin'){ ?>
+        <div>
+            <button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md" id="agregarCan">Agregar Can</button>
+        </div>
+    <?php } ?>
     <div class="flex flex-row pt-8 pr-4 pl-4 pb-6">
         <div class="basis-5/6 pr-7">
             <div class="grid grid-cols-3 gap-5">
@@ -135,7 +139,20 @@ $edad_max = $_POST['dog-edad-max']?? '';
                     <?php
                     if($tipoUsuario == 'admin'){
                     ?>
-                        <button class='w-full hover:bg-gray-400'>
+                        <button class='w-full hover:bg-gray-400 editarCan'
+                            data-id="<?php echo $perro['idcan']?? ''; ?>"
+                            data-nombre="<?php echo $perro['nombre']?? ''; ?>"
+                            data-descripcion="<?php echo $perro['descripcion'] ?? ''; ?>"
+                            data-foto1="<?php echo $perro['foto1'] ?? ''; ?>"
+                            data-raza="<?php echo $perro['raza'] ?? ''; ?>"
+                            data-edad="<?php echo $perro['edad'] ?? ''; ?>"
+                            data-tamano="<?php echo $perro['tamano'] ?? ''; ?>"
+                            data-genero="<?php echo $perro['genero'] ?? ''; ?>"
+                            data-observacionesMedicas="<?php echo $perro['observacionesMedicas'] ?? ''; ?>"
+                            data-foto2="<?php echo $perro['foto2'] ?? ''; ?>"
+                            data-foto3="<?php echo $perro['foto3'] ?? ''; ?>"
+                            data-estado="<?php echo $perro['estado'] ?? ''; ?>"
+                        >
                             Editar can
                         </button>
                     <?php
@@ -218,9 +235,9 @@ $edad_max = $_POST['dog-edad-max']?? '';
     <a href="./"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
 
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-0">
+        <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
             <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
-            <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> <!-- bloque para que se quede en el centro -->
+            <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> bloque para que se quede en el centro -->
             <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
                 <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
                     <h3 class="text-xl leading-6 font-large text-gray-900 " id="modal-title">Adoptar</h3>
@@ -263,15 +280,228 @@ $edad_max = $_POST['dog-edad-max']?? '';
     </div>
 
     <div id="formSolicitud" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center xl:block xl:p-0">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center xl:block xl:p-20">
             <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
-            <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> <!-- bloque para que se quede en el centro -->
+            <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> bloque para que se quede en el centro -->
             <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
                 <div class="bg-white pb-20">
                     <iframe id="gFormSoli" src="https://docs.google.com/forms/d/e/1FAIpQLSfK_93KP7a8igk9e9V2mlD3g7ykN3Zf5Q2qUhe1WNayevGWmQ/viewform?embedded=true" width="640" height="459" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
                 </div>
                 <div class="px-4 py-3 xl:px-6 xl:flex xl:flex-row-reverse bg-gray-200">
                     <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md cancelButton">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal agregar can -->
+    <div id="agregarCanModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen px-4 text-center xl:block xl:p-20">
+            <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
+            <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true"></span> bloque para que se quede en el centro -->
+            <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
+                <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
+                    <h3 class="text-xl leading-6 font-large text-gray-900 pb-2" id="modal-title">Agregar Can</h3>
+                    <hr>
+                    <fieldset>
+                        <form class="w-full max-w-lg pt-2">
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    Nombre
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="agNombre" type="text" placeholder="Nombre can">
+                                <!-- <p class="text-red-500 text-xs italic">Ingrese todos los datos.</p> -->
+                                </div>
+                                <div class="w-full md:w-1/2 px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    Raza
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="agRaza" type="text" placeholder="Raza">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                                        Tamaño
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="agTamano" type="text" placeholder="Pequeño, mediano, grande">
+                                    <!-- <p class="text-gray-600 text-xs italic">Pequeño, mediano o grande</p> -->
+                                </div>
+                                <div class="w-full md:w-1/3 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                                        Género
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="agGenero" type="text" placeholder="Macho o hembra">
+                                </div>
+                                <div class="w-full md:w-1/3 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                                        Edad
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="agEdad" type="text" placeholder="Edad en años">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-2">
+                                <div class="w-full px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                        Observaciones médicas
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="agobservacionesMedicas" type="text" placeholder="Condiciones a considerar del can">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                        Descripción
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="agDescripcion" type="text" placeholder="Desarrolle una breve decripción general acerca del nuevo can">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                        Fotos
+                                    </label>
+                                    <input id="agFoto1" type="file" class="block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-sky-50 file:text-sky-700
+                                        hover:file:bg-sky-100
+                                    "/>
+                                </div>
+                                <div class="w-full px-3 pt-2 mb-6 md:mb-0">
+                                    <input id="agFoto2" type="file" class="block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-sky-50 file:text-sky-700
+                                        hover:file:bg-sky-100
+                                    "/>
+                                </div>
+                                <div class="w-full px-3 pt-2 mb-6 md:mb-0">
+                                    <input id="agFoto3" type="file" class="block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-sky-50 file:text-sky-700
+                                        hover:file:bg-sky-100
+                                    "/>
+                                </div>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
+                <div class="px-4 py-3 xl:px-6 xl:flex xl:flex-row-reverse bg-gray-200">
+                    <button id="agCanBtn" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-xl px-4 py-2 bg-blue-600 text-base text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 xl:ml-3 xl:w-auto xl:text-md">Agregar</button>
+                    <button type="button" class="mt-z3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md cancelButton">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- editar can -->
+    <!-- Modal agregar can -->
+    <div id="editarCanModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen px-4 text-center xl:block xl:p-20">
+            <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
+            <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true"></span> bloque para que se quede en el centro -->
+            <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
+                <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
+                    <h3 class="text-xl leading-6 font-large text-gray-900 pb-2" id="modal-title">Editar Can</h3>
+                    <hr>
+                    <fieldset>
+                        <form class="w-full max-w-lg pt-2">
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    Nombre
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="edNombre" type="text" placeholder="Nombre can">
+                                <!-- <p class="text-red-500 text-xs italic">Ingrese todos los datos.</p> -->
+                                </div>
+                                <div class="w-full md:w-1/2 px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    Raza
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edRaza" type="text" placeholder="Raza">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Tamaño
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edTamano" type="text" placeholder="Pequeño, mediano, grande">
+                                    <!-- <p class="text-gray-600 text-xs italic">Pequeño, mediano o grande</p> -->
+                                </div>
+                                <div class="w-full md:w-1/3 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                                        Género
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edGenero" type="text" placeholder="Macho o hembra">
+                                </div>
+                                <div class="w-full md:w-1/3 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                                        Edad
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edEdad" type="text" placeholder="Edad en años">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-2">
+                                <div class="w-full px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                        Observaciones médicas
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edObservacionesMedicas" type="text" placeholder="Condiciones a considerar del can">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                        Descripción
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edDescripcion" type="text" placeholder="Desarrolle una breve decripción general acerca del nuevo can">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                        Fotos
+                                    </label>
+                                    <input id="edFoto1" type="file" class="block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-sky-50 file:text-sky-700
+                                        hover:file:bg-sky-100
+                                    "/>
+                                </div>
+                                <div class="w-full px-3 pt-2 mb-6 md:mb-0">
+                                    <input id="edFoto2" type="file" class="block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-sky-50 file:text-sky-700
+                                        hover:file:bg-sky-100
+                                    "/>
+                                </div>
+                                <div class="w-full px-3 pt-2 mb-6 md:mb-0">
+                                    <input id="edFoto3" type="file" class="block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-sky-50 file:text-sky-700
+                                        hover:file:bg-sky-100
+                                    "/>
+                                </div>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
+                <div class="px-4 py-3 xl:px-6 xl:flex xl:flex-row-reverse bg-gray-200">
+                    <button id="edCanBtn" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-xl px-4 py-2 bg-blue-600 text-base text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 xl:ml-3 xl:w-auto xl:text-md">Editar</button>
+                    <button type="button" class="mt-z3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md cancelButton">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -299,6 +529,8 @@ $edad_max = $_POST['dog-edad-max']?? '';
         $('.cancelButton').on('click', function(){
             $('#myModal').addClass('hidden');
             $('#formSolicitud').addClass('hidden');
+            $('#agregarCanModal').addClass('hidden');
+            $('#editarCanModal').addClass('hidden');
         });
 
         $('#saveButton').click(function(){
@@ -314,6 +546,8 @@ $edad_max = $_POST['dog-edad-max']?? '';
         //     }
         // });
 
+
+        // esto es para el filtro de rango
         const setLabel = (lbl, val) => {
             const label = $(`#slider-${lbl}-label`);
             label.text(val);
@@ -336,6 +570,53 @@ $edad_max = $_POST['dog-edad-max']?? '';
             setLabels(ev.value);
         });
         setLabels($('#ex2').attr("data-value").split(","));
+
+        $('#agregarCan').click(function(){
+            console.log('Aqui se muestra el modal')
+            $('#agregarCanModal').removeClass('hidden');
+        })
+
+        $('#agCanBtn').click(function(){
+            //hacer petición post a guardar can - también se puede desd el submit
+            console.log('guardarcan');
+            $('#agregarCanModal').addClass('hidden');
+        })
+
+        $('.editarCan').on('click', function(){
+            console.log('mostramos el modal y le pasamos la info');
+            $('#editarCanModal').removeClass('hidden');
+
+            //llenamos formulario
+            console.log($(this).data());
+            let id = $(this).data('id')
+            let nombre = $(this).data('nombre')
+            let descripcion = $(this).data('descripcion')
+            let foto1 = $(this).data('foto1')
+            let raza = $(this).data('raza')
+            let edad = $(this).data('edad')
+            let tamano = $(this).data('tamano')
+            let genero = $(this).data('genero')
+            let observacionesMedicas = $(this).data('observacionesMedicas')
+            let foto2 = $(this).data('foto2')
+            let foto3 = $(this).data('foto3')
+            let estado = $(this).data('estado')
+
+            $('#edNombre').val(nombre)
+            $('#edRaza').val(raza)
+            $('#edTamano').val(tamano)
+            $('#edGenero').val(genero)
+            $('#edObservacionesmedicas').val(observacionesMedicas)
+            $('#edDescripcion').val(descripcion)
+            $('#edEdad').val(edad)
+            $('#edFoto1').val(foto1)
+            $('#edFoto2').val(foto2)
+            $('#edFoto3').val(foto3)
+        })
+
+        $('#edCanBtn').click(function(){
+            //mandar a editar y cerramos modal
+            $('#editarCanModal').addClass('hidden');
+        })
     })
 
 </script>

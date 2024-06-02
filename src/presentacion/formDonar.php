@@ -13,7 +13,7 @@
             <img src="../assets/imagenes/qr.png" alt="QR" class="w-1/2">
         </div>
         <div class="pl-3 pr-2 text-center">
-        <fieldset>
+            <fieldset>
                 <form action="" method="post" target="_self">
                     <div>
                         <label>Ingresar monto:</label>
