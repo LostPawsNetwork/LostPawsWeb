@@ -58,7 +58,7 @@
         <div class="container mx-auto text-center">
             <h2 class="text-3xl font-bold mb-4">Cómo Puedes Ayudar</h2>
             <p class="text-gray-700">Tu donación hace la diferencia para muchas mascotas.</p><br>
-            <a href="#donar" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            <a href="./presentacion/login.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 Donar
             </a>
         </div>

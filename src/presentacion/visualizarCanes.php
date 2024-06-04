@@ -1,17 +1,17 @@
 <?php
 require_once "../datos/can.php";
 
+var_dump($_SESSION);
+// if (!isset($_SESSION["correo"])) {
+//     header("Location: login.php");
+//     exit();
+// }
+// else{
+//     $correo = $_SESSION["correo"];
+//     $tipoUsuario = $_SESSION['tipoUsuario'];
+// }
 
-if (!isset($_SESSION["correo"])) {
-    header("Location: login.php");
-    exit();
-}
-else{
-    $correo = $_SESSION["correo"];
-    $tipoUsuario = $_SESSION['tipoUsuario'];
-}
-
-
+$tipoUsuario = 'user';
 $can = new Can();
 $listaDeCans = $can->listarCanes();
 
@@ -129,7 +129,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
                 ?>
                     <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
                         <div class='h-64'>
-                            <img class='rounded-md size-full' src='assets/imagenes/perros-ejemplo/<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
+                            <img class='rounded-md size-full' src='<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
                         </div>
                         <div class='pt-3 pb-4 pl-2 h-28'>
                             <h5><?php echo $perro['nombre']?></h5>
