@@ -35,8 +35,9 @@ $listaDeCans = $can->listarCanes();
                         <img src="<?php echo htmlspecialchars(
                             $can["foto1"]
                         ); ?>" alt="Foto de <?php echo htmlspecialchars(
-    $can["nombre"]
-); ?>" class="h-40 w-full object-cover mb-4 rounded-lg">
+                        $can["nombre"]
+                    ); ?>" class="h-40 w-full object-cover mb-4 rounded-lg">
+                    
                     <?php endif; ?>
                     <h2 class="text-xl font-semibold mb-2"><?php echo htmlspecialchars(
                         $can["nombre"]

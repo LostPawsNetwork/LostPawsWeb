@@ -1,76 +1,22 @@
 <?php
-// Dearreglo de perros
-//todo hacer consulta a base de datos para traer la info de los perros, ver formato con post nos traemos los datos del filtro
+
+session_start();
+if (!isset($_SESSION['correo'])) {
+    header("Location: login.php");
+    exit();
+}
+
+require_once '../datos/can.php';
+
+$can = new Can();
+$listaDeCans = $can->listarCanes();
 
 $size = $_POST['dog-size'] ?? '';
 $sexo = $_POST['dog-sex'] ?? '';
 $edad_min = $_POST['dog-edad-min']?? '';
 $edad_max = $_POST['dog-edad-max']?? '';
 
-$perros = array(
-    array(
-        "id" => 1,
-        "sexo" => 'macho',
-        "edad" => '3 años',
-        "size" => 'Grande',
-        "obsmed" => 'Can con el gen de bipolaridad',
-        "nombre" => "Georgeth",
-        "imagen" => "perro1.jpg",
-        "descripcion" => "Descripción del perro 1, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 2,
-        "sexo" => 'hembra',
-        "edad" => '2 años',
-        "size" => 'Pequeño',
-        "obsmed" => '-',
-        "nombre" => "Thomas",
-        "imagen" => "perro2.jpg",
-        "descripcion" => "Descripción del perro 2, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 3,
-        "sexo" => 'macho',
-        "edad" => '1 años',
-        "size" => 'Grande',
-        "obsmed" => 'Apego emocional al responsable se recomienda estar presente la mayoria del tiempo',
-        "nombre" => "Mohamed",
-        "imagen" => "perro3.jpg",
-        "descripcion" => "Descripción del perro 3, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 4,
-        "sexo" => 'macho',
-        "edad" => '13 años',
-        "size" => 'Grande',
-        "obsmed" => '-',
-        "nombre" => "Ryan",
-        "imagen" => "perro4.jpg",
-        "descripcion" => "Descripción del perro 4, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 5,
-        "sexo" => 'hembra',
-        "edad" => '6 meses',
-        "size" => 'grande',
-        "obsmed" => '-',
-        "nombre" => "Alex",
-        "imagen" => "perro5.jpg",
-        "descripcion" => "Descripción del perro 5, tomando en cuenta tamaño, sexo y edad"
-    ),
-    array(
-        "id" => 1,
-        "sexo" => 'hembra',
-        "edad" => '2 años',
-        "size" => 'Mediano',
-        "obsmed" => 'Tiene un problema en el ojo izquierdo por el que se tiene que estar aplicando gotas todos los días',
-        "nombre" => "perro 6",
-        "imagen" => "perro6.jpg",
-        "descripcion" => "Descripción del perro 6, tomando en cuenta tamaño, sexo y edad"
-    )
-);
 ?>
-
 <style>
     #slider-div {
     display: flex;
@@ -107,38 +53,30 @@ $perros = array(
         <div class="basis-5/6 pr-7">
             <div class="grid grid-cols-3 gap-5">
                 <?php
-                foreach ($perros as $perro) {
+                foreach ($listaDeCans as $perro) 
+                {
                 ?>
                     <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
                         <div class='h-64'>
-                            <img class='rounded-md size-full' src='assets/imagenes/perros-ejemplo/<?php echo $perro['imagen'];?>' alt='Imagen del canino'>
+                            <img class='rounded-md size-full' src='<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
                         </div>
                         <div class='pt-3 pb-4 pl-2 h-28'>
                             <h5><?php echo $perro['nombre']?></h5>
                             <p class='text-left'><?php echo $perro['descripcion']?></p>
                         </div>
                         <div class='flex flex-row h-10 bg-gray-200'>
-                    <?php
-                    if(isset($admin)){
-                    ?>
-                        <button class='w-full hover:bg-gray-400'>
-                            Editar can
-                        </button>
-                    <?php
-                    }
-                    else{
-                    ?>
+
                         <button class='w-full hover:bg-gray-400 verDetalle'
-                            data-id=<?php echo $perro['id'] ?>
+                            data-id=<?php echo $perro['idcan'] ?>
                             data-descrip='<?php echo $perro['descripcion'] ?>'
-                            data-img='<?php echo $perro['imagen']; ?>'
-                            data-obsmed='<?php echo $perro['obsmed'] ?>'
-                            data-datos='<?php echo $perro['sexo']." - ".$perro['edad']. " - ".$perro['size']?>'
+                            data-img='<?php echo $perro['foto1']; ?>'
+                            data-obsmed='<?php echo $perro['observacionesmedicas'] ?>'
+                            data-datos='<?php echo $perro['genero']." - ".$perro['edad']. " - ".$perro['tamano']?>'
                         >
                             Adoptar
                         </button>
                     <?php
-                    }
+                    
                     ?>
                     </div>
                 </div>
@@ -149,7 +87,7 @@ $perros = array(
         </div>
         <div class="basis-1/6 pl-3 pr-2 shadow-lg shadow-black-100 outline outline-offset-2 outline-black-200 rounded text-center">
             <?php
-            //todo cuando se activen los filtros se re carga toda la página para hacer la consulta en base a lo filtrado
+            //todo cuando se activen los filtros se recarga toda la página para hacer la consulta en base a lo filtrado
             ?>
             <fieldset>
                 <div class="mb-2 mt-3 text-2xl text-bold ">
@@ -201,41 +139,42 @@ $perros = array(
         </div>
     </div>
     
-    <!-- <button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md" id="verDetalle">Open Modal</button> -->
+    <a href="landingPage.php"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
 
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-0">
+        <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
             <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
-            <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> <!-- bloque para que se quede en el centro -->
+            <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> bloque para que se quede en el centro -->
             <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
                 <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
                     <h3 class="text-xl leading-6 font-large text-gray-900 " id="modal-title">Adoptar</h3>
                     <hr>
                     <div class="xl:items-start w-full">
                         <div class="mt-3 xl:mt-0 xl:ml-4 xl:text-left">
-                            <div id="info_can" class="mt-2 flex flex-row">
+                            <div class="mt-2 flex flex-row">
                                 <div class="basis-2/5 border border-black-30">
-                                    <img class='rounded-md size-full' alt='Imagen del canino'>
+                                    <!--<img class='rounded-md size-full' alt='Imagen del canino'>-->
+                                    <span id="foto-can"></span>
                                 </div>
                                 <div class="basis-3/5 pl-3">
-                                    <h5>Descripción</h5>
+                                    <h5>Descripción:</h5>
                                     <span id="det-descripcion"></span>
                                 </div>
                             </div>
                             <div>
                                 <div class="pb-1 pt-2">
-                                    <h5>Datos</h5>
+                                    <h5>Datos:</h5>
                                     <span id="det-datos"></span>
                                 </div>
                                 <hr>
                                 <div class="pb-1">
-                                    <h5>Observaciones médicas</h5>
+                                    <h5>Observaciones médicas:</h5>
                                     <span id="ob-medicas"></span>
                                 </div>
                             </div>
                             <hr>
                             <div id="img_process">
-                                img del proceso
+                                Proceso de adopción:
                             </div>
                         </div>
                     </div>
@@ -249,9 +188,9 @@ $perros = array(
     </div>
 
     <div id="formSolicitud" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center xl:block xl:p-0">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center xl:block xl:p-20">
             <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
-            <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> <!-- bloque para que se quede en el centro -->
+            <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> bloque para que se quede en el centro -->
             <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
                 <div class="bg-white pb-20">
                     <iframe id="gFormSoli" src="https://docs.google.com/forms/d/e/1FAIpQLSfK_93KP7a8igk9e9V2mlD3g7ykN3Zf5Q2qUhe1WNayevGWmQ/viewform?embedded=true" width="640" height="459" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
@@ -272,9 +211,8 @@ $perros = array(
             let datos = $(this).data('datos');
             let observaciones = $(this).data('obsmed');
             let descripcion = $(this).data('descrip')
-            // $('#img_process').text(datos);
             //ahora llenamos el modal
-            $('#info_can img').attr('src', 'assets/imagenes/perros-ejemplo/' + img);
+            $('#foto-can').attr(img);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);
@@ -292,14 +230,7 @@ $perros = array(
             $('#formSolicitud').removeClass('hidden');
         })
 
-        // $('#gFormSoli').on('load', function() {
-        //     var iframe = document.getElementById('gFormSoli');
-        //     var iframeContent = iframe.contentWindow.location.href;
-        //     if (iframeContent.includes('formResponse')) {
-        //         $('#formSolicitud').addClass('hidden');
-        //     }
-        // });
-
+        // esto es para el filtro de rango
         const setLabel = (lbl, val) => {
             const label = $(`#slider-${lbl}-label`);
             label.text(val);
@@ -323,5 +254,4 @@ $perros = array(
         });
         setLabels($('#ex2').attr("data-value").split(","));
     })
-
 </script>

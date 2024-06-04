@@ -32,7 +32,7 @@
             <h2 class="text-3xl font-bold mb-4">Adopta una Mascota</h2>
             <p class="text-gray-700 mb-6">Explora las opciones para adoptar y dar un hogar a una mascota que lo necesita.</p>
         </div>
-        <a href="index.php?content=adopta/visualizarCanes" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        <a href="presentacion/login.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
             Adopta
         </a>
     </section>

@@ -1,10 +1,5 @@
 <?php
 session_start();
-
-header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
-header("Pragma: no-cache"); // HTTP 1.0.
-header("Expires: 0"); // Proxies.
-
 if (!isset($_SESSION['correo'])) {
     header("Location: login.php");
     exit();
@@ -58,7 +53,7 @@ if (!isset($_SESSION['correo'])) {
                         <h2 class="text-3xl font-bold mb-4">Adopta una Mascota</h2>
                         <p class="text-gray-700 mb-6">Explora las opciones para adoptar y dar un hogar a una mascota que lo necesita.</p>
                     </div>
-                    <a href="#adopta" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                    <a href="visualizarCanes.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                         Adopta
                     </a>
                 </section>
@@ -84,7 +79,7 @@ if (!isset($_SESSION['correo'])) {
                     <div class="container mx-auto text-center">
                         <h2 class="text-3xl font-bold mb-4">Cómo Puedes Ayudar</h2>
                         <p class="text-gray-700">Tu donación hace la diferencia para muchas mascotas.</p><br>
-                        <a href="#donar" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                        <a href="formDonar.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                             Donar
                         </a>
                     </div>
