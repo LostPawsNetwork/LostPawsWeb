@@ -38,7 +38,9 @@ class Usuario
                 ];
             }
         }
-        return ["success" => false, "tipoUsuario" => null];
+        else{
+            return ["success" => false, "tipoUsuario" => null];
+        }
     }
 
     function obtenerUsuarios()
