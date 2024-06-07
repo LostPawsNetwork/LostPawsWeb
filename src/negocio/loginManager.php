@@ -1,5 +1,6 @@
 <?php
     session_start();
+
     require_once '../datos/usuario.php';
 
     class LoginManager 
@@ -14,12 +15,14 @@
 
         public function iniciarSesion($correo, $passwd) 
         {
-            $resultado = $this->usuario->validarUsuario($correo, $passwd);
+            $cargo = $this->usuario->validarUsuario($correo, $passwd);
             
-            if ($resultado['success']) 
+            if ($cargo['success']) 
             {
+                $_SESSION['loggedin'] = true;
                 $_SESSION['correo'] = $correo;
-                $_SESSION['tipoUsuario'] = $resultado['tipoUsuario'];
+
+                $_SESSION['tipoUsuario'] = $cargo['tipoUsuario'];
         
                 return true;
             } 
@@ -32,10 +35,12 @@
 
         public function cerrarSesion() 
         {
-            session_unset();
+            $_SESSION = array();
+
             session_destroy();
-            header("Location: ../presentacion/login.php");
-            exit();
+
+            header("Location: /lostpaws/"); 
+            exit;
         }
 
         public function sesionActual() 

@@ -14,11 +14,14 @@
 
         $dsn = "pgsql:host=$host;dbname=$db;sslmode=$sslmode";
 
-        try {
+        try 
+        {
             $pdo = new PDO($dsn, $user, $pass);
 
             return $pdo;
-        } catch (\PDOException $e) {
+        } 
+        catch (\PDOException $e) 
+        {
             echo "Error: " . $e->getMessage();
 
             return null;

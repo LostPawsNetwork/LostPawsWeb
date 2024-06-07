@@ -3,7 +3,7 @@ session_start();
 
 require_once '../datos/usuario.php';
 
-$user = 'usuario';
+$user = 'user';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {

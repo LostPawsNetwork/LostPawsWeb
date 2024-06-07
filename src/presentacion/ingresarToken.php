@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['tipoUsuario'] !== 'admin') 
+{
+    header("Location: /lostpaws/presentacion/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 

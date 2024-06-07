@@ -1,9 +1,10 @@
 <?php
-
 session_start();
-if (!isset($_SESSION['correo'])) {
-    header("Location: login.php");
-    exit();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['tipoUsuario'] !== 'user') 
+{
+    header("Location: /lostpaws/presentacion/login.php");
+    exit;
 }
 
 require_once '../datos/can.php';
@@ -15,31 +16,35 @@ $size = $_POST['dog-size'] ?? '';
 $sexo = $_POST['dog-sex'] ?? '';
 $edad_min = $_POST['dog-edad-min']?? '';
 $edad_max = $_POST['dog-edad-max']?? '';
-
 ?>
-<style>
-    #slider-div {
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid de perros</title>
+    <style>
+    #slider-div 
+    {
     display: flex;
     flex-direction: row;
     margin-top: 30px;
     }
 
-    #slider-div>div {
+    #slider-div>div 
+    {
     margin: 8px;
     }
 
-    .slider-label {
+    .slider-label 
+    {
     position: absolute;
     background-color: #eeee;
     padding: 4px;
     font-size: 0.75rem;
     }
-</style>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Grid de perros</title>
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
@@ -48,98 +53,103 @@ $edad_max = $_POST['dog-edad-max']?? '';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
 </head>
-<body>
-    <div class="flex flex-row pt-8 pr-4 pl-4 pb-6">
-        <div class="basis-5/6 pr-7">
-            <div class="grid grid-cols-3 gap-5">
-                <?php
-                foreach ($listaDeCans as $perro) 
-                {
-                ?>
-                    <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
-                        <div class='h-64'>
-                            <img class='rounded-md size-full' src='<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
-                        </div>
-                        <div class='pt-3 pb-4 pl-2 h-28'>
-                            <h5><?php echo $perro['nombre']?></h5>
-                            <p class='text-left'><?php echo $perro['descripcion']?></p>
-                        </div>
-                        <div class='flex flex-row h-10 bg-gray-200'>
 
-                        <button class='w-full hover:bg-gray-400 verDetalle'
-                            data-id=<?php echo $perro['idcan'] ?>
-                            data-descrip='<?php echo $perro['descripcion'] ?>'
-                            data-img='<?php echo $perro['foto1']; ?>'
-                            data-obsmed='<?php echo $perro['observacionesmedicas'] ?>'
-                            data-datos='<?php echo $perro['genero']." - ".$perro['edad']. " - ".$perro['tamano']?>'
-                        >
-                            Adoptar
-                        </button>
-                    <?php
-                    
-                    ?>
-                    </div>
-                </div>
-                <?php
-                }
-                ?>
-            </div>
-        </div>
-        <div class="basis-1/6 pl-3 pr-2 shadow-lg shadow-black-100 outline outline-offset-2 outline-black-200 rounded text-center">
-            <?php
-            //todo cuando se activen los filtros se recarga toda la página para hacer la consulta en base a lo filtrado
-            ?>
-            <fieldset>
-                <div class="mb-2 mt-3 text-2xl text-bold ">
-                    <legend>Filtros</legend>
-                </div>
-                <form action="" method="post" target="_self">
-                    <div>
-                        <label>Tamaño</label>
-                        <div>
-                            <select name="dog-size" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 border-gray-600 dark:placeholder-gray-400">
-                                <option value="">...</option>
-                                <option value="xl" <?php echo isset($size)? ($size == 'xl'?  'selected': '') : ''?>>Grande</>
-                                <option value="x" <?php echo isset($size)? ($size == 'x'?  'selected': '') : ''?>>Mediano</option>
-                                <option value="xs" <?php echo isset($size)? ($size == 'xs'?  'selected': '') : ''?>>Pequeño</option>
-                            </select>
-                        </div>
-                        <label>Sexo</label>
-                        <div>
-                            <select name="dog-sex" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 border-gray-600 dark:placeholder-gray-400">
-                                <option value="">...</option>
-                                <option  value="macho" <?php echo isset($sexo)? ($sexo == 'macho'?  'selected': '') : ''?>>Macho</option>
-                                <option value="hembra" <?php echo isset($sexo)? ($sexo == 'hembra'?  'selected': '') : ''?>>Hembra</option>
-                            </select>
-                        </div>
-                        <label>Edad</label>
-                        <div class="w-3/4">
-                            <input type="text" hidden id="dog-edad-min" name="dog-edad-min">
-                            <input type="text" hidden id="dog-edad-max" name="dog-edad-max">
-                            <div id="slider-outer-div">
-                                <div id="slider-max-label" name="dog-edad-min" class="slider-label"></div>
-                                <div id="slider-min-label" name="dog-edad-max" class="slider-label"></div>
-                                <div id="slider-div">
-                                    <div>0 años</div>
-                                    <div>
-                                        <input id="ex2" type="text" data-slider-min="0" data-slider-max="20" data-slider-value="[
-                                            <?php echo ($edad_min != '')? $edad_min : 0 ?>, <?php echo ($edad_max != '')? $edad_max : 20 ?>]"
-                                            data-slider-tooltip="hide" />
+<body class="bg-gray-100">
+    <div class='flex'>
+        
+        <?php include "../components/header2.html"; ?>
+
+        <div class="flex-1">
+            <?php include "../components/sidebar2.html"; ?>
+
+            <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4 mt-20" style="top: 4; height: calc(100% - 4rem)">
+                <div class="flex flex-row pt-8 pr-4 pl-4 pb-6">
+                    <div class="basis-5/6 pr-7">
+                        <div class="grid grid-cols-3 gap-5">
+                            <?php
+                            foreach ($listaDeCans as $perro) 
+                            {
+                            ?>
+                                <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
+                                    <div class='h-64'>
+                                        <img class='rounded-md size-full' src='<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
                                     </div>
-                                    <div>20 años</div>
+                                    <div class='pt-3 pb-4 pl-2 h-28'>
+                                        <h5><?php echo $perro['nombre']?></h5>
+                                        <p class='text-left'><?php echo $perro['descripcion']?></p>
+                                    </div>
+                                    <div class='flex flex-row h-10 bg-gray-200'>
+                                        <button class='w-full hover:bg-gray-400 verDetalle'
+                                            data-id="<?php echo $perro['idcan'] ?>"
+                                            data-descrip="<?php echo $perro['descripcion'] ?>"
+                                            data-img="<?php echo $perro['foto1']; ?>"
+                                            data-obsmed="<?php echo $perro['observacionesmedicas'] ?>"
+                                            data-datos="<?php echo $perro['genero']." - ".$perro['edad']. " - ".$perro['tamano']?>"
+                                        >
+                                            Adoptar
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
-                    
-                    <button class="outline outline-offset-2 outline-black-100 mt-4 bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" type="submit">Filtrar</button>
-                    
-                </form>
-            </fieldset>
+                    <div class="basis-1/6 pl-3 pr-2 shadow-lg shadow-black-100 outline outline-offset-2 outline-black-200 rounded text-center">
+                        <fieldset>
+                            <div class="mb-2 mt-3 text-2xl font-bold">
+                                <legend>Filtros</legend>
+                            </div>
+                            <form action="" method="post" target="_self">
+                                <div>
+                                    <label>Tamaño</label>
+                                    <div>
+                                        <select name="dog-size" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                            <option value="">...</option>
+                                            <option value="xl" <?php echo isset($size) ? ($size == 'xl' ? 'selected' : '') : '' ?>>Grande</option>
+                                            <option value="x" <?php echo isset($size) ? ($size == 'x' ? 'selected' : '') : '' ?>>Mediano</option>
+                                            <option value="xs" <?php echo isset($size) ? ($size == 'xs' ? 'selected' : '') : '' ?>>Pequeño</option>
+                                        </select>
+                                    </div>
+                                    <label>Sexo</label>
+                                    <div>
+                                        <select name="dog-sex" id="dog-sex" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                            <option value="">...</option>
+                                            <option value="macho" <?php echo isset($sexo) ? ($sexo == 'macho' ? 'selected' : '') : '' ?>>Macho</option>
+                                            <option value="hembra" <?php echo isset($sexo) ? ($sexo == 'hembra' ? 'selected' : '') : '' ?>>Hembra</option>
+                                        </select>
+                                    </div>
+                                    <label>Edad</label>
+                                    <div class="w-3/4">
+                                        <input type="text" hidden id="dog-edad-min" name="dog-edad-min">
+                                        <input type="text" hidden id="dog-edad-max" name="dog-edad-max">
+                                        <div id="slider-outer-div">
+                                            <div id="slider-max-label" name="dog-edad-min" class="slider-label"></div>
+                                            <div id="slider-min-label" name="dog-edad-max" class="slider-label"></div>
+                                            <div id="slider-div">
+                                                <div>0 años</div>
+                                                <div>
+                                                    <input id="ex2" type="text" data-slider-min="0" data-slider-max="20" data-slider-value="[<?php echo ($edad_min != '') ? $edad_min : 0 ?>, <?php echo ($edad_max != '') ? $edad_max : 20 ?>]" data-slider-tooltip="hide" />
+                                                </div>
+                                                <div>20 años</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="outline outline-offset-2 outline-black-100 mt-4 bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" type="submit">Filtrar</button>
+                                
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+                <a href="landingPage.php"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
+            </main>
         </div>
     </div>
     
-    <a href="landingPage.php"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
+    <?php include "../components/footer.html"; ?>
+    <script src="../scripts/dynamic.js"></script>
 
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
@@ -203,6 +213,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
     </div>
 </body>
 </html>
+
 <script>
     $(document).ready(function(){
         $('.verDetalle').on('click', function(){
@@ -212,7 +223,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
             let observaciones = $(this).data('obsmed');
             let descripcion = $(this).data('descrip')
             //ahora llenamos el modal
-            $('#foto-can').attr(img);
+            $('#foto-can').attr('src', img);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);

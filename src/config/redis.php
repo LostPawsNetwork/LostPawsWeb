@@ -8,6 +8,7 @@
             "host" => "redis",
             "port" => 6379,
         ]);
+        
         return $redis;
     }
 ?>

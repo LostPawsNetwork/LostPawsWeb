@@ -1,10 +1,11 @@
 <?php
 session_start();
-// para verificar si esta logeado
-// if (!isset($_SESSION["correo"])) {
-//     header("Location: login.php");
-//     exit();
-// }
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['tipoUsuario'] !== 'admin') 
+{
+    header("Location: /lostpaws/presentacion/login.php");
+    exit;
+}
 
 ob_start();
 
