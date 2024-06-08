@@ -29,7 +29,7 @@
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full px-4">
         <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
                <div class="flex justify-center items-center">
-               <img src="../assets/imagenes/logoLostPaws.png" alt="Logo" class="h-20" />
+               <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
                </div>
                <br>
                 <div class="bg-blue-100 p-6 rounded-lg">

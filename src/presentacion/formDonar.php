@@ -30,7 +30,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
                 <div class="w-4/5 max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center">
                     <h1 class="text-2xl font-bold mb-4">Gracias por donar</h1>
                     <div class="flex justify-center">
-                    <img src="../assets/imagenes/qr.png" alt="QR" style="width: 250px;">
+                    <img src="../assets/images/qr.png" alt="QR" style="width: 250px;">
                     </div>
                     <div class="pl-3 pr-2 text-center">
                         <fieldset>

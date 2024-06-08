@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = $_POST["estado"];
 
     // Manejar la subida de la imagen
-    $target_dir = "../assets/imagenes/perros/";
+    $target_dir = "../assets/images/canes/";
     $target_file = $target_dir . basename($_FILES["foto1"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             null,
             $estado
         );
-        header("Location: dashboard.php");
+        header("Location: ../presentacion/dashboard.php");
         exit();
     }
 }
