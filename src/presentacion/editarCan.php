@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['tipoUsuario'] !== 'admin') 
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
+|| ($_SESSION['tipoUsuario'] !== 'admin' && $_SESSION['tipoUsuario'] !== 'superadmin')) 
 {
     header("Location: /lostpaws/presentacion/login.php");
     exit;
