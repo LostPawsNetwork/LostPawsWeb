@@ -4,6 +4,7 @@ import torch
 from transformers import pipeline, AutoModelForImageClassification, AutoFeatureExtractor
 from PIL import Image
 import io
+import os
 
 app = FastAPI()
 
@@ -32,4 +33,5 @@ def read_root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=80)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
