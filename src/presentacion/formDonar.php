@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['correo'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,9 +34,8 @@
                             <input type="file" id="comprobante" name="comprobante" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 border-gray-600 dark:placeholder-gray-400">
                         </div>
                     </div>
-                    <a href="../"><button class="mt-5 ml-5 px-4 py-2 bg-sky-500 text-white rounded-md">Volver</button></a>
-                    <button class="outline outline-offset-2 outline-black-100 mt-4 bg-blue-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" type="submit">Filtrar</button>
-                    
+                    <a href="landingPage.php"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
+                    <button class="outline outline-offset-2 outline-black-100 mt-4 bg-blue-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" type="submit">Donar</button>   
                 </form>
             </fieldset>
         </div>

@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once 'loginManager.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error al ejecutar el script.";
             }
         } else {
-            header("Location: ../presentacion/landing.php");
+            header("Location: ../presentacion/landingPage.php");
         }
     } else {
         echo "Email y/o contraseña incorrectos.";

@@ -1,17 +1,13 @@
 <?php
-require_once "../datos/can.php";
 
-var_dump($_SESSION);
-// if (!isset($_SESSION["correo"])) {
-//     header("Location: login.php");
-//     exit();
-// }
-// else{
-//     $correo = $_SESSION["correo"];
-//     $tipoUsuario = $_SESSION['tipoUsuario'];
-// }
+session_start();
+if (!isset($_SESSION['correo'])) {
+    header("Location: login.php");
+    exit();
+}
 
-$tipoUsuario = 'user';
+require_once '../datos/can.php';
+
 $can = new Can();
 $listaDeCans = $can->listarCanes();
 
@@ -83,7 +79,6 @@ $edad_max = $_POST['dog-edad-max']?? '';
 //     )
 // );
 ?>
-
 <style>
     #slider-div {
     display: flex;
@@ -125,7 +120,8 @@ $edad_max = $_POST['dog-edad-max']?? '';
         <div class="basis-5/6 pr-7">
             <div class="grid grid-cols-3 gap-5">
                 <?php
-                foreach ($listaDeCans as $perro) {
+                foreach ($listaDeCans as $perro) 
+                {
                 ?>
                     <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
                         <div class='h-64'>
@@ -136,40 +132,17 @@ $edad_max = $_POST['dog-edad-max']?? '';
                             <p class='text-left'><?php echo $perro['descripcion']?></p>
                         </div>
                         <div class='flex flex-row h-10 bg-gray-200'>
-                    <?php
-                    if($tipoUsuario == 'admin'){
-                    ?>
-                        <button class='w-full hover:bg-gray-400 editarCan'
-                            data-id="<?php echo $perro['idcan']?? ''; ?>"
-                            data-nombre="<?php echo $perro['nombre']?? ''; ?>"
-                            data-descripcion="<?php echo $perro['descripcion'] ?? ''; ?>"
-                            data-foto1="<?php echo $perro['foto1'] ?? ''; ?>"
-                            data-raza="<?php echo $perro['raza'] ?? ''; ?>"
-                            data-edad="<?php echo $perro['edad'] ?? ''; ?>"
-                            data-tamano="<?php echo $perro['tamano'] ?? ''; ?>"
-                            data-genero="<?php echo $perro['genero'] ?? ''; ?>"
-                            data-observacionesMedicas="<?php echo $perro['observacionesMedicas'] ?? ''; ?>"
-                            data-foto2="<?php echo $perro['foto2'] ?? ''; ?>"
-                            data-foto3="<?php echo $perro['foto3'] ?? ''; ?>"
-                            data-estado="<?php echo $perro['estado'] ?? ''; ?>"
-                        >
-                            Editar can
-                        </button>
-                    <?php
-                    }
-                    else{
-                    ?>
                         <button class='w-full hover:bg-gray-400 verDetalle'
                             data-id=<?php echo $perro['idcan'] ?>
                             data-descrip='<?php echo $perro['descripcion'] ?>'
                             data-img='<?php echo $perro['foto1']; ?>'
-                            data-obsmed='<?php echo $perro['observacionesMedicas'] ?>'
+                            data-obsmed='<?php echo $perro['observacionesmedicas'] ?>'
                             data-datos='<?php echo $perro['genero']." - ".$perro['edad']. " - ".$perro['tamano']?>'
                         >
                             Adoptar
                         </button>
                     <?php
-                    }
+                    
                     ?>
                     </div>
                 </div>
@@ -180,7 +153,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
         </div>
         <div class="basis-1/6 pl-3 pr-2 shadow-lg shadow-black-100 outline outline-offset-2 outline-black-200 rounded text-center">
             <?php
-            //todo cuando se activen los filtros se re carga toda la página para hacer la consulta en base a lo filtrado
+            //todo cuando se activen los filtros se recarga toda la página para hacer la consulta en base a lo filtrado
             ?>
             <fieldset>
                 <div class="mb-2 mt-3 text-2xl text-bold ">
@@ -232,7 +205,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
         </div>
     </div>
     
-    <a href="./"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
+    <a href="landingPage.php"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
 
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
@@ -244,29 +217,30 @@ $edad_max = $_POST['dog-edad-max']?? '';
                     <hr>
                     <div class="xl:items-start w-full">
                         <div class="mt-3 xl:mt-0 xl:ml-4 xl:text-left">
-                            <div id="info_can" class="mt-2 flex flex-row">
+                            <div class="mt-2 flex flex-row">
                                 <div class="basis-2/5 border border-black-30">
-                                    <img class='rounded-md size-full' alt='Imagen del canino'>
+                                    <!--<img class='rounded-md size-full' alt='Imagen del canino'>-->
+                                    <span id="foto-can"></span>
                                 </div>
                                 <div class="basis-3/5 pl-3">
-                                    <h5>Descripción</h5>
+                                    <h5>Descripción:</h5>
                                     <span id="det-descripcion"></span>
                                 </div>
                             </div>
                             <div>
                                 <div class="pb-1 pt-2">
-                                    <h5>Datos</h5>
+                                    <h5>Datos:</h5>
                                     <span id="det-datos"></span>
                                 </div>
                                 <hr>
                                 <div class="pb-1">
-                                    <h5>Observaciones médicas</h5>
+                                    <h5>Observaciones médicas:</h5>
                                     <span id="ob-medicas"></span>
                                 </div>
                             </div>
                             <hr>
                             <div id="img_process">
-                                img del proceso
+                                Proceso de adopción:
                             </div>
                         </div>
                     </div>
@@ -516,9 +490,8 @@ $edad_max = $_POST['dog-edad-max']?? '';
             let datos = $(this).data('datos');
             let observaciones = $(this).data('obsmed');
             let descripcion = $(this).data('descrip')
-            // $('#img_process').text(datos);
             //ahora llenamos el modal
-            $('#info_can img').attr('src', 'assets/imagenes/perros-ejemplo/' + img);
+            $('#foto-can').attr(img);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);
@@ -618,5 +591,4 @@ $edad_max = $_POST['dog-edad-max']?? '';
             $('#editarCanModal').addClass('hidden');
         })
     })
-
 </script>
