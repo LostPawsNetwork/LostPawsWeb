@@ -1,3 +1,14 @@
+FROM debian:latest as downloader
+
+RUN apt-get update && apt-get install -y wget
+
+ENV SERVER_URL http://161.132.47.250:8082
+
+RUN mkdir -p /checkpoint
+
+RUN wget ${SERVER_URL}/pytorch_model.bin -O /checkpoint/pytorch_model.bin
+RUN wget ${SERVER_URL}/optimizer.pt -O /checkpoint/optimizer.pt
+
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -6,12 +17,7 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV SERVER_URL http://161.132.47.250:8082
-
-RUN mkdir -p /app/checkpoint
-
-RUN wget ${SERVER_URL}/pytorch_model.bin -O /app/results/checkpoint-1030/pytorch_model.bin
-RUN wget ${SERVER_URL}/optimizer.pt -O /app/results/checkpoint-1030/optimizer.pt
+COPY --from=downloader /checkpoint /app/results/checkpoint-1030
 
 COPY DogDetector/ .
 
