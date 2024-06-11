@@ -33,7 +33,7 @@
                     </div>
                     <div class="flex flex-col items-center space-y-4">
                         <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Enviar Código</button>
-                        <a href="index.php" class="text-green-600 hover:underline">Volver al Inicio</a>
+                        <a href="/lostpaws/presentacion/login.php" class="text-green-600 hover:underline">Volver</a>
                     </div>
                 </form>
             </div>
