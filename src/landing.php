@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LostPaws</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="relative w-full h-96 overflow-hidden">
@@ -51,7 +52,7 @@
             <h2 class="text-3xl font-bold mb-4">Nuestras Sedes</h2>
             <p class="text-gray-700 mb-6">Encuentra nuestra sede más cercana y ven a visitarnos.</p>
         </div>
-        <div id="map" style="height: 400px;"></div>
+        <div id="map" style="height: 400px; z-index: 1;"></div>
     </section>
     <!-- Sección de Donación -->
     <section id="donar" class="py-10 bg-gray-100">
@@ -66,9 +67,59 @@
 
     <!-- Sección de Testimonios -->
     <section id="testimonios" class="py-10 bg-white">
-        <div class="container mx-auto text-center">
+        <div class="container mx-auto text-center grid place-content-center">
             <h2 class="text-3xl font-bold mb-4">Historias de Éxito</h2>
-            <p class="text-gray-700">Descubre las historias de mascotas y dueños felices gracias a nuestra ayuda.</p>
+            <p class="text-gray-700 pb-10">Descubre las historias de mascotas y dueños felices gracias a nuestra ayuda.</p>
+            <div id="carousel-historias" class="owl-carousel flex flex-row">
+                <div class="max-w-lg w-full lg:flex rounded shadow m-5">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/imagenes/perros/adoptados/perro1.jpg')">
+                    </div>
+                    <div class="p-4 flex flex-col justify-between leading-normal text-left">
+                        <div class="mb-8">
+                            <div class="text-gray-900 font-bold text-xl mb-2">Chocolate</div>
+                            <p class="text-gray-700 text-base">Chocolate era un can que se encontraba en situación de calle hasta que un equipo de rescatistas lo pudieron llevar a Cruz Azul, donde se le dió la atención necesaria para poder ser adoptado por una gran familia</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-sm">
+                                <p class="text-gray-900 leading-none">Jonathan Reinink</p>
+                                <p class="text-gray-600">Aug 18</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-lg w-full lg:flex rounded shadow m-5">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/imagenes/perros/adoptados/perro2.jpg')">
+                    </div>
+                    <div class="p-4 flex flex-col justify-between leading-normal text-left">
+                        <div class="mb-8">
+                            <div class="text-gray-900 font-bold text-xl mb-2">Luna</div>
+                            <p class="text-gray-700 text-base">Luna era una perra que se encontraba en una situación de abandono hasta que fue rescatada por un equipo de voluntarios</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-sm">
+                                <p class="text-gray-900 leading-none">Maria Pérez</p>
+                                <p class="text-gray-600">Sep 10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-lg w-full lg:flex rounded shadow m-5">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/imagenes/perros/adoptados/perro3.jpg')">
+                    </div>
+                    <div class="p-4 flex flex-col justify-between leading-normal text-left">
+                        <div class="mb-8">
+                            <div class="text-gray-900 font-bold text-xl mb-2">Lucas</div>
+                            <p class="text-gray-700 text-base">Era un perro que se encontraba en una situación de maltrato hasta que fue rescatado por una organización de protección animal</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-sm">
+                                <p class="text-gray-900 leading-none">Mauricio García</p>
+                                <p class="text-gray-600">Jun 29</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -97,16 +148,22 @@
                     <label for="mensaje" class="block text-sm font-bold mb-2">Mensaje:</label>
                     <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-3 py-2 border rounded"></textarea>
                 </div>
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full">Enviar</button>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full" onclick="enviarContacto()">Enviar</button>
             </form>
         </div>
     </section>
 
-    <!-- aqui vamos a poner los toast (notificaciones pequeñas) -->
+    <!-- aqui vamos a poner los toast (notificaciones pequeñas)
     <div class="toast toast-top toast-end">
         <div class="alert alert-info">
             <span>Estamos guardando tu contacto para comunicarnos con usted</span>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>
+
+<script>
+    function enviarContacto(){
+        alert('Un encargado se comunicará con usted para responder todas sus dudas');
+    }
+</script>
