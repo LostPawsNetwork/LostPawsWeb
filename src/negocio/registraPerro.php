@@ -1,10 +1,12 @@
 <?php
 session_start();
-// para verificar si esta logeado
-// if (!isset($_SESSION["correo"])) {
-//     header("Location: login.php");
-//     exit();
-// }
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
+|| ($_SESSION['tipoUsuario'] !== 'admin' && $_SESSION['tipoUsuario'] !== 'superadmin'))
+{
+    header("Location: /lostpaws/presentacion/login.php");
+    exit;
+}
 
 ob_start();
 
@@ -21,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = $_POST["estado"];
 
     // Manejar la subida de la imagen
-    $target_dir = "../assets/imagenes/perros/";
+    $target_dir = "../assets/images/canes/";
     $target_file = $target_dir . basename($_FILES["foto1"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -85,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             null,
             $estado
         );
-        header("Location: dashboard.php");
+        header("Location: ../presentacion/dashboard.php");
         exit();
     }
 }
