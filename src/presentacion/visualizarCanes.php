@@ -65,12 +65,12 @@ $edad_max = $_POST['dog-edad-max']?? '';
             <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4 mt-20" style="top: 4; height: calc(100% - 4rem)">
                 <div class="flex flex-row pt-8 pr-4 pl-4 pb-6">
                     <div class="basis-5/6 pr-7">
-                        <div class="grid grid-cols-3 gap-5">
+                        <div class="grid grid-cols-3 gap-8">
                             <?php
                             foreach ($listaDeCans as $perro) 
                             {
                             ?>
-                                <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
+                                <div class='bg-white text-center shadow-lg rounded-lg'>
                                     <div class='h-64'>
                                         <img class='rounded-md size-full' src='<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
                                     </div>
@@ -78,8 +78,8 @@ $edad_max = $_POST['dog-edad-max']?? '';
                                         <h5><?php echo $perro['nombre']?></h5>
                                         <p class='text-left'><?php echo $perro['descripcion']?></p>
                                     </div>
-                                    <div class='flex flex-row h-10 bg-gray-200'>
-                                        <button class='w-full hover:bg-gray-400 verDetalle'
+                                    <div class='flex flex-row h-10'>
+                                        <button class='w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 verDetalle rounded-lg'
                                             data-id="<?php echo $perro['idcan'] ?>"
                                             data-descrip="<?php echo $perro['descripcion'] ?>"
                                             data-img="<?php echo $perro['foto1']; ?>"
@@ -95,16 +95,16 @@ $edad_max = $_POST['dog-edad-max']?? '';
                             ?>
                         </div>
                     </div>
-                    <div class="basis-1/6 pl-3 pr-2 shadow-lg shadow-black-100 outline outline-offset-2 outline-black-200 rounded text-center">
+                    <div class="basis-1/6 bg-white text-center p-8 rounded-lg shadow-md w-full max-w-sm">
                         <fieldset>
-                            <div class="mb-2 mt-3 text-2xl font-bold">
+                            <div class="mb-2 text-2xl font-bold">
                                 <legend>Filtros</legend>
                             </div>
                             <form action="" method="post" target="_self">
                                 <div>
                                     <label>Tamaño</label>
                                     <div>
-                                        <select name="dog-size" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <select name="dog-size" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
                                             <option value="">...</option>
                                             <option value="xl" <?php echo isset($size) ? ($size == 'xl' ? 'selected' : '') : '' ?>>Grande</option>
                                             <option value="x" <?php echo isset($size) ? ($size == 'x' ? 'selected' : '') : '' ?>>Mediano</option>
@@ -113,13 +113,13 @@ $edad_max = $_POST['dog-edad-max']?? '';
                                     </div>
                                     <label>Sexo</label>
                                     <div>
-                                        <select name="dog-sex" id="dog-sex" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <select name="dog-sex" id="dog-sex" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
                                             <option value="">...</option>
                                             <option value="macho" <?php echo isset($sexo) ? ($sexo == 'macho' ? 'selected' : '') : '' ?>>Macho</option>
                                             <option value="hembra" <?php echo isset($sexo) ? ($sexo == 'hembra' ? 'selected' : '') : '' ?>>Hembra</option>
                                         </select>
                                     </div>
-                                    <label>Edad</label>
+                                    <label class="pt-3">Edad</label>
                                     <div class="w-3/4">
                                         <input type="text" hidden id="dog-edad-min" name="dog-edad-min">
                                         <input type="text" hidden id="dog-edad-max" name="dog-edad-max">
@@ -137,7 +137,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
                                     </div>
                                 </div>
                                 
-                                <button class="outline outline-offset-2 outline-black-100 mt-4 bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" type="submit">Filtrar</button>
+                                <button class="outline outline-offset-2 outline-black-100 mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Filtrar</button>
                                 
                             </form>
                         </fieldset>
@@ -164,7 +164,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
                             <div class="mt-2 flex flex-row">
                                 <div class="basis-2/5 border border-black-30">
                                     <!--<img class='rounded-md size-full' alt='Imagen del canino'>-->
-                                    <span id="foto-can"></span>
+                                    <img id="foto-can"></img>
                                 </div>
                                 <div class="basis-3/5 pl-3">
                                     <h5>Descripción:</h5>
@@ -319,7 +319,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
     </div>
 
     <!-- editar can -->
-    <!-- Modal agregar can -->
+    <!-- Modal editar can -->
     <div id="editarCanModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 text-center xl:block xl:p-20">
             <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->

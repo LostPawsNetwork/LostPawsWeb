@@ -17,7 +17,7 @@
         {
             $cargo = $this->usuario->validarUsuario($correo, $passwd);
             
-            if ($cargo['success']) 
+            if (isset($resultado['success'])) 
             {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['correo'] = $correo;
