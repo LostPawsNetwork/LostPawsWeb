@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     if ($tokenIngresado === $tokenEnviado) 
     {
         $_SESSION["correo"];
-        header("Location: ../presentacion/dashboard.php");
+        header("Location: ../presentacion/dashAdmin.php");
         exit();
     } 
     else 

@@ -71,6 +71,7 @@ $listaDeCans = $can->listarCanes();
                     </div>
                 <?php endforeach; ?>
             </div>
+            <a href="dashAdmin.php"><button class="mt-5 ml-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
         </div>
     </div>
 

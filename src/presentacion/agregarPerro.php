@@ -63,6 +63,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
                 <input type="file" name="foto1" id="foto1" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
             </div>
             <div class="flex justify-end">
+                <a href="dashAdmin.php" class="bg-gray-200 p-2 mr-3 rounded-md hover:bg-gray-300">Volver</a>
                 <button type="submit" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Guardar</button>
             </div>
         </form>

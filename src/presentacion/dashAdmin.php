@@ -18,35 +18,33 @@
 <body class="bg-gray-100">
 
     <div class='flex'>
-        <?php include "../components/header2.html"; ?>
+        <?php include "../components/header3.html"; ?>
 
         <div class="flex-1">
-            <!-- Menú Lateral -->
-            <?php include "../components/sidebar2.html"; ?>
             <!-- Contenido principal de la página -->
-            <div id="main-content" class='flex min-h-screen p-4 mt-20'>
+            <div id="main-content" class='flex min-h-screen p-4 mt-20 text-center'>
                 <div class="container mx-auto p-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="dashboard.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <a href="dashboard.php">Gestionar Can</a>
+                                Gestionar Can
                             </div>
-                        </div>
-                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        </div></a>
+                        <a href="solicitudesUsuario.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Solicitudes</button>
                             </div>
-                        </div>
-                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        </div></a>
+                        <a href="gestionExamenes.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Exámenes</button>
                             </div>
-                        </div>
-                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        </div></a>
+                        <a href="gestionarControl.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Controles</button>
                             </div>
-                        </div>
+                        </div></a>
                         <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Testimonios</button>
@@ -57,11 +55,11 @@
                                 <button type="submit">Gestionar Administradores</button>
                             </div>
                         </div>
-                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="solicitudesDesaprobadas.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Reporte Usuarios Mal Calificados</button>
                             </div>
-                        </div>
+                        </div></a>
                         <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Reporte Donaciones</button>
