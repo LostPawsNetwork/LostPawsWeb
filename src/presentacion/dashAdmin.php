@@ -50,11 +50,11 @@
                                 <button type="submit">Gestionar Testimonios</button>
                             </div>
                         </div>
-                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="administradores.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Administradores</button>
                             </div>
-                        </div>
+                        </div></a>
                         <a href="solicitudesDesaprobadas.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Reporte Usuarios Mal Calificados</button>
