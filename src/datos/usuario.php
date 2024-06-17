@@ -46,15 +46,21 @@ class Usuario
         $conn->close();
     }
 
-    function obtenerUsuarios()
+    function obtenerUsuario($correo)
     {
-        $sql = "SELECT * FROM usuario";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+        $sql = "SELECT nombre, apellido FROM usuario WHERE email = :correo";
+    
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':correo', $correo);
+            $stmt->execute();
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            echo "Error al obtener usuarios: " . $e->getMessage();
+            return false;
+        }
+    }    
 
     function obtenerToken($correo)
     {
