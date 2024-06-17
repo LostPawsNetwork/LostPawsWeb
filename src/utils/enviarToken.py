@@ -33,7 +33,7 @@ except (Exception, psycopg2.Error) as error:
     sys.exit(1)
 
 # Generar token de acceso
-token = secrets.token_urlsafe(32)
+token = secrets.token_urlsafe(8)
 print(f"Token generado: {token}")
 
 # Actualizar token en la base de datos
