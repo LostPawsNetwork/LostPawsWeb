@@ -36,12 +36,27 @@ class Adopcion
         }
     }
 
-    function obtenerAdopciones()
+
+    public function obtenerAdopcion($idUsuario)
     {
-        $sql = "SELECT * FROM Adopcion";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare("SELECT idAdopcion FROM adopcion WHERE idUsuario = ?");
+        $stmt->bindParam(1, $idUsuario, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($resultado && isset($resultado['idadopcion'])) {
+                return $resultado['idadopcion'];
+            } else {
+                echo "No se encontró una adopción para el usuario con ID $idUsuario.";
+                return null;
+            }
+        } else {
+            echo "Error al obtener la adopción: " . $stmt->errorInfo()[2];
+            return null;
+        }
+        
+        $stmt->closeCursor();
     }
 
     function getIdAdopcion() {

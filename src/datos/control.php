@@ -54,5 +54,19 @@ class Control
     
         $stmt->closeCursor();
     }
+
+    public function listarControles($idAdopcion)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM control WHERE idAdopcion = ?");
+        $stmt->bindParam(1, $idAdopcion, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $controles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $controles;
+        } else {
+            return []; // Devuelve un arreglo vacío si no hay controles encontrados
+        }
+    }
 }
 ?>

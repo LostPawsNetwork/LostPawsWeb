@@ -19,7 +19,7 @@ class LoginManager
         if ($cargo["success"]) {
             $_SESSION["loggedin"] = true;
             $_SESSION["correo"] = $correo;
-            $_SESSION["idusuario"] = $cargo["idusuario"];
+            $_SESSION["idUsuario"] = $cargo["idUsuario"];
             $_SESSION["tipoUsuario"] = $cargo["tipoUsuario"];
 
             return true;
