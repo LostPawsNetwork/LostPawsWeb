@@ -15,16 +15,25 @@ class Adopcion
         $this->conn = getPDOConnection();
     }
 
-    function registrarAdopcion($estado, $fechaSolicitudAdopcion, $idUsuario, $idCan) 
+    public function registrarAdopcion($idUsuario, $idCan) 
     {
-        $sql = "INSERT INTO Adopcion (estado, fechaSolicitudAdopcion, idUsuario, idCan) 
-                VALUES (:estado, :fechaSolicitudAdopcion, :idUsuario, :idCan)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':estado', $estado);
-        $stmt->bindParam(':fechaSolicitudAdopcion', $fechaSolicitudAdopcion);
-        $stmt->bindParam(':idUsuario', $idUsuario);
-        $stmt->bindParam(':idCan', $idCan);
-        return $stmt->execute();
+        $fechaSolicitudAdopcion = date('Y-m-d H:i:s');
+        $estado = "activa";
+
+        
+        $stmt = $this->conn->prepare("INSERT INTO adopcion (estado, fechaSolicitudAdopcion, idUsuario, idCan) VALUES (?, ?, ?, ?)");
+        $stmt->bindParam(1, $estado);
+        $stmt->bindParam(2, $fechaSolicitudAdopcion);
+        $stmt->bindParam(3, $idUsuario, PDO::PARAM_INT);
+        $stmt->bindParam(4, $idCan, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $idAdopcion = $this->conn->lastInsertId();
+            return $idAdopcion;
+        } else {
+            echo "Error: " . $stmt->errorInfo()[2];
+            return null;
+        }
     }
 
     function obtenerAdopciones()
