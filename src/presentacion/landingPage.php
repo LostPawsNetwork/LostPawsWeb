@@ -27,12 +27,11 @@ if (
 
         <div class="flex-1">
             <!-- Menú Lateral -->
-            <?php include "../components/sidebar2.html"; ?>
+            <?php include "../components/sidebar2.php"; ?>
 
             <!-- Contenido principal de la página -->
             <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4" style="top: 4rem; height: calc(100% - 4rem)">
-                <p>Salto de la linea en la pagina para evitar que se solapen.</p>
-                <br><br>
+                <br>
                 <div class="relative w-full h-96 overflow-hidden">
                     <video autoplay muted loop class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 z-0">
                         <source src="../assets/videos/landing.mp4" type="video/mp4">

@@ -15,24 +15,48 @@ class Adopcion
         $this->conn = getPDOConnection();
     }
 
-    function registrarAdopcion($estado, $fechaSolicitudAdopcion, $idUsuario, $idCan) 
+    public function registrarAdopcion($idUsuario, $idCan) 
     {
-        $sql = "INSERT INTO Adopcion (estado, fechaSolicitudAdopcion, idUsuario, idCan) 
-                VALUES (:estado, :fechaSolicitudAdopcion, :idUsuario, :idCan)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':estado', $estado);
-        $stmt->bindParam(':fechaSolicitudAdopcion', $fechaSolicitudAdopcion);
-        $stmt->bindParam(':idUsuario', $idUsuario);
-        $stmt->bindParam(':idCan', $idCan);
-        return $stmt->execute();
+        $fechaSolicitudAdopcion = date('Y-m-d H:i:s');
+        $estado = "activa";
+
+        
+        $stmt = $this->conn->prepare("INSERT INTO adopcion (estado, fechaSolicitudAdopcion, idUsuario, idCan) VALUES (?, ?, ?, ?)");
+        $stmt->bindParam(1, $estado);
+        $stmt->bindParam(2, $fechaSolicitudAdopcion);
+        $stmt->bindParam(3, $idUsuario, PDO::PARAM_INT);
+        $stmt->bindParam(4, $idCan, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $idAdopcion = $this->conn->lastInsertId();
+            return $idAdopcion;
+        } else {
+            echo "Error: " . $stmt->errorInfo()[2];
+            return null;
+        }
     }
 
-    function obtenerAdopciones()
+
+    public function obtenerAdopcion($idUsuario)
     {
-        $sql = "SELECT * FROM Adopcion";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare("SELECT idAdopcion FROM adopcion WHERE idUsuario = ?");
+        $stmt->bindParam(1, $idUsuario, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($resultado && isset($resultado['idadopcion'])) {
+                return $resultado['idadopcion'];
+            } else {
+                echo "No se encontró una adopción para el usuario con ID $idUsuario.";
+                return null;
+            }
+        } else {
+            echo "Error al obtener la adopción: " . $stmt->errorInfo()[2];
+            return null;
+        }
+        
+        $stmt->closeCursor();
     }
 
     function getIdAdopcion() {

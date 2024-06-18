@@ -41,7 +41,7 @@ if (
     <div id="header">
         <?php include "../components/header3.html"; ?>
     </div>
-        <br>
+    <br>
     <div id="main-content" class='min-h-screen'>
         <div class="container mx-auto p-4">
             <div class="">
@@ -64,8 +64,8 @@ if (
                             $solicitudes = [
                                 [
                                     "id_solicitud" => 1,
-                                    "id_usuario" => 101,
-                                    "id_can" => 202,
+                                    "id_usuario" => 30,
+                                    "id_can" => 1,
                                     "fecha" => "2024-01-01",
                                     "link_solicitud" =>
                                         "https://example.com/solicitud/1",
@@ -82,7 +82,6 @@ if (
                             ];
 
                             foreach ($solicitudes as $solicitud) {
-
                                 echo "<tr>";
                                 echo "<td class='py-2 px-4 border-b'>{$solicitud["id_solicitud"]}</td>";
                                 echo "<td class='py-2 px-4 border-b'>{$solicitud["id_usuario"]}</td>";
@@ -90,7 +89,18 @@ if (
                                 echo "<td class='py-2 px-4 border-b'>{$solicitud["fecha"]}</td>";
                                 echo "<td class='py-2 px-4 border-b'><a href='{$solicitud["link_solicitud"]}' class='text-blue-600 hover:underline'>Ver Solicitud</a></td>";
                                 ?>
-                                <td class="py-2 px-4 border-b"><button id="aceptarSoli" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button><button id="rechazarSoli" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button></td>
+                                <td class="py-2 px-4 border-b">
+                                    <form action="../negocio/aceptarSolicitud.php" method="post" style="display: inline;">
+                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['id_usuario']; ?>">
+                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['id_can']; ?>">
+                                        <button type="submit" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button>
+                                    </form>
+                                    <form action="../negocio/rechazarSolicitud.php" method="post" style="display: inline;">
+                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['id_usuario']; ?>">
+                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['id_can']; ?>">
+                                        <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button>
+                                    </form>
+                                </td>
                                 </tr>
                             <?php
                             }
@@ -99,10 +109,9 @@ if (
                     </table>
                 </div>
             </div>
-        <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
+            <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
         </div>
     </div>
-
     <?php include "../components/footer.html"; ?>
 </body>
 </html>

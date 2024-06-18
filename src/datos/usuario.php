@@ -23,7 +23,7 @@ class Usuario
     function validarUsuario($correo, $passwd)
     {
         $sql =
-            "SELECT idusuario, contrasena, tipoUsuario FROM usuario WHERE email = :correo";
+            "SELECT idUsuario, contrasena, tipoUsuario FROM usuario WHERE email = :correo";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":correo", $correo);
@@ -35,7 +35,7 @@ class Usuario
             if (password_verify($passwd, $row["contrasena"])) {
                 return [
                     "success" => true,
-                    "idusuario" => $row["idusuario"],
+                    "idUsuario" => $row["idusuario"],
                     "tipoUsuario" => $row["tipousuario"],
                 ];
             }
