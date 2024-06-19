@@ -46,11 +46,13 @@ class Control
             $archivo = null;
     
             if ($stmt->execute()) {
-                echo "Control $nroControl para la adopción $idAdopcion registrado exitosamente.<br>";
             } else {
                 echo "Error al registrar el control $nroControl: " . $stmt->errorInfo()[2] . "<br>";
             }
         }
+
+        header("Location: /lostpaws/presentacion/gestionarSolicitudUsuario.php");
+        exit();
     
         $stmt->closeCursor();
     }

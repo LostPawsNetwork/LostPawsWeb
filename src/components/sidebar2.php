@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 if (isset($_SESSION["correo"])) {
     $usuario_email = $_SESSION["correo"];
 

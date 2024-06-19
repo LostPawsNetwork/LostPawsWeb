@@ -114,6 +114,24 @@ class Usuario
 
         return $stmt->execute();
     }
+    function listarAdministradores()
+    {
+        $sql = "SELECT idusuario, nombre, email FROM usuario WHERE tipoUsuario = :tipoUsuario";
+
+        $tipoUsuario="admin";
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $tipoUsuario = 'admin';
+            $stmt->bindParam(':tipoUsuario', $tipoUsuario);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener administradores: " . $e->getMessage();
+            return false;
+        }
+    }    
 
     function editarUsuario($idUsuario, $correo, $nombre, $apellido)
     {
