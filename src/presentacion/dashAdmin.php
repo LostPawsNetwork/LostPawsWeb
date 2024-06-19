@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
-|| ($_SESSION['tipoUsuario'] !== 'admin' && $_SESSION['tipoUsuario'] !== 'superadmin')) 
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    ($_SESSION["tipoUsuario"] !== "admin" &&
+        $_SESSION["tipoUsuario"] !== "superadmin")
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 ?>
 
@@ -58,13 +61,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
                                     <button type="submit">Reporte Usuarios Mal Calificados</button>
                                 </div>
                         </div></a>
-                        <?php if ($_SESSION['tipoUsuario'] === 'superadmin') { ?>
+                        <?php if (
+                            $_SESSION["tipoUsuario"] === "superadmin"
+                        ) { ?>
                             <a href="gestionarAdministradores.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                                 <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                     <button type="submit">Gestionar Administradores</button>
                                 </div>
                             </div></a>
                             <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                                <a href="reporteDonaciones.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                                 <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                     <button type="submit">Reporte Donaciones</button>
                                 </div>
