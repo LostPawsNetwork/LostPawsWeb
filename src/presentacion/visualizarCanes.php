@@ -60,7 +60,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
         <?php include "../components/header2.html"; ?>
 
         <div class="flex-1">
-            <?php include "../components/sidebar2.html"; ?>
+            <?php include "../components/sidebar2.php"; ?>
 
             <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4 mt-20" style="top: 4; height: calc(100% - 4rem)">
                 <div class="flex flex-row pt-8 pr-4 pl-4 pb-6">
