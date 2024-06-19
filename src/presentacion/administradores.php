@@ -91,7 +91,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
             <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> bloque para que se quede en el centro -->
             <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
                 <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
-                    <h3 class="text-3xl leading-6 mb-4 font-large text-gray-900 " id="modal-title">Ediatr administrador</h3>
+                    <h3 class="text-3xl leading-6 mb-4 font-large text-gray-900 " id="modal-title">Editar administrador</h3>
                     <hr>
                     <div>
                         <form action="../negocio/gestionAdministradores.php" method="POST">
