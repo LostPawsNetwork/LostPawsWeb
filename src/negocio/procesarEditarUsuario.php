@@ -8,12 +8,12 @@ require_once "../datos/usuario.php";
 session_start();
 
 // Verifica si el usuario está autenticado
-if (!isset($_SESSION["idusuario"])) {
+if (!isset($_SESSION["idUsuario"])) {
     die("Acceso denegado. Por favor, inicia sesión.");
 }
 
 // Obtiene el idUsuario de la sesión
-$idUsuario = $_SESSION["idusuario"];
+$idUsuario = $_SESSION["idUsuario"];
 
 // Verifica si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

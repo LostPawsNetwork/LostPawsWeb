@@ -10,6 +10,10 @@ if (
     header("Location: /lostpaws/presentacion/login.php");
     exit();
 }
+
+require_once '../datos/solicitud.php';
+$solicitud = new Solicitud();
+$solicitudes = $solicitud->listarSolicitudes();
 ?>
 
 <!DOCTYPE html>
@@ -37,81 +41,62 @@ if (
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div id="header">
-        <?php include "../components/header3.html"; ?>
-    </div>
-    <br>
-    <div id="main-content" class='min-h-screen'>
-        <div class="container mx-auto p-4">
-            <div class="">
-                <h1 class="text-3xl font-bold mb-6">Solicitudes</h1>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b">ID Solicitud</th>
-                                <th class="py-2 px-4 border-b">ID Usuario</th>
-                                <th class="py-2 px-4 border-b">ID Can</th>
-                                <th class="py-2 px-4 border-b">Fecha</th>
-                                <th class="py-2 px-4 border-b">Link Solicitud</th>
-                                <th class="py-2 px-4 border-b">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Aquí debes reemplazar con tu propia lógica de conexión a la base de datos y consulta
-                            $solicitudes = [
-                                [
-                                    "id_solicitud" => 1,
-                                    "id_usuario" => 30,
-                                    "id_can" => 1,
-                                    "fecha" => "2024-01-01",
-                                    "link_solicitud" =>
-                                        "https://example.com/solicitud/1",
-                                ],
-                                [
-                                    "id_solicitud" => 2,
-                                    "id_usuario" => 102,
-                                    "id_can" => 203,
-                                    "fecha" => "2024-02-01",
-                                    "link_solicitud" =>
-                                        "https://example.com/solicitud/2",
-                                ],
-                                // Agrega más solicitudes aquí
-                            ];
-
+<body>
+<div id="main-content" class='min-h-screen'>
+    <div class="container mx-auto p-4">
+        <div class="">
+            <h1 class="text-3xl font-bold mb-6">Solicitudes</h1>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-2 px-4 border-b">ID Solicitud</th>
+                            <th class="py-2 px-4 border-b">Estado</th>
+                            <th class="py-2 px-4 border-b">Link</th>
+                            <th class="py-2 px-4 border-b">ID Usuario</th>
+                            <th class="py-2 px-4 border-b">ID Can</th>
+                            <th class="py-2 px-4 border-b">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($solicitudes) {
                             foreach ($solicitudes as $solicitud) {
                                 echo "<tr>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["id_solicitud"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["id_usuario"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["id_can"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["fecha"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'><a href='{$solicitud["link_solicitud"]}' class='text-blue-600 hover:underline'>Ver Solicitud</a></td>";
+                                echo "<td class='py-2 px-4 border-b'>{$solicitud["idsolicitud"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$solicitud["estado"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'><a href='{$solicitud["link"]}' class='text-blue-600 hover:underline'>Ver Solicitud</a></td>";
+                                echo "<td class='py-2 px-4 border-b'>{$solicitud["idusuario"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$solicitud["idcan"]}</td>";
                                 ?>
                                 <td class="py-2 px-4 border-b">
                                     <form action="../negocio/aceptarSolicitud.php" method="post" style="display: inline;">
-                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['id_usuario']; ?>">
-                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['id_can']; ?>">
+                                        <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
+                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
+                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
                                         <button type="submit" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button>
                                     </form>
                                     <form action="../negocio/rechazarSolicitud.php" method="post" style="display: inline;">
-                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['id_usuario']; ?>">
-                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['id_can']; ?>">
+                                        <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
+                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
+                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
                                         <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button>
                                     </form>
                                 </td>
                                 </tr>
                             <?php
                             }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                        } else {
+                            echo "<tr><td colspan='6' class='py-2 px-4 border-b'>No hay solicitudes disponibles.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
-            <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
         </div>
+        <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
     </div>
-    <?php include "../components/footer.html"; ?>
+</div>
+<?php include "../components/footer.html"; ?>
 </body>
 </html>
