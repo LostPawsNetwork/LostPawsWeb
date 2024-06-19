@@ -60,7 +60,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
         <?php include "../components/header2.html"; ?>
 
         <div class="flex-1">
-            <?php include "../components/sidebar2.html"; ?>
+            <?php include "../components/sidebar2.php"; ?>
 
             <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4 mt-20" style="top: 4; height: calc(100% - 4rem)">
                 <div class="flex flex-row pt-8 pr-4 pl-4 pb-6">
@@ -86,7 +86,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
                                             data-obsmed="<?php echo $perro['observacionesmedicas'] ?>"
                                             data-datos="<?php echo $perro['genero']." - ".$perro['edad']. " - ".$perro['tamano']?>"
                                         >
-                                            Adoptar
+                                            Ver detalles
                                         </button>
                                     </div>
                                 </div>
@@ -150,6 +150,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
     
     <?php include "../components/footer.html"; ?>
     <script src="../scripts/dynamic.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
@@ -206,7 +207,13 @@ $edad_max = $_POST['dog-edad-max']?? '';
                     <iframe id="gFormSoli" src="https://docs.google.com/forms/d/e/1FAIpQLSfK_93KP7a8igk9e9V2mlD3g7ykN3Zf5Q2qUhe1WNayevGWmQ/viewform?embedded=true" width="640" height="459" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
                 </div>
                 <div class="px-4 py-3 xl:px-6 xl:flex xl:flex-row-reverse bg-gray-200">
-                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md cancelButton">Cerrar</button>
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 
+                    shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 
+                    focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md enviarSolicitud">Enviar solicitud</button>    
+                    
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 
+                    shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 
+                    focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md cancelButton">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -216,20 +223,28 @@ $edad_max = $_POST['dog-edad-max']?? '';
 
 <script>
     $(document).ready(function(){
+        let idCan; // Variable para almacenar la idCan
+
         $('.verDetalle').on('click', function(){
-            console.log($(this).data('id'));
+            idCan = $(this).data('id'); // Obtener la idCan
             let img = $(this).data('img');
             let datos = $(this).data('datos');
             let observaciones = $(this).data('obsmed');
-            let descripcion = $(this).data('descrip')
-            //ahora llenamos el modal
+            let descripcion = $(this).data('descrip');
+            // ahora llenamos el modal
             $('#foto-can').attr('src', img);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);
             $('#myModal').removeClass('hidden');
+        });
 
-        })
+        $('.enviarSolicitud').on('click', function(){
+            // Obtener la idUsuario de la sesión
+            let idUsuario = <?php echo $_SESSION['idUsuario']; ?>;
+            // Redireccionar a la página con idUsuario y idCan como parámetros
+            window.location.href = `../negocio/registrarSolicitud.php?idUsuario=${idUsuario}&idCan=${idCan}`;
+        });
 
         $('.cancelButton').on('click', function(){
             $('#myModal').addClass('hidden');
@@ -239,7 +254,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
         $('#saveButton').click(function(){
             $('#myModal').addClass('hidden');
             $('#formSolicitud').removeClass('hidden');
-        })
+        });
 
         // esto es para el filtro de rango
         const setLabel = (lbl, val) => {
@@ -251,18 +266,18 @@ $edad_max = $_POST['dog-edad-max']?? '';
                 top: rect.top - 30,
                 left: rect.left
             });
-        }
+        };
 
         const setLabels = (values) => {
             $('#dog-edad-min').val(values[0]);
             $('#dog-edad-max').val(values[1]);
             setLabel("min", values[0]);
             setLabel("max", values[1]);
-        }
+        };
 
         $('#ex2').slider().on('slide', function(ev) {
             setLabels(ev.value);
         });
         setLabels($('#ex2').attr("data-value").split(","));
-    })
+    });
 </script>

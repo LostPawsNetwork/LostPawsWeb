@@ -7,6 +7,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
     header("Location: /lostpaws/presentacion/login.php");
     exit;
 }
+
+include "../datos/usuario.php";
 ?>
 
 <!DOCTYPE html>
@@ -51,40 +53,27 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
                                 <th class="py-2 px-4 border-b">ID Administración</th>
                                 <th class="py-2 px-4 border-b">Nombre</th>
                                 <th class="py-2 px-4 border-b">Correo</th>
-                                <th class="py-2 px-4 border-b">Contraseña</th>
                                 <th class="py-2 px-4 border-b">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            // Aquí debes reemplazar con tu propia lógica de conexión a la base de datos y consulta
-                            $controles = [
-                                [
-                                    "id_administrador" => 1,
-                                    "correo" => "xo@gmail.com",
-                                    "nombre" => "Ximena",
-                                    "contrasena" => "*****",
-                                ],
-                                [
-                                    "id_administrador" => 2,
-                                    "correo" => "rg@gmail.com",
-                                    "nombre" => "Jesus",
-                                    "contrasena" => "*****",
-                                ],
-                                // Agrega más controles aquí
-                            ];
+                            $usuario = new Usuario();
+                            $administradores = $usuario->listarAdministradores();
 
-                            foreach ($controles as $control) {
-
-                                echo "<tr>";
-                                echo "<td class='py-2 px-4 border-b'>{$control["id_administrador"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$control["nombre"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$control["correo"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$control["contrasena"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white p-2 rounded-md hover:bg-blue-600 editarCorreo'>Editar</button></td>";
-                                ?>
-                                </tr>
-                            <?php
+                            if (!empty($administradores)) {
+                                foreach ($administradores as $administrador) {
+                                    echo "<tr>";
+                                    echo "<td class='py-2 px-4 border-b'>{$administrador['idusuario']}</td>";
+                                    echo "<td class='py-2 px-4 border-b'>{$administrador['nombre']}</td>";
+                                    echo "<td class='py-2 px-4 border-b'>{$administrador['email']}</td>";
+                                    echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 
+                                    text-white p-2 rounded-md hover:bg-blue-600 editarCorreo' 
+                                    data-correo='{$administrador['email']}'>Editar</button></td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5' class='py-2 px-4 border-b'>No hay administradores registrados.</td></tr>";
                             }
                             ?>
                         </tbody>
@@ -103,15 +92,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
             <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> bloque para que se quede en el centro -->
             <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
                 <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
-                    <h3 class="text-3xl leading-6 mb-4 font-large text-gray-900 " id="modal-title">Ediatr administrador</h3>
+                    <h3 class="text-3xl leading-6 mb-4 font-large text-gray-900 " id="modal-title">Editar administrador</h3>
                     <hr>
                     <div>
-                        <form action="../negocio/gestionAdministradores.php" method="POST">
+                        <form action="../negocio/editarAdministrador.php" method="POST">
                             <div class="mb-4">
                                 <label for="correoAdmin" class="block text-sm font-medium text-gray-700">Correo</label>
-                                <input type="text" name="correoAdmin" id="correoAdmin" class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300" required>
+                                <input type="email" name="correoAdmin" id="correoAdmin" class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300" required>
+                                <input type="hidden" name="correoOriginal" id="correoOriginal">
                             </div>
-                                <div class="flex justify-center">
+                            <div class="flex justify-center">
                                 <button type="submit" class="bg-blue-600 text-white w-full p-2 rounded-md hover:bg-blue-700">Editar</button>
                             </div>
                         </form>
@@ -133,18 +123,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
             let img = $(this).data('img');
             let datos = $(this).data('datos');
             let observaciones = $(this).data('obsmed');
-            let descripcion = $(this).data('descrip')
-            //ahora llenamos el modal
+            let descripcion = $(this).data('descrip');
+            let correo = $(this).data('correo'); // Obtener el correo
+
+            // ahora llenamos el modal
             $('#foto-can').attr('src', img);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);
+            $('#correoAdmin').val(correo); // Llenar el campo del correo
+            $('#correoOriginal').val(correo); // Llenar el campo oculto con el correo original
             $('#modalEditarAdmin').removeClass('hidden');
-
-        })
+        });
 
         $('.cancelButton').on('click', function(){
             $('#modalEditarAdmin').addClass('hidden');
         });
-    })
+    });
 </script>

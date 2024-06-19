@@ -60,8 +60,27 @@ class Usuario
             echo "Error al obtener usuarios: " . $e->getMessage();
             return false;
         }
+    }   
+     
+    function listarAdministradores()
+    {
+        $sql = "SELECT idusuario, nombre, email FROM usuario WHERE tipoUsuario = :tipoUsuario";
+        
+        $tipoUsuario="admin";
+        
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $tipoUsuario = 'admin';
+            $stmt->bindParam(':tipoUsuario', $tipoUsuario);
+            $stmt->execute();
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener administradores: " . $e->getMessage();
+            return false;
+        }
     }    
-
+    
     function obtenerToken($correo)
     {
         $sql = "SELECT token FROM usuario WHERE email = :correo";
