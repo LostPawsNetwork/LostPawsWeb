@@ -78,7 +78,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
                 </section>
 
                 <!-- Sección de Donación -->
-                <section id="donar" class="py-10 bg-gray-100">
+                <section id="donar" class="py-10 bg-gray-100 mt-10">
                     <div class="container mx-auto text-center">
                         <h2 class="text-3xl font-bold mb-4">Cómo Puedes Ayudar</h2>
                         <p class="text-gray-700">Tu donación hace la diferencia para muchas mascotas.</p><br>

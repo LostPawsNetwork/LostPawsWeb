@@ -71,14 +71,14 @@ $edad_max = $_POST['dog-edad-max']?? '';
                             {
                             ?>
                                 <div class='bg-white text-center shadow-lg rounded-lg'>
-                                    <div class='h-64'>
+                                    <div class='h-64 m-2'>
                                         <img class='rounded-md size-full' src='<?php echo $perro['foto1'];?>' alt='Imagen del canino'>
                                     </div>
                                     <div class='pt-3 pb-4 pl-2 h-28'>
                                         <h5><?php echo $perro['nombre']?></h5>
                                         <p class='text-left'><?php echo $perro['descripcion']?></p>
                                     </div>
-                                    <div class='flex flex-row h-10'>
+                                    <div class='flex flex-row h-10 m-2'>
                                         <button class='w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 verDetalle rounded-lg'
                                             data-id="<?php echo $perro['idcan'] ?>"
                                             data-descrip="<?php echo $perro['descripcion'] ?>"

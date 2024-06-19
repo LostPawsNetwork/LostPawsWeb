@@ -45,7 +45,7 @@
                 </section>
 
                 <!-- Adoptar -->
-                <section id="adopta" class="text-center py-10 bg-white">
+                <section id="adopta" class="text-center py-10 bg-white pt-24 pb-16">
                     <div class="container mx-auto">
                         <h2 class="text-3xl font-bold mb-4">Adopta una Mascota</h2>
                         <p class="text-gray-700 mb-6">Explora las opciones para adoptar y dar un hogar a una mascota que lo necesita.</p>
@@ -74,7 +74,7 @@
 
                 <!-- Sección de Donación -->
                 <section id="donar" class="py-10 bg-gray-100">
-                    <div class="container mx-auto text-center">
+                    <div class="container mx-auto text-center mt-16 mb-16">
                         <h2 class="text-3xl font-bold mb-4">Cómo Puedes Ayudar</h2>
                         <p class="text-gray-700">Tu donación hace la diferencia para muchas mascotas.</p><br>
                         <a href="presentacion/login.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
