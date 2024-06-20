@@ -1,5 +1,7 @@
 <?php
-require_once "../datos/Usuario.php";
+session_start();
+
+require_once "../datos/usuario.php";
 
 class LoginManager
 {
@@ -10,28 +12,36 @@ class LoginManager
         $this->usuario = new Usuario();
     }
 
-    public function iniciarSesion($email, $password)
+    public function iniciarSesion($correo, $passwd)
     {
-        $usuarioValido = $this->usuario->validarUsuario($email, $password);
+        $cargo = $this->usuario->validarUsuario($correo, $passwd);
 
-        if ($usuarioValido) {
-            $_SESSION["email"] = $email;
+        if ($cargo["success"]) {
+            $_SESSION["loggedin"] = true;
+            $_SESSION["correo"] = $correo;
+            $_SESSION["idUsuario"] = $cargo["idUsuario"];
+            $_SESSION["tipoUsuario"] = $cargo["tipoUsuario"];
 
             return true;
         } else {
+            echo "Fallo al iniciar sesión";
             return false;
         }
     }
 
     public function cerrarSesion()
     {
-        session_unset();
+        $_SESSION = [];
+
         session_destroy();
+
+        header("Location: /lostpaws/");
+        exit();
     }
 
     public function sesionActual()
     {
-        return isset($_SESSION["email"]);
+        return isset($_SESSION["correo"]);
     }
 }
 ?>

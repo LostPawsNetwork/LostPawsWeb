@@ -11,6 +11,14 @@
 </head>
 
 <body class="bg-black h-screen font-sans relative overflow-hidden">
+    
+    <?php
+    session_start();
+
+    header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+    header("Pragma: no-cache");
+    header("Expires: 0");
+    ?>
 
     <video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 filter blur-lg">
         <source src="../assets/videos/login.mp4" type="video/mp4">
@@ -21,16 +29,16 @@
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full px-4">
         <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
                <div class="flex justify-center items-center">
-               <img src="../assets/imagenes/logoLostPaws.png" alt="Logo" class="h-20" />
+               <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
                </div>
                <br>
                 <div class="bg-blue-100 p-6 rounded-lg">
                     <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Iniciar Sesión</h2>
 
-                <form action="../negocio/procesarLogin.php"  method="post" class="space-y-6">
+                <form action="../negocio/procesarLogin.php" method="post" class="space-y-6">
                     <div>
                         <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
-                        <input type="text" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <input type="email" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                     </div>
 
                     <div>
@@ -43,10 +51,8 @@
 
                     <div class="flex flex-col items-center space-y-4">
                         <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Ingresar</button>
-                        <div>
-                        ¿No tienes cuenta?<a href="registrar" class="text-green-600 hover:underline"> Registrate</a>
-                        </div>
-                        <a href="recuperar" class="text-green-600 hover:underline">¿Has olvidado tu contraseña?</a>
+                        <a href="registroUsuario.php" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Registrarse</a>
+                        <a href="recuperarPassword.php" class="text-green-600 hover:underline">¿Has olvidado tu contraseña?</a>
                     </div>
                 </form>
             </div>
