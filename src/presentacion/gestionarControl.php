@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
-|| ($_SESSION['tipoUsuario'] !== 'admin' && $_SESSION['tipoUsuario'] !== 'superadmin'))
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    ($_SESSION["tipoUsuario"] !== "admin" &&
+        $_SESSION["tipoUsuario"] !== "superadmin")
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 ?>
 
@@ -60,22 +63,34 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
                             <?php
                             // Aquí debes reemplazar con tu propia lógica de conexión a la base de datos y consulta
                             $controles = [
-                                ['id_control' => 1, 'id_usuario' => 101, 'id_can' => 202, 'fecha' => '2024-01-01',],
-                                ['id_control' => 2, 'id_usuario' => 102, 'id_can' => 203, 'fecha' => '2024-02-01',],
+                                [
+                                    "id_control" => 1,
+                                    "id_usuario" => 101,
+                                    "id_can" => 202,
+                                    "fecha" => "2024-01-01",
+                                ],
+                                [
+                                    "id_control" => 2,
+                                    "id_usuario" => 102,
+                                    "id_can" => 203,
+                                    "fecha" => "2024-02-01",
+                                ],
                                 // Agrega más controles aquí
                             ];
 
                             foreach ($controles as $control) {
+
                                 echo "<tr>";
-                                echo "<td class='py-2 px-4 border-b'>{$control['id_control']}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$control['id_usuario']}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$control['id_can']}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$control['fecha']}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$control["id_control"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$control["id_usuario"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$control["id_can"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$control["fecha"]}</td>";
                                 echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white p-2 rounded-md hover:bg-blue-600 verControl'>Ver control</button></td>";
-                            ?>
+                                ?>
                                 <td class="py-2 px-4 border-b"><button id="aceptarControl" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button><button id="rechazarControl" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button></td>
                                 </tr>
-                            <?php }
+                            <?php
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -101,15 +116,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
                                 <?php
                                 // Aquí debes reemplazar con tu propia lógica de conexión a la base de datos y consulta
                                 $controles = [
-                                    ['id_control' => 1, 'resp_img' => 101,],
-                                    ['id_control' => 2, 'resp_img' => 102,],
+                                    ["id_control" => 1, "resp_img" => 101],
+                                    ["id_control" => 2, "resp_img" => 102],
                                     // Agrega más controles aquí
                                 ];
 
-                                foreach ($controles as $control) {
-                                ?>
+                                foreach ($controles as $control) { ?>
                                 <tr>
-                                    <td class='py-2 px-4 border-b'>Respuesta <?php echo $control['id_control'];?></td>
+                                    <td class='py-2 px-4 border-b'>Respuesta <?php echo $control[
+                                        "id_control"
+                                    ]; ?></td>
                                     <td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white p-2 rounded-md hover:bg-blue-600 downloadResp'>Descargar</button></td>
                                 </tr>
                                 <?php }

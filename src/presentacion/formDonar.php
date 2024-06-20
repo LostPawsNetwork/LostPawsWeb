@@ -25,7 +25,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
 
         <div class="flex-1 flex flex-col">
 
-            <?php include "../components/sidebar2.html"; ?>
+            <?php include "../components/sidebar2.php"; ?>
 
             <main class="flex-1 flex items-center justify-center">
                 <div class="w-4/5 max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center">

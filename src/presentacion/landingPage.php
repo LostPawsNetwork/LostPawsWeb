@@ -1,10 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['tipoUsuario'] !== 'user') 
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    $_SESSION["tipoUsuario"] !== "user"
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 ?>
 
@@ -24,12 +27,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
 
         <div class="flex-1">
             <!-- Menú Lateral -->
-            <?php include "../components/sidebar2.html"; ?>
+            <?php include "../components/sidebar2.php"; ?>
 
             <!-- Contenido principal de la página -->
             <main id="page-content" class="transition-transform duration-300 ease-in-out flex-1 p-4" style="top: 4rem; height: calc(100% - 4rem)">
-                <p>Salto de la linea en la pagina para evitar que se solapen.</p>
-                <br><br>
+                <br>
                 <div class="relative w-full h-96 overflow-hidden">
                     <video autoplay muted loop class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 z-0">
                         <source src="../assets/videos/landing.mp4" type="video/mp4">
@@ -168,7 +170,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
                     </div>
                 </section>
 
-                
                 <!-- Sección de Redes Sociales -->
                 <section id="redes" class="py-10 bg-white">
                     <div class="container mx-auto text-center">
@@ -183,7 +184,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
                                     d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
                                 </svg>
                             </span>
-    
                             <!-- Instagram -->
                             <span class="[&>svg]:h-12 [&>svg]:w-12 [&>svg]:fill-[#c13584]">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

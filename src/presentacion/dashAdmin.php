@@ -1,9 +1,15 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['correo'])) {
-//     header("Location: login.php");
-//     exit();
-// }
+session_start();
+
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    ($_SESSION["tipoUsuario"] !== "admin" &&
+        $_SESSION["tipoUsuario"] !== "superadmin")
+) {
+    header("Location: /lostpaws/presentacion/login.php");
+    exit();
+}
 ?>
 
 <!doctype html>
@@ -25,17 +31,17 @@
             <div id="main-content" class='flex min-h-screen p-4 mt-20 text-center'>
                 <div class="container mx-auto p-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-                        <a href="dashboard.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="gestionarCan.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 Gestionar Can
                             </div>
                         </div></a>
-                        <a href="solicitudesUsuario.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="gestionarSolicitudUsuario.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Solicitudes</button>
                             </div>
                         </div></a>
-                        <a href="gestionExamenes.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="gestionarExamenes.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Exámenes</button>
                             </div>
@@ -45,26 +51,31 @@
                                 <button type="submit">Gestionar Controles</button>
                             </div>
                         </div></a>
-                        <a href="testimonios.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Testimonios</button>
                             </div>
+                        </div>
+                        <a href="reporteUsuarios.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
+                                    <button type="submit">Reporte Usuarios Mal Calificados</button>
+                                </div>
                         </div></a>
-                        <a href="administradores.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <button type="submit">Gestionar Administradores</button>
+                        <?php if (
+                            $_SESSION["tipoUsuario"] === "superadmin"
+                        ) { ?>
+                            <a href="gestionarAdministradores.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
+                                    <button type="submit">Gestionar Administradores</button>
+                                </div>
+                            </div></a>
+                            <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                                <a href="reporteDonaciones.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
+                                    <button type="submit">Reporte Donaciones</button>
+                                </div>
                             </div>
-                        </div></a>
-                        <a href="solicitudesDesaprobadas.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <button type="submit">Reporte Usuarios Mal Calificados</button>
-                            </div>
-                        </div></a>
-                        <a href="reporteDonacion.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <button type="submit">Reporte Donaciones</button>
-                            </div>
-                        </div></a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
