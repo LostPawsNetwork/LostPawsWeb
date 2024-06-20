@@ -44,7 +44,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
                         </div>
                     </div>
                     <div class="m-5">
-                        <a href="landingPage.php" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 m-5 px-4 rounded">
+                        <a href="landingPage.php" class="bg-white hover:bg-gray-200 py-2 px-4 rounded border border-gray-300 mr-4">
                             Volver
                         </a>
                         <a href="landingPage.php" id="donarBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">

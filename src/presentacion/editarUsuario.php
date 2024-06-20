@@ -31,37 +31,49 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
     <title>Editar Perfil de Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 class="text-2xl font-bold mb-6 text-center">Editar Perfil de Usuario</h2>
-        <form action="../negocio/procesarEditarUsuario.php" method="post" class="space-y-4">
-            <div>
-                <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico:</label>
-                <input type="email" id="correo" name="correo" class="mt-1 block w-full px-3 py-2 border border-gray-300 
-                rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
-                required value="<?php echo htmlspecialchars($correo); ?>">
+<body class="bg-gray-100">
+    <div class='flex min-h-screen'>
+        <?php include "../components/header2.html"; ?>
+        <div class="flex-1 flex flex-col items-center justify-center pt-10">
+            <?php include "../components/sidebar2.php"; ?>
+            <div class="max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center">
+                <h1 class="text-2xl font-bold pb-4">Editar Perfil de Usuario</h1>
+                <fieldset>
+                    <form class="w-full max-w-xl pt-2" action="../negocio/procesarEditarUsuario.php">
+                        <div class="flex flex-wrap mb-6">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                Correo electrónico
+                            </label>
+                            <input class="appearance-none block w-full text-gray-700 rounded py-3 px-4 mb-3 border border-gray-300 leading-tight focus:outline-none focus:bg-white"
+                                type="email" id="correo" name="correo" id="correo"
+                                required value="<?php echo htmlspecialchars($correo); ?>"
+                                placeholder="Correo electrónico"
+                                >
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                Nombre
+                            </label>
+                            <input class="appearance-none block w-full text-gray-700 rounded py-3 border border-gray-300 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                id="nombre" name="nombre" type="text"
+                                required value="<?php echo htmlspecialchars($nombre); ?>"
+                            >
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                Apellidos
+                            </label>
+                            <input class="appearance-none block w-full text-gray-700 rounded py-3 px-4 mb-3 border border-gray-300 leading-tight focus:outline-none focus:bg-white"
+                                id="apellido" name="apellido" type="text" placeholder="Apellidos"
+                                required value="<?php echo htmlspecialchars($apellido); ?>"
+                            >
+                        </div>
+                        <div class="px-4 py-3 xl:px-6 xl:flex xl:flex-row-reverse">
+                            <button id="edUsBtn" type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-xl px-4 py-2 bg-blue-600 text-base text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 xl:ml-3 xl:w-auto xl:text-md">Editar</button>
+                            <a href="landingPage.php" class="bg-white hover:bg-gray-200 py-2 px-4 rounded border border-gray-300">
+                                Volver
+                            </a>
+                        </div>
+                    </form>
+                </fieldset>
             </div>
-
-            <div>
-                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" class="mt-1 block w-full px-3 py-2 border border-gray-300 
-                rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
-                required value="<?php echo htmlspecialchars($nombre); ?>">
-            </div>
-
-            <div>
-                <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" class="mt-1 block w-full px-3 py-2 border border-gray-300 
-                rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
-                required value="<?php echo htmlspecialchars($apellido); ?>">
-            </div>
-
-            <div class="flex justify-center">
-                <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white font-medium rounded-md shadow-sm 
-                hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Actualizar Perfil</button>
-            </div>
-        </form>
+        </div>
     </div>
 </body>
 </html>
-

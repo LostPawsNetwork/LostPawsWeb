@@ -45,13 +45,13 @@ $edad_max = $_POST['dog-edad-max']?? '';
     font-size: 0.75rem;
     }
     </style>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -67,7 +67,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
                     <div class="basis-5/6 pr-7">
                         <div class="grid grid-cols-3 gap-8">
                             <?php
-                            foreach ($listaDeCans as $perro) 
+                            foreach ($listaDeCans as $perro)
                             {
                             ?>
                                 <div class='bg-white text-center shadow-lg rounded-lg'>
@@ -80,11 +80,11 @@ $edad_max = $_POST['dog-edad-max']?? '';
                                     </div>
                                     <div class='flex flex-row h-10 m-2'>
                                         <button class='w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 verDetalle rounded-lg'
-                                            data-id="<?php echo $perro['idcan'] ?>"
-                                            data-descrip="<?php echo $perro['descripcion'] ?>"
+                                            data-id="<?php echo $perro['idcan']; ?>"
+                                            data-descrip="<?php echo $perro['descripcion']; ?>"
                                             data-img="<?php echo $perro['foto1']; ?>"
-                                            data-obsmed="<?php echo $perro['observacionesmedicas'] ?>"
-                                            data-datos="<?php echo $perro['genero']." - ".$perro['edad']. " - ".$perro['tamano']?>"
+                                            data-obsmed="<?php echo $perro['observacionesmedicas']; ?>"
+                                            data-datos="<?php echo $perro['genero']." - ".$perro['edad']." - ".$perro['tamano'];?>"
                                         >
                                             Ver detalles
                                         </button>
@@ -142,8 +142,8 @@ $edad_max = $_POST['dog-edad-max']?? '';
                             </form>
                         </fieldset>
                     </div>
+                    <a href="landingPage.php"><button class="bg-white p-2 hover:bg-gray-200 py-2 px-4 rounded border border-gray-300">Volver</button></a>
                 </div>
-                <a href="landingPage.php"><button class="mt-5 ml-5 px-4 py-2 bg-blue-600 text-white rounded-md">Volver</button></a>
             </main>
         </div>
     </div>
