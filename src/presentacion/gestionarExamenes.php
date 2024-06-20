@@ -88,7 +88,7 @@ $examenes = $examenAptitud->obtenerExamenesAptitud();
                                                         if (
                                                             $examen[
                                                                 "estado"
-                                                            ] === "pendiente"
+                                                            ] === "Pendiente"
                                                         ) {
                                                             echo "
                                                                 <form action='../negocio/aprobarExamen.php' method='post' style='display:inline;' onsubmit='confirmarOperacion(event, this)'>
