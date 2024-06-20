@@ -1,23 +1,22 @@
 <?php
-session_start();
+if (isset($_SESSION["correo"])) {
+    $usuario_email = $_SESSION["correo"];
 
-if (isset($_SESSION['correo'])) {
-    $usuario_email = $_SESSION['correo'];
-
-    require_once '../config/neon.php';
+    require_once "../config/neon.php";
 
     $conn = getPDOConnection();
 
-    $stmt = $conn->prepare("SELECT COUNT(*) AS num_adopciones FROM adopcion WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = :email)");
-    $stmt->bindParam(':email', $usuario_email);
+    $stmt = $conn->prepare(
+        "SELECT COUNT(*) AS num_adopciones FROM adopcion WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = :email)"
+    );
+    $stmt->bindParam(":email", $usuario_email);
     $stmt->execute();
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $num_adopciones = $resultado['num_adopciones'];
+    $num_adopciones = $resultado["num_adopciones"];
 
     $stmt->closeCursor();
     $conn = null;
-
 } else {
     $num_adopciones = 0;
 }

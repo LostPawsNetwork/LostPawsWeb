@@ -17,7 +17,16 @@ class Solicitud
 
     function listarSolicitudes() 
     {
-
+        $sql = "SELECT * FROM solicitud";
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     function registrarSolicitud($idUsuario, $idCan) 
@@ -38,8 +47,18 @@ class Solicitud
         }
     }
 
-    function actualizarSolicitud() 
+    function actualizarSolicitud($idSolicitud, $nuevoEstado)
     {
-
+        $sql = "UPDATE solicitud SET estado = :nuevoEstado WHERE idSolicitud = :idSolicitud";
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':idSolicitud', $idSolicitud);
+            $stmt->bindParam(':nuevoEstado', $nuevoEstado);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }

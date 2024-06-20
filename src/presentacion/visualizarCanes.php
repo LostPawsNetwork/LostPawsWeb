@@ -151,7 +151,6 @@ $edad_max = $_POST['dog-edad-max']?? '';
     <?php include "../components/footer.html"; ?>
     <script src="../scripts/dynamic.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
             <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
@@ -207,10 +206,10 @@ $edad_max = $_POST['dog-edad-max']?? '';
                     <iframe id="gFormSoli" src="https://docs.google.com/forms/d/e/1FAIpQLSfK_93KP7a8igk9e9V2mlD3g7ykN3Zf5Q2qUhe1WNayevGWmQ/viewform?embedded=true" width="640" height="459" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
                 </div>
                 <div class="px-4 py-3 xl:px-6 xl:flex xl:flex-row-reverse bg-gray-200">
-                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 
+                <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 
                     shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 
                     focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md enviarSolicitud">Enviar solicitud</button>    
-                    
+
                     <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 
                     shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 
                     focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md cancelButton">Cerrar</button>
@@ -223,29 +222,28 @@ $edad_max = $_POST['dog-edad-max']?? '';
 
 <script>
     $(document).ready(function(){
-        let idCan; // Variable para almacenar la idCan
-
+        let idCan;
         $('.verDetalle').on('click', function(){
-            idCan = $(this).data('id'); // Obtener la idCan
+            
+            idCan = $(this).data('id');
             let img = $(this).data('img');
             let datos = $(this).data('datos');
             let observaciones = $(this).data('obsmed');
             let descripcion = $(this).data('descrip');
-            // ahora llenamos el modal
+            //ahora llenamos el modal
             $('#foto-can').attr('src', img);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);
             $('#myModal').removeClass('hidden');
-        });
 
+        })
         $('.enviarSolicitud').on('click', function(){
             // Obtener la idUsuario de la sesión
             let idUsuario = <?php echo $_SESSION['idUsuario']; ?>;
             // Redireccionar a la página con idUsuario y idCan como parámetros
             window.location.href = `../negocio/registrarSolicitud.php?idUsuario=${idUsuario}&idCan=${idCan}`;
         });
-
         $('.cancelButton').on('click', function(){
             $('#myModal').addClass('hidden');
             $('#formSolicitud').addClass('hidden');

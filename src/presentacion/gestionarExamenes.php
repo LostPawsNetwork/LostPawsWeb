@@ -43,6 +43,16 @@ $examenes = $examenAptitud->obtenerExamenesAptitud();
             margin-top: 60px; /* Ajusta el margen superior para que empiece después del header */
         }
     </style>
+    <script>
+            function confirmarOperacion(event, form) {
+                event.preventDefault();
+                var accion = event.submitter.innerText.toLowerCase();
+                var confirmar = confirm("¿Está seguro que desea " + accion + " este examen?");
+                if (confirmar) {
+                    form.submit();
+                }
+            }
+        </script>
 </head>
 <body class="bg-gray-100">
     <div id="header">
@@ -66,24 +76,38 @@ $examenes = $examenAptitud->obtenerExamenesAptitud();
                         </thead>
                         <tbody>
 
-                            <?php foreach ($examenes as $examen) {
-                                echo "<tr>";
-                                echo "<td class='py-2 px-4 border-b'>{$examen["idexamen"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$examen["idusuario"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$examen["estado"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>
-                                        <form action='../negocio/aprobarExamen.php' method='post' style='display:inline;'>
-                                            <input type='hidden' name='idexamen' value='{$examen["idexamen"]}'>
-                                            <button type='submit' class='bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600'>Aceptar</button>
-                                        </form>
-                                        <form action='../negocio/rechazarExamen.php' method='post' style='display:inline;'>
-                                            <input type='hidden' name='idexamen' value='{$examen["idexamen"]}'>
-                                            <button type='submit' class='bg-red-500 text-white p-2 rounded-md hover:bg-red-600'>Rechazar</button>
-                                        </form>
-                                      </td>";
-                                echo "</tr>";
-                            } ?>
-                        </tbody>
+                                                    <?php foreach (
+                                                        $examenes
+                                                        as $examen
+                                                    ) {
+                                                        echo "<tr>";
+                                                        echo "<td class='py-2 px-4 border-b'>{$examen["idexamen"]}</td>";
+                                                        echo "<td class='py-2 px-4 border-b'>{$examen["idusuario"]}</td>";
+                                                        echo "<td class='py-2 px-4 border-b'>{$examen["estado"]}</td>";
+                                                        echo "<td class='py-2 px-4 border-b'>";
+                                                        if (
+                                                            $examen[
+                                                                "estado"
+                                                            ] === "pendiente"
+                                                        ) {
+                                                            echo "
+                                                                <form action='../negocio/aprobarExamen.php' method='post' style='display:inline;' onsubmit='confirmarOperacion(event, this)'>
+                                                                    <input type='hidden' name='idexamen' value='{$examen["idexamen"]}'>
+                                                                    <button type='submit' class='bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600'>Aceptar</button>
+                                                                </form>
+                                                                <form action='../negocio/rechazarExamen.php' method='post' style='display:inline;' onsubmit='confirmarOperacion(event, this)'>
+                                                                    <input type='hidden' name='idexamen' value='{$examen["idexamen"]}'>
+                                                                    <button type='submit' class='bg-red-500 text-white p-2 rounded-md hover:bg-red-600'>Rechazar</button>
+                                                                </form>";
+                                                        } else {
+                                                            echo "
+                                                                <button type='button' class='bg-gray-400 text-white p-2 rounded-md cursor-not-allowed' disabled>Aceptar</button>
+                                                                <button type='button' class='bg-gray-400 text-white p-2 rounded-md cursor-not-allowed' disabled>Rechazar</button>";
+                                                        }
+                                                        echo "</td>";
+                                                        echo "</tr>";
+                                                    } ?>
+                                                </tbody>
                     </table>
                 </div>
             </div>
