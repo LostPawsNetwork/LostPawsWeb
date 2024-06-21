@@ -51,16 +51,23 @@ if (
                                 <button type="submit">Gestionar Controles</button>
                             </div>
                         </div></a>
-                        <div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="gestionarTestimonios.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                             <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                 <button type="submit">Gestionar Testimonios</button>
                             </div>
-                        </div>
+                        </div></a>
                         <a href="reporteUsuarios.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                                 <div class="bg-white text-black font-bold py-2 px-4 rounded">
                                     <button type="submit">Reporte Usuarios Mal Calificados</button>
                                 </div>
                         </div></a>
+
+                        <a href="gestionarContacto.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
+                                    <button type="submit">Solicitudes de Contacto</button>
+                                </div>
+                        </div></a>
+
                         <?php if (
                             $_SESSION["tipoUsuario"] === "superadmin"
                         ) { ?>
