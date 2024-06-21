@@ -19,8 +19,7 @@ if (isset($_SESSION["correo"])) {
     $conn = null;
 } else {
     $num_adopciones = 0;
-}
-?>
+} ?>
 
 <aside id="menu" class="fixed inset-y-0 left-0 transform -translate-x-full bg-blue-800 text-white w-64 overflow-auto transition-transform duration-300 ease-in-out mt-20">
     <a href="/lostpaws/presentacion/visualizarCanes.php" class="block p-4">Adopta</a>
@@ -44,7 +43,19 @@ document.getElementById("crearExamenAptitud").addEventListener("click", function
     event.preventDefault();
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/lostpaws/presentacion/crearExamenAptitud.php", true);
+    xhr.open("POST", "/lostpaws/negocio/crearExamenAptitud.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                alert(xhr.responseText);
+            } else {
+                alert(xhr.responseText + "Hubo un problema al crear el examen de aptitud.");
+            }
+        }
+    };
+
+    xhr.send();
 });
 </script>

@@ -1,26 +1,53 @@
 <?php
+require_once "../config/neon.php"; // Asegúrate de que la ruta a neon.php es correcta
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = trim($_POST["nombre"]);
     $email = trim($_POST["email"]);
     $mensaje = trim($_POST["mensaje"]);
 
     // Validación básica
-    if (empty($nombre) || empty($email) || empty($mensaje) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (
+        empty($nombre) ||
+        empty($email) ||
+        empty($mensaje) ||
+        !filter_var($email, FILTER_VALIDATE_EMAIL)
+    ) {
         echo "Por favor completa todos los campos y asegúrate de que el correo electrónico es válido.";
         exit();
     }
 
-    // Configuración del correo
-    $to = "xo2021071080@virtual.upt.pe";
-    $subject = "Nuevo mensaje de contacto de $nombre";
-    $body = "Nombre: $nombre\nEmail: $email\n\nMensaje:\n$mensaje";
-    $headers = "From: $email";
+    // Obtener la conexión PDO
+    $conn = getPDOConnection();
 
-    // Enviar correo
-    if (mail($to, $subject, $body, $headers)) {
-        echo "Tu mensaje ha sido enviado con éxito.";
+    if ($conn !== null) {
+        try {
+            // Preparar la sentencia SQL para insertar los datos
+            $sql =
+                "INSERT INTO Contacto (nombre, email, mensaje) VALUES (:nombre, :email, :mensaje)";
+            $stmt = $conn->prepare($sql);
+
+            // Vincular los parámetros
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":mensaje", $mensaje);
+
+            // Ejecutar la sentencia
+            $stmt->execute();
+
+            // Mostrar mensaje de éxito y redirigir usando JavaScript
+            echo "<script>
+                    alert('Mensaje enviado con éxito.');
+                    window.location.href = '../presentacion/landingPage.php';
+                  </script>";
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     } else {
-        echo "Hubo un problema al enviar tu mensaje. Por favor intenta de nuevo.";
+        echo "No se pudo conectar a la base de datos.";
     }
+
+    // Cerrar la conexión
+    $conn = null;
 }
 ?>
