@@ -35,6 +35,16 @@ if (isset($_SESSION["correo"])) {
         <a href="/lostpaws/presentacion/misControles.php" class="block p-4">Mis Controles</a>
     <?php endif; ?>
 
-    <a href="/lostpaws/presentacion/examenAptitud.php" class="block p-4">Examen Aptitud</a>
+    <a href="#" id="crearExamenAptitud" class="block p-4">Examen Aptitud</a>
     <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-4">Editar Perfil</a>
 </aside>
+
+<script>
+document.getElementById("crearExamenAptitud").addEventListener("click", function(event) {
+    event.preventDefault();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/lostpaws/presentacion/crearExamenAptitud.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+});
+</script>
