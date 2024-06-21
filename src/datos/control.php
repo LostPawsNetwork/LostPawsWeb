@@ -70,5 +70,47 @@ class Control
             return []; // Devuelve un arreglo vacío si no hay controles encontrados
         }
     }
+
+    public function obtenerControl($idAdopcion)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM control WHERE idAdopcion = ?");
+        $stmt->bindParam(1, $idAdopcion, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $controles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $controles;
+        } else {
+            return []; // Devuelve un arreglo vacío si no hay controles encontrados
+        }
+    }
+
+    public function rellenarControl($idControl, $foto1Path, $archivoPath, $foto2Path, $foto3Path, $foto4Path)
+    {
+        $sql = "UPDATE control SET foto1 = :foto1, archivo = :archivo, foto2 = :foto2, foto3 = :foto3, foto4 = :foto4 WHERE idControl = :idControl";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':foto1', $foto1Path);
+        $stmt->bindParam(':archivo', $archivoPath);
+        $stmt->bindParam(':foto2', $foto2Path);
+        $stmt->bindParam(':foto3', $foto3Path);
+        $stmt->bindParam(':foto4', $foto4Path);
+        $stmt->bindParam(':idControl', $idControl);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function listarControlesEnRevision()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM control WHERE estado = 'En revisión'");
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return []; // Devuelve un arreglo vacío si no hay controles encontrados
+        }
+    }
 }
 ?>
