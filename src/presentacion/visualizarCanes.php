@@ -164,7 +164,7 @@ $edad_max = $_POST['dog-edad-max']?? '';
                             <div class="mt-2 flex flex-row">
                                 <div class="basis-2/5 border border-black-30">
                                     <!--<img class='rounded-md size-full' alt='Imagen del canino'>-->
-                                    <span id="foto-can"></span>
+                                    <img id="foto-can"></img>
                                 </div>
                                 <div class="basis-3/5 pl-3">
                                     <h5>Descripción:</h5>
