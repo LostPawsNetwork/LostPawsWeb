@@ -148,6 +148,24 @@ class Usuario
         return $stmt->execute();
     }
 
+    function obtenerTotalUsuarios()
+    {
+        $sql = "SELECT COUNT(*) as total FROM usuario";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    function obtenerUsuariosDesaprobados()
+    {
+        $sql = "SELECT COUNT(*) as desaprobados FROM usuario 
+                INNER JOIN examenAptitud ON usuario.idUsuario = examenAptitud.idUsuario 
+                WHERE examenAptitud.estado = 'Desaprobado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['desaprobados'];
+    }
+
     //Falta terminar consulta
     function listarUsuariosDesaprobados()
     {

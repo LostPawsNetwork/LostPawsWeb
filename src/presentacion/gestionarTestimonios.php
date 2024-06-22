@@ -10,6 +10,10 @@ if (
     header("Location: /lostpaws/presentacion/login.php");
     exit();
 }
+
+require_once '../datos/testimonio.php';
+$testimonio = new Testimonio();
+$testimonios = $testimonio->obtenerTestimonios();
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +52,7 @@ if (
             <div class="">
                 <div class="flex justify-between items-center mb-4">
                     <h1 class="text-3xl font-bold mb-6">Gestionar Testimonios</h1>
-                    <a href="" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Agregar Testimonio</a>
+                    <a href="formularioTestimonio.php" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Agregar Testimonio</a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center mt-8">
@@ -63,25 +67,6 @@ if (
                         </thead>
                         <tbody>
                             <?php
-                            // Aquí debes reemplazar con tu propia lógica de conexión a la base de datos y consulta
-                            $testimonios = [
-                                [
-                                    "id_testimonio" => 1,
-                                    "fecha" => "2024-01-01",
-                                    "texto" => "Texto del testimonio 1",
-                                    "id_usuario" => 101,
-                                    "foto" => "path/to/foto1.jpg",
-                                ],
-                                [
-                                    "id_testimonio" => 2,
-                                    "fecha" => "2024-02-01",
-                                    "texto" => "Texto del testimonio 2",
-                                    "id_usuario" => 102,
-                                    "foto" => "path/to/foto2.jpg",
-                                ],
-                                // Agrega más testimonios aquí
-                            ];
-
                             foreach ($testimonios as $testimonio) {
                                 echo "<tr>";
                                 echo "<td class='py-2 px-4 border-b'>{$testimonio["id_testimonio"]}</td>";
@@ -101,55 +86,5 @@ if (
     </div>
 
     <?php include "../components/footer.html"; ?>
-
-    <div id="modalEditarAdmin" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
-            <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div> <!-- este es para el fondo oscuro -->
-            <!-- <span class="hidden xl:inline-block xl:align-middle xl:h-screen" aria-hidden="true">&#8203;</span> bloque para que se quede en el centro -->
-            <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
-                <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
-                    <h3 class="text-3xl leading-6 mb-4 font-large text-gray-900 " id="modal-title">Ediatr administrador</h3>
-                    <hr>
-                    <div>
-                        <form action="../negocio/gestionAdministradores.php" method="POST">
-                            <div class="mb-4">
-                                <label for="correoAdmin" class="block text-sm font-medium text-gray-700">Correo</label>
-                                <input type="text" name="correoAdmin" id="correoAdmin" class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300" required>
-                            </div>
-                                <div class="flex justify-center">
-                                <button type="submit" class="bg-blue-600 text-white w-full p-2 rounded-md hover:bg-blue-700">Editar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="px-4 py-3 xl:px-6 xl:flex xl:flex-row-reverse bg-gray-200">
-                    <button type="button" class="mt-z3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-xl px-4 py-2 bg-white text-base text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:mt-0 xl:ml-3 xl:w-auto xl:text-md cancelButton">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
-
-<script>
-    $(document).ready(function(){
-        $('.editarCorreo').on('click', function(){
-            console.log($(this).data('id'));
-            let img = $(this).data('img');
-            let datos = $(this).data('datos');
-            let observaciones = $(this).data('obsmed');
-            let descripcion = $(this).data('descrip')
-            //ahora llenamos el modal
-            $('#foto-can').attr('src', img);
-            $('#det-descripcion').text(descripcion);
-            $('#det-datos').text(datos);
-            $('#ob-medicas').text(observaciones);
-            $('#modalEditarAdmin').removeClass('hidden');
-
-        })
-
-        $('.cancelButton').on('click', function(){
-            $('#modalEditarAdmin').addClass('hidden');
-        });
-    })
-</script>
