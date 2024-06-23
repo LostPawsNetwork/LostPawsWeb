@@ -10,6 +10,10 @@ if (
     header("Location: /lostpaws/presentacion/login.php");
     exit();
 }
+
+require_once "../datos/testimonio.php";
+$testimonio = new Testimonio();
+$testimonios = $testimonio->obtenerTestimonios();
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +21,10 @@ if (
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usurio mal calificado</title>
+    <title>Testimonios</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* Estilo para el header */
         #header {
@@ -45,45 +50,31 @@ if (
     <div id="main-content" class='min-h-screen'>
         <div class="container mx-auto p-4">
             <div class="">
-                <h1 class="text-3xl font-bold mb-6">Usuarios mal calificados</h1>
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-3xl font-bold mb-6">Gestionar Testimonios</h1>
+                    <a href="formularioTestimonio.php" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Agregar Testimonio</a>
+                </div>
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center mt-8">
                         <thead class="bg-gray-200">
                             <tr>
-                                <th class="py-2 px-4 border-b">ID Usuario</th>
+                                <th class="py-2 px-4 border-b">ID Testimonio</th>
                                 <th class="py-2 px-4 border-b">Fecha</th>
-                                <th class="py-2 px-4 border-b">Examen</th>
+                                <th class="py-2 px-4 border-b">Texto</th>
+                                <th class="py-2 px-4 border-b">idUsuario</th>
+                                <th class="py-2 px-4 border-b">Foto</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // Aquí debes reemplazar con tu propia lógica de conexión a la base de datos y consulta
-                            $examenes = [
-                                [
-                                    "id_usuario" => 101,
-                                    "fecha" => "2024-01-01",
-                                    "link_examen" =>
-                                        "https://example.com/examen/1",
-                                ],
-                                [
-                                    "id_usuario" => 102,
-                                    "fecha" => "2024-02-01",
-                                    "link_examen" =>
-                                        "https://example.com/examen/2",
-                                ],
-                                // Agrega más examenes aquí
-                            ];
-
-                            foreach ($examenes as $examen) {
-
+                            <?php foreach ($testimonios as $testimonio) {
                                 echo "<tr>";
-                                echo "<td class='py-2 px-4 border-b'>{$examen["id_usuario"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$examen["fecha"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'><a href='{$examen["link_examen"]}' class='bg-blue-500 mr-2 text-white p-2 rounded-md hover:bg-blue-600'>Ver examen</a></td>";
-                                ?></tr>
-                            <?php
-                            }
-                            ?>
+                                echo "<td class='py-2 px-4 border-b'>{$testimonio["idtestimonio"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$testimonio["fecha"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$testimonio["texto"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$testimonio["idusuario"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'><img src='{$testimonio["foto"]}' alt='Foto del Testimonio' class='h-12 w-12 object-cover'></td>";
+                                echo "</tr>";
+                            } ?>
                         </tbody>
                     </table>
                 </div>
