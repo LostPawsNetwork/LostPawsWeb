@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
-|| ($_SESSION['tipoUsuario'] !== 'admin' && $_SESSION['tipoUsuario'] !== 'superadmin'))
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    ($_SESSION["tipoUsuario"] !== "admin" &&
+        $_SESSION["tipoUsuario"] !== "superadmin")
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 ?>
 
@@ -30,10 +33,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
                 <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
                 <input type="text" name="nombre" id="nombre" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
             </div>
-            <div>
-                <label for="raza" class="block text-sm font-medium text-gray-700">Raza</label>
-                <input type="text" name="raza" id="raza" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
-            </div>
+
             <div>
                 <label for="edad" class="block text-sm font-medium text-gray-700">Edad</label>
                 <input type="number" name="edad" id="edad" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
