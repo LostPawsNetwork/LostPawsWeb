@@ -56,9 +56,9 @@ if (
                                 <button type="submit">Gestionar Testimonios</button>
                             </div>
                         </div></a>
-                        <a href="reporteUsuarios.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                        <a href="reportes.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
                                 <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                    <button type="submit">Reporte Usuarios Mal Calificados</button>
+                                    <button type="submit">Reportes </button>
                                 </div>
                         </div></a>
 
