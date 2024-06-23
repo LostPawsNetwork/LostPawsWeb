@@ -21,6 +21,7 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
     $nombre = $datosUsuario[0]['nombre'];
     $apellido = $datosUsuario[0]['apellido'];
 } else {
+    // Manejo de error si no se encuentra el usuario
 }
 ?>
 
@@ -30,9 +31,50 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
     <meta charset="UTF-8">
     <title>Editar Perfil de Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f0f0f0; 
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(10px); 
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px; 
+            width: 100%;
+            z-index: 1; 
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+<body>
+
+    <video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
+        <source src="../assets/videos/login.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+
+    <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+    <div class="form-container ">
         <h2 class="text-2xl font-bold mb-6 text-center">Editar Perfil de Usuario</h2>
         <form action="../negocio/procesarEditarUsuario.php" method="post" class="space-y-4">
             <div>
@@ -57,11 +99,9 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
             </div>
 
             <div class="flex justify-center">
-                <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white font-medium rounded-md shadow-sm 
-                hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Actualizar Perfil</button>
+                <button type="submit" class="bg-blue-600 text-white w-full p-2 rounded-md hover:bg-blue-700">Actualizar Perfil</button>
             </div>
         </form>
     </div>
 </body>
 </html>
-
