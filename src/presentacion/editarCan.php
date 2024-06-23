@@ -9,6 +9,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
 }
 
 require_once "../datos/can.php";
-
+// ayaha
 echo "Se tiene que hacer un modal dentro del dashboard.php"
 ?>
