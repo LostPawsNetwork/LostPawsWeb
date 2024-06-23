@@ -98,7 +98,10 @@ usort($controles, function($a, $b) {
     </style>
 </head>
 <body>
-    <h1>Mis Controles</h1>
+<div class="min-h-screen flex items-center justify-center">
+    <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+        <div class="flex justify-center items-center">
+         <h1>Mis Controles</h1>
 
     <table>
         <thead>
@@ -140,6 +143,9 @@ usort($controles, function($a, $b) {
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
+    </div>
+</div>
 
 </body>
 </html>
