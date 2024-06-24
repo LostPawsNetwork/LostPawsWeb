@@ -50,6 +50,15 @@ class ExamenAptitud
         return $stmt->execute();
     }
 
+    function obtenerExamenPorUsuario($idUsuario)
+    {
+        $sql = "SELECT estado FROM ExamenAptitud WHERE idUsuario = :idUsuario";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":idUsuario", $idUsuario);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     function getIdExamen()
     {
         return $this->idExamen;
