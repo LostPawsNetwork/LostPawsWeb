@@ -68,9 +68,10 @@ if (
     <div class="min-h-screen flex items-center justify-center">
     <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
     <div class="flex justify-center items-center">
-               <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
-               </div>
-               <br>
+        <a href="/lostpaws/presentacion/landingPage.php">
+            <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
+        </a>
+    </div>
 
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm container mx-auto p-4">   
               
