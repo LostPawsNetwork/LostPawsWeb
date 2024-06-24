@@ -72,7 +72,7 @@ if (
             <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
         </a>
     </div>
-
+    <br>
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm container mx-auto p-4">   
               
         <div class="flex flex-col gap-4 flex flex-col gap-4">
