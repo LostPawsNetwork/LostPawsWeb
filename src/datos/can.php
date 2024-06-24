@@ -148,6 +148,14 @@ class Can
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function listarCanesAdoptados()
+    {
+        $sql = "SELECT COUNT(*) as total FROM Can WHERE estado = 'Adoptado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["total"];
+    }
+
     // Getters y Setters
 
     function getIdCan()
