@@ -25,14 +25,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
         <?php if (!empty($error)): ?>
             <div class="bg-red-500 text-white p-4 mb-4 rounded"><?php echo $error; ?></div>
         <?php endif; ?>
-        <form action="../negocio/registraPerro.php" method="post" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md space-y-4">
+        <form id="perroForm" action="../negocio/registrarPerro.php" method="post" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md space-y-4">
             <div>
                 <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
                 <input type="text" name="nombre" id="nombre" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
-            </div>
-            <div>
-                <label for="raza" class="block text-sm font-medium text-gray-700">Raza</label>
-                <input type="text" name="raza" id="raza" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
             </div>
             <div>
                 <label for="edad" class="block text-sm font-medium text-gray-700">Edad</label>
@@ -55,18 +51,48 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
                 <textarea name="descripcion" id="descripcion" class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300"></textarea>
             </div>
             <div>
-                <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
-                <input type="text" name="estado" id="estado" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                <label for="foto1" class="block text-sm font-medium text-gray-700">Foto del can</label>
+                <input type="file" name="foto1" id="foto1" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                <button type="button" id="detectarRaza" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mt-2">Detectar Raza</button>
             </div>
             <div>
-                <label for="foto1" class="block text-sm font-medium text-gray-700">Foto 1 (Subir)</label>
-                <input type="file" name="foto1" id="foto1" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                <label for="raza" class="block text-sm font-medium text-gray-700">Raza</label>
+                <input type="text" name="raza" id="raza" readonly required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
             </div>
             <div class="flex justify-end">
-                <button type="submit" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Guardar</button>
+                <button type="submit" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Registrar</button>
             </div>
         </form>
     </div>
 
+    <script>
+        document.getElementById('detectarRaza').addEventListener('click', function() {
+            var fileInput = document.getElementById('foto1');
+            if (fileInput.files.length === 0) {
+                alert('Por favor selecciona una imagen primero.');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('uploadIA.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.raza) {
+                    document.getElementById('raza').value = data.raza;
+                } else {
+                    alert('No se pudo determinar la raza. Inténtalo de nuevo.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al detectar la raza.');
+            });
+        });
+    </script>
 </body>
 </html>

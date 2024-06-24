@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $genero = $_POST["genero"];
     $observacionesMedicas = $_POST["observacionesMedicas"];
     $descripcion = $_POST["descripcion"];
-    $estado = $_POST["estado"];
+    $estado = "Por adoptar";
 
     // Manejar la subida de la imagen
     $target_dir = "../assets/images/canes/";
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             null,
             $estado
         );
-        header("Location: ../presentacion/dashboard.php");
+        header("Location: ../presentacion/gestionarCan.php");
         exit();
     }
 }
