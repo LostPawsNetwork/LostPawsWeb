@@ -59,7 +59,9 @@ $controles = $controlObj->listarControlesEnRevision();
                                         echo "<td class='py-2 px-4 border-b'>{$control["idadopcion"]}</td>";
                                         echo "<td class='py-2 px-4 border-b'>{$control["fechacontrol"]}</td>";
                                         echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white 
-                                        p-2 rounded-md hover:bg-blue-600 verControl' data-id='{$control["idcontrol"]}' 
+                                        p-2 rounded-md hover:bg-blue-600 verControl'
+                                        data-id='{$control["idcontrol"]}'
+                                        data-nrocontrol='{$control["nrocontrol"]}'
                                         data-foto1='{$control["foto1"]}' data-archivo='{$control["archivo"]}' 
                                         data-foto2='{$control["foto2"]}' data-foto3='{$control["foto3"]}' 
                                         data-foto4='{$control["foto4"]}'>Ver control</button></td>";
@@ -107,6 +109,7 @@ $controles = $controlObj->listarControlesEnRevision();
 <script>
     $(document).ready(function(){
         $('.verControl').on('click', function(){
+            let nrocontrol = $(this).data('nrocontrol');
             let foto1 = $(this).data('foto1');
             let archivo = $(this).data('archivo');
             let foto2 = $(this).data('foto2');
@@ -120,7 +123,7 @@ $controles = $controlObj->listarControlesEnRevision();
             if (foto1) {
                 $('#control-images').append(`
                     <div style="max-width: 250px;">
-                        <p class="font-bold text-lg mb-2">Número de control</p>
+                        <p class="font-bold text-lg mb-2">Número de control: ${nrocontrol}</p>
                         <img src="${foto1}" alt="Foto 1" class="max-w-full mb-2">
                     </div>
                 `);
