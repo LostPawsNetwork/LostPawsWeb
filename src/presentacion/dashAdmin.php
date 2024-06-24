@@ -61,10 +61,10 @@ if (
   </style>
 </head>
 
-<video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 filter blur-lg">
+ <!-- <video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 filter blur-lg">
         <source src="../assets/videos/ayaha.mp4" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
+    </video>  -->
     <div class="min-h-screen flex items-center justify-center">
     <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
     <div class="flex justify-center items-center">
