@@ -67,10 +67,6 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
 </head>
 <body>
 
-    <video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
-        <source src="../assets/videos/login.mp4" type="video/mp4">
-        Tu navegador no soporta la etiqueta de video.
-    </video>
 
     <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
