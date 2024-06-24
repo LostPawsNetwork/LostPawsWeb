@@ -44,7 +44,7 @@ if (
 </head>
 <body class="bg-gray-100">
     <video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 filter blur-lg">
-        <source src="../assets/videos/login.mp4" type="video/mp4">
+        <source src="../assets/videos/token.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
