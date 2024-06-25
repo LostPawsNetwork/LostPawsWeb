@@ -124,7 +124,7 @@ $categorias = [
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    header('Content-Type: application/json');
+    header("Content-Type: application/json");
 
     if (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0) {
         $fileTmpPath = $_FILES["file"]["tmp_name"];
@@ -136,12 +136,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $allowedfileExtensions = ["jpg", "jpeg", "png"];
         if (in_array($fileExtension, $allowedfileExtensions)) {
-            $uploadFileDir = "uploads/";
+            $uploadFileDir = "../assets/images/canes/";
             $dest_path = $uploadFileDir . $fileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, "http://161.132.47.250:8000/classify/");
+                curl_setopt(
+                    $ch,
+                    CURLOPT_URL,
+                    "http://161.132.47.250:8000/classify/"
+                );
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -164,23 +168,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (json_last_error() === JSON_ERROR_NONE) {
                     $bestResult = null;
                     foreach ($resultArray as $result) {
-                        if ($bestResult === null || $result["score"] > $bestResult["score"]) {
+                        if (
+                            $bestResult === null ||
+                            $result["score"] > $bestResult["score"]
+                        ) {
                             $bestResult = $result;
                         }
                     }
                     if ($bestResult) {
-                        echo json_encode(["raza" => $categorias[$bestResult["label"]]]);
+                        echo json_encode([
+                            "raza" => $categorias[$bestResult["label"]],
+                        ]);
                     } else {
-                        echo json_encode(["error" => "No se pudo determinar la raza."]);
+                        echo json_encode([
+                            "error" => "No se pudo determinar la raza.",
+                        ]);
                     }
                 } else {
-                    echo json_encode(["error" => "Error al procesar la respuesta de la API."]);
+                    echo json_encode([
+                        "error" => "Error al procesar la respuesta de la API.",
+                    ]);
                 }
             } else {
-                echo json_encode(["error" => "Error al mover el archivo subido"]);
+                echo json_encode([
+                    "error" => "Error al mover el archivo subido",
+                ]);
             }
         } else {
-            echo json_encode(["error" => "Tipo de archivo no permitido. Solo se permiten archivos JPG, JPEG y PNG."]);
+            echo json_encode([
+                "error" =>
+                    "Tipo de archivo no permitido. Solo se permiten archivos JPG, JPEG y PNG.",
+            ]);
         }
     } else {
         echo json_encode(["error" => "Error al subir el archivo"]);

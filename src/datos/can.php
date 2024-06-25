@@ -42,32 +42,20 @@ class Can
     function editarCan(
         $idCan,
         $nombre,
-        $raza,
         $edad,
         $tamano,
-        $genero,
         $observacionesMedicas,
-        $descripcion,
-        $foto1,
-        $foto2,
-        $foto3,
-        $estado
+        $descripcion
     ) {
         $sql =
-            "UPDATE Can SET nombre = :nombre, raza = :raza, edad = :edad, tamano = :tamano, genero = :genero, observacionesMedicas = :observacionesMedicas, descripcion = :descripcion, foto1 = :foto1, foto2 = :foto2, foto3 = :foto3, estado = :estado WHERE idCan = :idCan";
+            "UPDATE Can SET nombre = :nombre, edad = :edad, tamano = :tamano, observacionesMedicas = :observacionesMedicas, descripcion = :descripcion WHERE idCan = :idCan";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":idCan", $idCan);
         $stmt->bindParam(":nombre", $nombre);
-        $stmt->bindParam(":raza", $raza);
         $stmt->bindParam(":edad", $edad);
         $stmt->bindParam(":tamano", $tamano);
-        $stmt->bindParam(":genero", $genero);
         $stmt->bindParam(":observacionesMedicas", $observacionesMedicas);
         $stmt->bindParam(":descripcion", $descripcion);
-        $stmt->bindParam(":foto1", $foto1);
-        $stmt->bindParam(":foto2", $foto2);
-        $stmt->bindParam(":foto3", $foto3);
-        $stmt->bindParam(":estado", $estado);
         return $stmt->execute();
     }
 
