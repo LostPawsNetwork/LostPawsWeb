@@ -23,7 +23,13 @@ $edad_min = $_POST["dog-edad-min"] ?? "";
 $edad_max = $_POST["dog-edad-max"] ?? "";
 
 $examenAptitud = new ExamenAptitud();
-$estadoExamen = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"])["estado"];
+$examenUsuario = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"]);
+
+if ($examenUsuario !== false && isset($examenUsuario["estado"])) {
+    $estadoExamen = $examenUsuario["estado"];
+} else {
+    $estadoExamen = "No encontrado";
+}
 
 require_once "../datos/adopcion.php";
 

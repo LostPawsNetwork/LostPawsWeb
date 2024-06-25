@@ -32,17 +32,22 @@ class ExamenAptitud
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function verificarAprobado($email)
+    public function verificarEstado($email)
     {
         $stmt = $this->conn->prepare(
-            "SELECT COUNT(*) AS num_aprobados FROM examenaptitud WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = :email) AND estado = 'Aprobado'"
+            "SELECT estado FROM examenaptitud WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = :email) LIMIT 1"
         );
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $resultado["num_aprobados"];
+    
+        if ($resultado) {
+            return $resultado["estado"];
+        } else {
+            return "Sin examen";
+        }
     }
+    
 
     function aprobarExamenAptitud($idExamen)
     {
