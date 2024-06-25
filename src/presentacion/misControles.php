@@ -24,7 +24,7 @@ $stmt->closeCursor();
 $conn = null;
 // Si no tiene adopciones registradas, redireccionar al usuario
 if ($num_adopciones == 0) {
-    header("Location: /lostpaws/presentacion/login.php");
+    header("Location: /lostpaws/presentacion/landingPage.php");
     exit;
 }
 
@@ -113,7 +113,15 @@ usort($controles, function($a, $b) {
                     <?php
                         $fechaControl = new DateTime($control['fechacontrol']);
                         $fechaActual = new DateTime();
-                        $deshabilitarBoton = $fechaControl > $fechaActual;
+                        $estado = $control['estado'];
+                        $deshabilitarBoton = $fechaControl > $fechaActual || $estado === 'En revisión' || $estado === 'Aceptado';
+                        if ($estado === 'Aceptado') {
+                            $textoBoton = 'Aceptado';
+                        } elseif ($estado === 'En revisión') {
+                            $textoBoton = 'En revisión';
+                        } else {
+                            $textoBoton = 'Subir Control';
+                        }
                     ?>
                     <tr>
                         <td><?php echo htmlspecialchars($control['nrocontrol']); ?></td>
@@ -121,7 +129,7 @@ usort($controles, function($a, $b) {
                         <td><?php echo htmlspecialchars($control['estado']); ?></td>
                         <td>
                             <?php if ($deshabilitarBoton) : ?>
-                                <button class="subir-control-btn" disabled>Deshabilitado</button>
+                                <button class="subir-control-btn" disabled><?php echo htmlspecialchars($textoBoton); ?></button>
                             <?php else : ?>
                                 <a href="subirControl.php?idControl=<?php echo htmlspecialchars($control['idcontrol']); ?>&nroControl=<?php echo htmlspecialchars($control['nrocontrol']); ?>" class="subir-control-btn">Subir Control</a>
                             <?php endif; ?>

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idControl = $_POST['idControl'];
     $nroControl = $_POST['nroControl'];
 
-    $uploadDir = '../presentacion/uploads/';
+    $uploadDir = '../uploads/controles/';
 
     // Manejo de la foto del can
     $fotoCan = $_FILES['fotoCan'];

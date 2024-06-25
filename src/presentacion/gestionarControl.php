@@ -65,11 +65,11 @@ $controles = $controlObj->listarControlesEnRevision();
                                         data-foto1='{$control["foto1"]}' data-archivo='{$control["archivo"]}' 
                                         data-foto2='{$control["foto2"]}' data-foto3='{$control["foto3"]}' 
                                         data-foto4='{$control["foto4"]}'>Ver control</button></td>";
-                                        
-                                        echo "<td class='py-2 px-4 border-b'><button id='aceptarControl' 
-                                        class='bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600'>
-                                        Aceptar</button><button id='rechazarControl' class='bg-red-500 text-white 
-                                        p-2 rounded-md hover:bg-red-600'>Rechazar</button></td>";
+                                    
+                                        echo "<td class='py-2 px-4 border-b'>";
+                                        echo "<a href='../negocio/aceptarControl.php?idcontrol=" . htmlspecialchars($control["idcontrol"]) . "' class='bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600'>Aceptar</a>";
+                                        echo "<a href='../negocio/rechazarControl.php?idcontrol=" . htmlspecialchars($control["idcontrol"]) . "' class='bg-red-500 text-white p-2 rounded-md hover:bg-red-600'>Rechazar</a>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {
@@ -107,8 +107,9 @@ $controles = $controlObj->listarControlesEnRevision();
 </html>
 
 <script>
-    $(document).ready(function(){
-        $('.verControl').on('click', function(){
+    $(document).ready(function() {
+        // Función para manejar la acción de Ver Control
+        $('.verControl').on('click', function() {
             let nrocontrol = $(this).data('nrocontrol');
             let foto1 = $(this).data('foto1');
             let archivo = $(this).data('archivo');
@@ -165,11 +166,12 @@ $controles = $controlObj->listarControlesEnRevision();
                 }
                 $('#control-images').append(`</div>`);
             }
-            // Mostramos el modal
+            // Mostramos el modal después de construir su contenido
             $('#modalControl').removeClass('hidden');
         });
 
-        $('.cancelButton').on('click', function(){
+        // Función para cerrar el modal
+        $('.cancelButton').on('click', function() {
             $('#modalControl').addClass('hidden');
         });
     });
