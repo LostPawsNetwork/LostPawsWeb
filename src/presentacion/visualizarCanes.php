@@ -11,7 +11,8 @@ if (
 }
 
 require_once "../datos/can.php";
-require_once "../datos/examenAptitud.php"; // Asegúrate de que esta línea incluye la clase correcta para los exámenes
+require_once "../datos/examenAptitud.php";
+
 
 $can = new Can();
 $listaDeCans = $can->listarCanes();
@@ -22,9 +23,13 @@ $edad_min = $_POST["dog-edad-min"] ?? "";
 $edad_max = $_POST["dog-edad-max"] ?? "";
 
 $examenAptitud = new ExamenAptitud();
-$estadoExamen = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"])[
-    "estado"
-];
+$estadoExamen = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"])["estado"];
+
+require_once "../datos/adopcion.php";
+
+$adopcion = new Adopcion();
+$num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
+
 ?>
 
 <!DOCTYPE html>
@@ -75,51 +80,31 @@ $estadoExamen = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"])[
                 <div class="flex flex-row pt-8 pr-4 pl-4 pb-6">
                     <div class="basis-5/6 pr-7">
                         <div class="grid grid-cols-3 gap-5">
-                            <?php foreach ($listaDeCans as $perro) { ?>
-                                <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
-                                    <div class='h-64'>
-                                        <img class='rounded-md size-full' src='<?php echo $perro[
-                                            "foto1"
-                                        ]; ?>' alt='Imagen del canino'>
-                                    </div>
-                                    <div class='pt-3 pb-4 pl-2 h-28'>
-                                        <h5><?php echo $perro["nombre"]; ?></h5>
-                                        <p class='text-left'><?php echo $perro[
-                                            "descripcion"
-                                        ]; ?></p>
-                                    </div>
-                                    <div class='flex flex-row h-10 bg-gray-200'>
-                                        <button class='w-full hover:bg-gray-400 verDetalle'
-                                            data-id="<?php echo $perro[
-                                                "idcan"
-                                            ]; ?>"
-                                            data-descrip="<?php echo $perro[
-                                                "descripcion"
-                                            ]; ?>"
-                                            data-img="<?php echo $perro[
-                                                "foto1"
-                                            ]; ?>"
-                                            data-obsmed="<?php echo $perro[
-                                                "observacionesmedicas"
-                                            ]; ?>"
-                                            data-datos="<?php echo $perro[
-                                                "genero"
-                                            ] .
-                                                " - " .
-                                                $perro["edad"] .
-                                                " - " .
-                                                $perro["tamano"]; ?>"
-                                            <?php if (
-                                                $estadoExamen !== "Aprobado"
-                                            ) {
-                                                echo "disabled";
-                                            } ?>
-                                        >
-                                            Ver detalles
-                                        </button>
-                                    </div>
+                        <?php foreach ($listaDeCans as $perro) { ?>
+                            <div class='text-center shadow-lg shadow-sky-100 outline outline-offset-2 outline-sky-200 rounded'>
+                                <div class='h-64'>
+                                    <img class='rounded-md size-full' src='<?php echo $perro["foto1"]; ?>' alt='Imagen del canino'>
                                 </div>
-                            <?php } ?>
+                                <div class='pt-3 pb-4 pl-2 h-28'>
+                                    <h5><?php echo $perro["nombre"]; ?></h5>
+                                    <p class='text-left'><?php echo $perro["descripcion"]; ?></p>
+                                </div>
+                                <div class='flex flex-row h-10 bg-gray-200'>
+                                    <button class='w-full hover:bg-gray-400 verDetalle'
+                                        data-id="<?php echo $perro["idcan"]; ?>"
+                                        data-descrip="<?php echo $perro["descripcion"]; ?>"
+                                        data-img="<?php echo $perro["foto1"]; ?>"
+                                        data-obsmed="<?php echo $perro["observacionesmedicas"]; ?>"
+                                        data-datos="<?php echo $perro["genero"] . " - " . $perro["edad"] . " - " . $perro["tamano"]; ?>"
+                                        <?php if ($estadoExamen !== "Aprobado" || $num_adopciones > 0) {
+                                            echo "disabled";
+                                        } ?>
+                                    >
+                                        Ver detalles
+                                    </button>
+                                </div>
+                            </div>
+                        <?php } ?>
                         </div>
                     </div>
                     <div class="basis-1/6 pl-3 pr-2 shadow-lg shadow-black-100 outline outline-offset-2 outline-black-200 rounded text-center">
@@ -227,7 +212,7 @@ $estadoExamen = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"])[
                             <div class="mt-2 flex flex-row">
                                 <div class="basis-2/5 border border-black-30">
                                     <!--<img class='rounded-md size-full' alt='Imagen del canino'>-->
-                                    <span id="foto-can"></span>
+                                    <img id="foto-can"></img>
                                 </div>
                                 <div class="basis-3/5 pl-3">
                                     <h5>Descripción:</h5>

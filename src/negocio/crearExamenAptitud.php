@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_SESSION["idUsuario"])) {
-        $estado = "pendiente";
+        $estado = "Pendiente";
         $idUsuario = $_SESSION["idUsuario"];
         require_once "../datos/examenAptitud.php";
 
