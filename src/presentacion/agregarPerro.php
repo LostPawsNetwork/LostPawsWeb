@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
-|| ($_SESSION['tipoUsuario'] !== 'admin' && $_SESSION['tipoUsuario'] !== 'superadmin'))
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    ($_SESSION["tipoUsuario"] !== "admin" &&
+        $_SESSION["tipoUsuario"] !== "superadmin")
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 ?>
 
@@ -36,11 +39,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true
             </div>
             <div>
                 <label for="tamano" class="block text-sm font-medium text-gray-700">Tamaño</label>
-                <input type="text" name="tamano" id="tamano" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                <select name="tamano" id="tamano" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                    <option value="">Seleccione una opción</option>
+                    <option value="grande">Grande</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="toy">Toy</option>
+                </select>
             </div>
             <div>
                 <label for="genero" class="block text-sm font-medium text-gray-700">Género</label>
-                <input type="text" name="genero" id="genero" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                <select name="genero" id="genero" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                    <option value="">Seleccione una opción</option>
+                    <option value="macho">Macho</option>
+                    <option value="hembra">Hembra</option>
+                </select>
             </div>
             <div>
                 <label for="observacionesMedicas" class="block text-sm font-medium text-gray-700">Observaciones Médicas</label>

@@ -1,34 +1,34 @@
 <?php
 session_start();
-require_once '../datos/control.php';
+require_once "../datos/control.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['idControl']) || !isset($_POST['nroControl'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (!isset($_POST["idControl"]) || !isset($_POST["nroControl"])) {
         echo "Parámetros inválidos.";
-        exit;
+        exit();
     }
 
-    $idControl = $_POST['idControl'];
-    $nroControl = $_POST['nroControl'];
+    $idControl = $_POST["idControl"];
+    $nroControl = $_POST["nroControl"];
 
-    $uploadDir = '../uploads/controles/';
+    $uploadDir = "../uploads/controles/";
 
     // Manejo de la foto del can
-    $fotoCan = $_FILES['fotoCan'];
-    $fotoCanPath = $uploadDir . basename($fotoCan['name']);
-    move_uploaded_file($fotoCan['tmp_name'], $fotoCanPath);
+    $fotoCan = $_FILES["fotoCan"];
+    $fotoCanPath = $uploadDir . basename($fotoCan["name"]);
+    move_uploaded_file($fotoCan["tmp_name"], $fotoCanPath);
 
     // Manejo del archivo de vacunas
-    $archivoVacunas = $_FILES['archivoVacunas'];
-    $archivoVacunasPath = $uploadDir . basename($archivoVacunas['name']);
-    move_uploaded_file($archivoVacunas['tmp_name'], $archivoVacunasPath);
+    $archivoVacunas = $_FILES["archivoVacunas"];
+    $archivoVacunasPath = $uploadDir . basename($archivoVacunas["name"]);
+    move_uploaded_file($archivoVacunas["tmp_name"], $archivoVacunasPath);
 
     // Manejo de las fotos del hogar
-    $fotosHogar = $_FILES['fotosHogar'];
+    $fotosHogar = $_FILES["fotosHogar"];
     $fotoPaths = [];
-    for ($i = 0; $i < count($fotosHogar['name']); $i++) {
-        $fotoPath = $uploadDir . basename($fotosHogar['name'][$i]);
-        move_uploaded_file($fotosHogar['tmp_name'][$i], $fotoPath);
+    for ($i = 0; $i < count($fotosHogar["name"]); $i++) {
+        $fotoPath = $uploadDir . basename($fotosHogar["name"][$i]);
+        move_uploaded_file($fotosHogar["tmp_name"][$i], $fotoPath);
         $fotoPaths[] = $fotoPath;
     }
 
@@ -39,7 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Llama a la función para rellenar el control
     $control = new Control();
-    $resultado = $control->rellenarControl($idControl, $fotoCanPath, $archivoVacunasPath, $foto2Path, $foto3Path, $foto4Path);
+    $resultado = $control->rellenarControl(
+        $idControl,
+        $fotoCanPath,
+        $archivoVacunasPath,
+        $foto2Path,
+        $foto3Path,
+        $foto4Path
+    );
 
     if ($resultado) {
         header("Location: ../presentacion/misControles.php");

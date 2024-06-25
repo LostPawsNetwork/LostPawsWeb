@@ -8,20 +8,22 @@ class Donacion
     private $monto;
     private $fecha;
     private $idUsuario;
+    private $comprobante;
 
     function __construct()
     {
         $this->conn = getPDOConnection();
     }
 
-    function registrarDonacion($monto, $fecha, $idUsuario)
+    function registrarDonacion($monto, $fecha, $idUsuario, $comprobante = null)
     {
-        $sql = "INSERT INTO Donacion (monto, fecha, idUsuario)
-                VALUES (:monto, :fecha, :idUsuario)";
+        $sql = "INSERT INTO Donacion (monto, fecha, idUsuario, comprobante)
+                    VALUES (:monto, :fecha, :idUsuario, :comprobante)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":monto", $monto);
         $stmt->bindParam(":fecha", $fecha);
         $stmt->bindParam(":idUsuario", $idUsuario);
+        $stmt->bindParam(":comprobante", $comprobante);
         return $stmt->execute();
     }
 
