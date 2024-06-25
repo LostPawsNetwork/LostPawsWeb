@@ -33,7 +33,7 @@ class Solicitud
     {
         try {
             $estado = 'Pendiente';
-            $link = 'NULL'; // Suponiendo que el link puede ser nulo
+            $link = 'NULL';
             $sql = "INSERT INTO solicitud (idUsuario, idCan, estado, link) VALUES (:idUsuario, :idCan, :estado, :link)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':idUsuario', $idUsuario);

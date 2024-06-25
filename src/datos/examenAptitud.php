@@ -61,7 +61,7 @@ class ExamenAptitud
     function rechazarExamenAptitud($idExamen)
     {
         $sql =
-            "UPDATE ExamenAptitud SET estado = 'Rechazado' WHERE idExamen = :idExamen";
+            "UPDATE ExamenAptitud SET estado = 'Desaprobado' WHERE idExamen = :idExamen";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":idExamen", $idExamen);
         return $stmt->execute();

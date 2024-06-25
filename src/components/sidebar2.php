@@ -33,7 +33,7 @@ if (isset($_SESSION["correo"])) {
         <a href="/lostpaws/presentacion/misControles.php" class="block p-4">Mis Controles</a>
     <?php endif; ?>
 
-    <?php if ($estado_examen == "Rechazado" || $estado_examen == "Sin examen"): ?>
+    <?php if ($estado_examen == "Desaprobado" || $estado_examen == "Sin examen"): ?>
         <a href="#" id="crearExamenAptitud" class="block p-4">Examen Aptitud</a>
     <?php endif; ?>
 
