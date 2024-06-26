@@ -35,7 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verifica si la actualización fue exitosa
     if ($resultado) {
-        header("Location: /lostpaws/presentacion/landingPage.php");
+        echo "<script>
+                alert('Los datos se han modificado correctamente.');
+                window.location.href = '/lostpaws/presentacion/landingPage.php';
+              </script>";
         exit();
     } else {
         echo "Error al actualizar el perfil.";
