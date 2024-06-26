@@ -13,14 +13,8 @@ if (
 require_once "../datos/can.php";
 require_once "../datos/examenAptitud.php";
 
-
 $can = new Can();
 $listaDeCans = $can->listarCanes();
-
-$size = $_POST["dog-size"] ?? "";
-$sexo = $_POST["dog-sex"] ?? "";
-$edad_min = $_POST["dog-edad-min"] ?? "";
-$edad_max = $_POST["dog-edad-max"] ?? "";
 
 $examenAptitud = new ExamenAptitud();
 $examenUsuario = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"]);
@@ -36,6 +30,10 @@ require_once "../datos/adopcion.php";
 $adopcion = new Adopcion();
 $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
 
+$size = $_POST["dog-size"] ?? "";
+$sexo = $_POST["dog-sex"] ?? "";
+$edad_min = $_POST["dog-edad-min"] ?? "";
+$edad_max = $_POST["dog-edad-max"] ?? "";
 ?>
 
 <!DOCTYPE html>
@@ -102,9 +100,7 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
                                         data-img="<?php echo $perro["foto1"]; ?>"
                                         data-obsmed="<?php echo $perro["observacionesmedicas"]; ?>"
                                         data-datos="<?php echo $perro["genero"] . " - " . $perro["edad"] . " - " . $perro["tamano"]; ?>"
-                                        <?php if ($estadoExamen !== "Aprobado" || $num_adopciones > 0) {
-                                            echo "disabled";
-                                        } ?>
+                                        onclick="verDetallesHandler()"
                                     >
                                         Ver detalles
                                     </button>
@@ -281,27 +277,37 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
 <script>
     $(document).ready(function(){
         let idCan;
+
         $('.verDetalle').on('click', function(){
+            let estadoExamen = "<?php echo $estadoExamen; ?>";
 
             idCan = $(this).data('id');
             let img = $(this).data('img');
             let datos = $(this).data('datos');
             let observaciones = $(this).data('obsmed');
             let descripcion = $(this).data('descrip');
-            //ahora llenamos el modal
+
+            // Verificar el estado del examen
+            if (estadoExamen !== "Aprobado") {
+                alert("Necesitas aprobar el examen de aptitud para adoptar un can.");
+                return; // Salir de la función si el examen no está aprobado
+            }
+
+            // Llenar el modal con los datos del perro si el examen está aprobado
             $('#foto-can').attr('src', img);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);
             $('#myModal').removeClass('hidden');
+        });
 
-        })
         $('.enviarSolicitud').on('click', function(){
             // Obtener la idUsuario de la sesión
             let idUsuario = <?php echo $_SESSION["idUsuario"]; ?>;
             // Redireccionar a la página con idUsuario y idCan como parámetros
-            window.location.href = `../negocio/registrarSolicitud.php?idUsuario=${idUsuario}&idCan=${idCan}`;
+            window.location.href = '../negocio/registrarSolicitud.php?idUsuario=' + idUsuario + '&idCan=' + idCan;
         });
+
         $('.cancelButton').on('click', function(){
             $('#myModal').addClass('hidden');
             $('#formSolicitud').addClass('hidden');
@@ -312,11 +318,11 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
             $('#formSolicitud').removeClass('hidden');
         });
 
-        // esto es para el filtro de rango
+        // Función para actualizar las etiquetas de los sliders
         const setLabel = (lbl, val) => {
             const label = $(`#slider-${lbl}-label`);
             label.text(val);
-            const slider = $(`#slider-div .${lbl}-slider-handle`);
+            const slider = $(`.${lbl}-slider-handle`);
             const rect = slider[0].getBoundingClientRect();
             label.offset({
                 top: rect.top - 30,
@@ -324,6 +330,7 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
             });
         };
 
+        // Función para actualizar los valores de los sliders y etiquetas
         const setLabels = (values) => {
             $('#dog-edad-min').val(values[0]);
             $('#dog-edad-max').val(values[1]);
@@ -331,9 +338,12 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
             setLabel("max", values[1]);
         };
 
+        // Configurar el slider y actualizar etiquetas al deslizar
         $('#ex2').slider().on('slide', function(ev) {
             setLabels(ev.value);
         });
+
+        // Inicializar las etiquetas de los sliders con los valores actuales
         setLabels($('#ex2').attr("data-value").split(","));
     });
 </script>
