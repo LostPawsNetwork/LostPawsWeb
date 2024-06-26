@@ -5,8 +5,7 @@ require_once '../datos/usuario.php';
 
 $user = 'user';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") 
-{
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
     $passwd = $_POST['passwd'];
     $confirmPassword = $_POST['confirmPassword'];
@@ -17,22 +16,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $fechaNacimiento = $_POST['fechaNacimiento'];
     $tipoUsuario = $user;
 
-    if ($passwd !== $confirmPassword) 
-    {
+    if ($passwd !== $confirmPassword) {
         echo "Las contraseñas no coinciden.";
         exit();
     }
 
     $user = new Usuario();
     $registroExitoso = $user->registrarUsuario($correo, $passwd, $nombre, $apellido, $tipoDocumento, $nummeroDocumento, $fechaNacimiento, $tipoUsuario);
-    
-    if ($registroExitoso)
-    {
-        header("Location: ../presentacion/login.php");
+
+    if ($registroExitoso) {
+        $_SESSION["loggedin"] = true;
+        $_SESSION["correo"] = $correo;
+        $_SESSION["idUsuario"] = $user->obtenerIdUsuarioPorCorreo($correo);
+        $_SESSION["tipoUsuario"] = $tipoUsuario;
+        header("Location: ../presentacion/landingPage.php");
         exit();
-    } 
-    else 
-    {
+    } else {
         echo "Error al registrar el usuario.";
     }
 }

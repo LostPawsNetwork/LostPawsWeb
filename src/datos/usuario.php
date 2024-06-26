@@ -20,6 +20,19 @@ class Usuario
         $this->conn = getPDOConnection();
     }
 
+    public function obtenerIdUsuarioPorCorreo($correo) {
+        try {
+            $stmt = $this->conn->prepare("SELECT idusuario FROM usuario WHERE email = :correo");
+            $stmt->bindParam(':correo', $correo);
+            $stmt->execute();
+            $idUsuario = $stmt->fetchColumn();
+            return $idUsuario;
+        } catch (PDOException $e) {
+            echo "Error al obtener el ID del usuario: " . $e->getMessage();
+            return null;
+        }
+    }
+
     function validarUsuario($correo, $passwd)
     {
         $sql =
