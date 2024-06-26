@@ -32,6 +32,23 @@ class ExamenAptitud
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function verificarEstado($email)
+    {
+        $stmt = $this->conn->prepare(
+            "SELECT estado FROM examenaptitud WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = :email) LIMIT 1"
+        );
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($resultado) {
+            return $resultado["estado"];
+        } else {
+            return "Sin examen";
+        }
+    }
+    
+
     function aprobarExamenAptitud($idExamen)
     {
         $sql =
@@ -44,10 +61,19 @@ class ExamenAptitud
     function rechazarExamenAptitud($idExamen)
     {
         $sql =
-            "UPDATE ExamenAptitud SET estado = 'Rechazado' WHERE idExamen = :idExamen";
+            "UPDATE ExamenAptitud SET estado = 'Desaprobado' WHERE idExamen = :idExamen";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":idExamen", $idExamen);
         return $stmt->execute();
+    }
+
+    function obtenerExamenPorUsuario($idUsuario)
+    {
+        $sql = "SELECT estado FROM ExamenAptitud WHERE idUsuario = :idUsuario";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":idUsuario", $idUsuario);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     function getIdExamen()

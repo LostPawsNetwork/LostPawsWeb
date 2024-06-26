@@ -47,7 +47,8 @@ $solicitudes = $solicitud->listarSolicitudes();
         <div class="">
             <h1 class="text-3xl font-bold mb-6">Solicitudes</h1>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
+            <a href="https://docs.google.com/forms/d/1NVCjJMX96Nbc48Axl1c5gSrdz9c6I9LD-cyf8VOegpk/edit#response=ACYDBNgTtMvBHnrwMXZXQ_ioCTurUsX0hZfCzrMOQrDxP9aGZkjtkyq4yhGz8J4OPQ" class="text-blue-600 hover:underline" target="_blank">Ver respuestas</a>
+            <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
                     <thead class="bg-gray-200">
                         <tr>
                             <th class="py-2 px-4 border-b">ID Solicitud</th>
@@ -70,18 +71,23 @@ $solicitudes = $solicitud->listarSolicitudes();
                                 echo "<td class='py-2 px-4 border-b'>{$solicitud["idcan"]}</td>";
                                 ?>
                                 <td class="py-2 px-4 border-b">
-                                    <form action="../negocio/aceptarSolicitud.php" method="post" style="display: inline;">
-                                        <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
-                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
-                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
-                                        <button type="submit" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button>
-                                    </form>
-                                    <form action="../negocio/rechazarSolicitud.php" method="post" style="display: inline;">
-                                        <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
-                                        <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
-                                        <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
-                                        <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button>
-                                    </form>
+                                    <?php if ($solicitud["estado"] === 'Pendiente'): ?>
+                                        <form action="../negocio/aceptarSolicitud.php" method="post" style="display: inline;">
+                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
+                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
+                                            <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
+                                            <button type="submit" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button>
+                                        </form>
+                                        <form action="../negocio/rechazarSolicitud.php" method="post" style="display: inline;">
+                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
+                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
+                                            <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
+                                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <button disabled class="bg-gray-300 text-white p-2 rounded-md cursor-not-allowed">Aceptar</button>
+                                        <button disabled class="bg-gray-300 text-white p-2 rounded-md cursor-not-allowed">Rechazar</button>
+                                    <?php endif; ?>
                                 </td>
                                 </tr>
                             <?php

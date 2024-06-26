@@ -57,7 +57,6 @@ $listaDeCans = $can->listarCanes();
                 <button id="agregarCan" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Agregar Perro</button>
                 <a href="agregarPerro.php" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Agregar Perro</a>
                 <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
-
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <?php foreach ($listaDeCans as $can): ?>
@@ -99,8 +98,8 @@ $listaDeCans = $can->listarCanes();
                         <p class="text-gray-700"><strong>Descripción:</strong> <?php echo htmlspecialchars(
                             $can["descripcion"]
                         ); ?></p>
-                        <form action="editarCan.php" method="post">
-                            <input type="hidden" name="idCan" value="<?php echo $can[
+                        <form action="editarCan.php" method="get">
+                            <input type="hidden" name="idcan" value="<?php echo $can[
                                 "idcan"
                             ]; ?>">
                             <button type="submit" class="mt-4 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Editar</button>

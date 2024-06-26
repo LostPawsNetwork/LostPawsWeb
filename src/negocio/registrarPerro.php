@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
-|| ($_SESSION['tipoUsuario'] !== 'admin' && $_SESSION['tipoUsuario'] !== 'superadmin'))
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    ($_SESSION["tipoUsuario"] !== "admin" &&
+        $_SESSION["tipoUsuario"] !== "superadmin")
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 
 ob_start();
@@ -20,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $genero = $_POST["genero"];
     $observacionesMedicas = $_POST["observacionesMedicas"];
     $descripcion = $_POST["descripcion"];
-    $estado = $_POST["estado"];
+    $estado = "Por adoptar";
 
     // Manejar la subida de la imagen
     $target_dir = "../assets/images/canes/";
@@ -35,12 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uploadOk = 1;
     } else {
         $error = "El archivo no es una imagen.";
-        $uploadOk = 0;
-    }
-
-    // Comprobar si el archivo ya existe
-    if (file_exists($target_file)) {
-        $error = "Lo siento, el archivo ya existe.";
         $uploadOk = 0;
     }
 
@@ -87,11 +84,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             null,
             $estado
         );
-        header("Location: ../presentacion/dashboard.php");
+        echo "<script>
+            alert('El can se ha añadido con éxito.');
+            setTimeout(function() {
+                window.location.href = '../presentacion/gestionarCan.php';
+            }, 1000);
+        </script>";
         exit();
+    } else {
+        echo "<div class='bg-red-500 text-white p-4 mb-4 rounded'>$error</div>";
     }
 }
 
 ob_end_flush();
-
 ?>

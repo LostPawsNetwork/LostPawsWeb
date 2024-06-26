@@ -49,18 +49,38 @@ class Usuario
     function obtenerUsuario($correo)
     {
         $sql = "SELECT nombre, apellido FROM usuario WHERE email = :correo";
-    
+
         try {
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':correo', $correo);
+            $stmt->bindParam(":correo", $correo);
             $stmt->execute();
-    
+
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo "Error al obtener usuarios: " . $e->getMessage();
             return false;
         }
-    }    
+    }
+
+    function listarAdministradores()
+    {
+        $sql =
+            "SELECT idusuario, nombre, email FROM usuario WHERE tipoUsuario = :tipoUsuario";
+
+        $tipoUsuario = "admin";
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $tipoUsuario = "admin";
+            $stmt->bindParam(":tipoUsuario", $tipoUsuario);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener administradores: " . $e->getMessage();
+            return false;
+        }
+    }
 
     function obtenerToken($correo)
     {
@@ -114,24 +134,6 @@ class Usuario
 
         return $stmt->execute();
     }
-    function listarAdministradores()
-    {
-        $sql = "SELECT idusuario, nombre, email FROM usuario WHERE tipoUsuario = :tipoUsuario";
-
-        $tipoUsuario="admin";
-
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $tipoUsuario = 'admin';
-            $stmt->bindParam(':tipoUsuario', $tipoUsuario);
-            $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo "Error al obtener administradores: " . $e->getMessage();
-            return false;
-        }
-    }    
 
     function editarUsuario($idUsuario, $correo, $nombre, $apellido)
     {
@@ -147,16 +149,52 @@ class Usuario
         return $stmt->execute();
     }
 
-    //Falta terminar consulta
-    function listarUsuariosDesaprobados()
+    function obtenerTotalUsuarios()
     {
-        $sql =
-            "SELECT * FROM usuario INNER JOIN examenAptitud ON usuario.idUsuario = examenAptitud.idUsuario WHERE examenAptitud.estado = 'Desaprobado'";
-
+        $sql = "SELECT COUNT(*) as total FROM usuario";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["total"];
+    }
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    function obtenerUsuariosDesaprobados()
+    {
+        $sql = "SELECT COUNT(*) as desaprobados FROM usuario
+                INNER JOIN examenAptitud ON usuario.idUsuario = examenAptitud.idUsuario
+                WHERE examenAptitud.estado = 'Desaprobado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["desaprobados"];
+    }
+
+    function obtenerUsuariosAprobados()
+    {
+        $sql = "SELECT COUNT(*) as aprobados FROM usuario
+                INNER JOIN examenAptitud ON usuario.idUsuario = examenAptitud.idUsuario
+                WHERE examenAptitud.estado = 'Aprobado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["aprobados"];
+    }
+
+    function obtenerUsuariosRechazados()
+    {
+        $sql = "SELECT COUNT(*) as rechazados FROM usuario
+                INNER JOIN solicitud ON usuario.idUsuario = solicitud.idUsuario
+                WHERE solicitud.estado = 'Rechazado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["rechazados"];
+    }
+
+    function obtenerSolicitudesAprobadadas()
+    {
+        $sql = "SELECT COUNT(*) as aprobadas FROM usuario
+                INNER JOIN solicitud ON usuario.idUsuario = solicitud.idUsuario
+                WHERE solicitud.estado = 'Aprobado'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["aprobadas"];
     }
 
     function getIdUsuario()

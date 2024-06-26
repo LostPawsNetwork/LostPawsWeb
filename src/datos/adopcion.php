@@ -36,6 +36,15 @@ class Adopcion
         }
     }
 
+    public function verificarAdopcion($idUsuario)
+    {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS num_adopciones FROM adopcion WHERE idUsuario = :idUsuario");
+        $stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultado["num_adopciones"];
+    }
 
     public function obtenerAdopcion($idUsuario)
     {
