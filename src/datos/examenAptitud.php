@@ -49,7 +49,6 @@ class ExamenAptitud
         }
     }
     
-
     function aprobarExamenAptitud($idExamen)
     {
         $sql =

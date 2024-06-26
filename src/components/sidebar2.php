@@ -16,7 +16,6 @@ if (isset($_SESSION["correo"])) {
 
 } else {
     $num_adopciones = 0;
-    $estado_examen = "Nulo";
 }
 ?>
 
