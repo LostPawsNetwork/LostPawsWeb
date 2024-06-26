@@ -157,6 +157,14 @@ class Usuario
         return $stmt->fetch(PDO::FETCH_ASSOC)["total"];
     }
 
+    public function obtenerCorreoPorId($idUsuario) {
+        $stmt = $this->conn->prepare("SELECT email FROM usuario WHERE idusuario = :id");
+        $stmt->bindValue(':id', $idUsuario, PDO::PARAM_INT);
+        $stmt->execute();
+        $correo = $stmt->fetchColumn();
+        return $correo;
+    }
+
     function obtenerUsuariosDesaprobados()
     {
         $sql = "SELECT COUNT(*) as desaprobados FROM usuario
