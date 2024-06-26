@@ -12,11 +12,11 @@ if (isset($_SESSION["correo"])) {
     $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
     
     $examen = new ExamenAptitud();
-    $num_aprobados = $examen->verificarAprobado($_SESSION["correo"]);
+    $estado_examen = $examen->verificarEstado($_SESSION["correo"]);
 
 } else {
     $num_adopciones = 0;
-    $num_aprobados = 0;
+    $estado_examen = "Nulo";
 }
 ?>
 
@@ -33,31 +33,35 @@ if (isset($_SESSION["correo"])) {
         <a href="/lostpaws/presentacion/misControles.php" class="block p-4">Mis Controles</a>
     <?php endif; ?>
 
-    <?php if ($num_aprobados == 0): ?>
+    <?php if ($estado_examen == "Desaprobado" || $estado_examen == "Sin examen"): ?>
         <a href="#" id="crearExamenAptitud" class="block p-4">Examen Aptitud</a>
     <?php endif; ?>
 
     <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-4">Editar Perfil</a>
 </aside>
 
+<div id="aptitudModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-3/4 md:w-1/2 p-6 rounded-lg h-auto md:h-auto lg:h-3/4">
+        <h2 class="text-xl font-bold mb-4">Examen de Aptitud</h2>
+        <iframe src="https://forms.gle/gubJhn4UUnbt3gEf7" class="w-full h-96 mb-4"></iframe>
+        <form id="aptitudForm" action="/lostpaws/negocio/crearExamenAptitud.php" method="POST" class="flex justify-end space-x-2">
+            <button type="button" id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded">Cerrar</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enviar examen</button>
+        </form>
+    </div>
+</div>
+
 <script>
 document.getElementById("crearExamenAptitud").addEventListener("click", function(event) {
     event.preventDefault();
+    document.getElementById("aptitudModal").classList.remove("hidden");
+});
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/lostpaws/negocio/crearExamenAptitud.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+document.getElementById("closeModal").addEventListener("click", function() {
+    document.getElementById("aptitudModal").classList.add("hidden");
+});
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                alert(xhr.responseText);
-            } else {
-                alert(xhr.responseText + "Hubo un problema al crear el examen de aptitud.");
-            }
-        }
-    };
-
-    xhr.send();
+document.getElementById("submitExam").addEventListener("click", function() {
+    window.location.href = '/lostpaws/negocio/crearExamenAptitud.php';
 });
 </script>

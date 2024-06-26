@@ -47,7 +47,8 @@ $solicitudes = $solicitud->listarSolicitudes();
         <div class="">
             <h1 class="text-3xl font-bold mb-6">Solicitudes</h1>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
+            <a href="https://docs.google.com/forms/d/1NVCjJMX96Nbc48Axl1c5gSrdz9c6I9LD-cyf8VOegpk/edit#response=ACYDBNgTtMvBHnrwMXZXQ_ioCTurUsX0hZfCzrMOQrDxP9aGZkjtkyq4yhGz8J4OPQ" class="text-blue-600 hover:underline" target="_blank">Ver respuestas</a>
+            <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
                     <thead class="bg-gray-200">
                         <tr>
                             <th class="py-2 px-4 border-b">ID Solicitud</th>

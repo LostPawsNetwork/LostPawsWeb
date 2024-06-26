@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $examenAptitud->registrarExamenAptitud($estado, $idUsuario);
 
         if ($result) {
-            echo "Examen de aptitud creado exitosamente.";
+            header("Location: ../presentacion/landingPage.php");
         } else {
             echo "Error al crear el examen de aptitud.";
         }
