@@ -55,13 +55,34 @@
                     </a>
                 </section>
 
-                <!-- Nosotros -->
-                <section id="nosotros" class="py-10 bg-gray-100">
-                    <div class="container mx-auto text-center mt-16 mb-16">
-                        <h2 class="text-3xl font-bold mb-4">Conoce a nuestro equipo</h2>
-                        <p class="text-gray-700">Un equipo profesional y dedicado a cuidar de tus mascotas.</p>
-                    </div>
-                </section>
+<!-- Nosotros -->
+<!-- Nosotros -->
+<section id="nosotros" class="py-10 bg-gray-100">
+    <div class="container mx-auto text-center mt-16 mb-16">
+        <h2 class="text-3xl font-bold mb-4">Conoce a nuestro equipo</h2>
+        <p class="text-gray-700 mb-8">Un equipo profesional y dedicado a cuidar de tus mascotas.</p>
+        <div class="flex justify-center gap-6">
+            <div class="w-full sm:w-1/2 md:w-1/3 p-2 flex flex-col items-center  border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform transition duration-500 hover:scale-105">
+                <img src="assets/images/medico1.jpg" alt="Medico 1" class="w-48 h-48 object-cover rounded-lg">
+                <h3 class="text-xl font-bold mt-4">Dr. Guillermo Franco</h3>
+                <p class="text-gray-700">Cirugía General</p>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/3 p-2 flex flex-col items-center  border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform transition duration-500 hover:scale-105">
+                <img src="assets/images/medico2.jpg" alt="Medico 2" class="w-48 h-48 object-cover rounded-lg">
+                <h3 class="text-xl font-bold mt-4">Dra. Leticia Vargas </h3>
+                <p class="text-gray-700">Medicina General</p>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/3 p-2 flex flex-col items-center  border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform transition duration-500 hover:scale-105">
+                <img src="assets/images/medico3.jpg" alt="Medico 3" class="w-48 h-48 object-cover rounded-lg">
+                <h3 class="text-xl font-bold mt-4">Dra. Giuliana Lira</h3>
+                <p class="text-gray-700">Estética Canina</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 
                 <!-- Sección de Sedes -->
                 <section id="sedes" class="py-10 bg-white">
