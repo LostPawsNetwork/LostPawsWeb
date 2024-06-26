@@ -1,5 +1,4 @@
 <?php
-
 $categorias = [
     "chihuahua" => "Chihuahua",
     "japanese_spaniel" => "Spaniel Japonés",
@@ -125,6 +124,8 @@ $categorias = [
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    header("Content-Type: application/json");
+
     if (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0) {
         $fileTmpPath = $_FILES["file"]["tmp_name"];
         $fileName = $_FILES["file"]["name"];
@@ -135,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $allowedfileExtensions = ["jpg", "jpeg", "png"];
         if (in_array($fileExtension, $allowedfileExtensions)) {
-            $uploadFileDir = "uploads/";
+            $uploadFileDir = "../assets/images/canes/";
             $dest_path = $uploadFileDir . $fileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
@@ -159,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $response = curl_exec($ch);
                 if (curl_errno($ch)) {
-                    echo "Error:" . curl_error($ch);
+                    echo json_encode(["error" => curl_error($ch)]);
                 }
                 curl_close($ch);
 
@@ -175,26 +176,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                     }
                     if ($bestResult) {
-                        echo "<h2>Resultado de la clasificación:</h2>";
-                        echo "<p>La raza más probable es: <strong>" .
-                            htmlspecialchars(
-                                $categorias[$bestResult["label"]]
-                            ) .
-                            "</strong></p>";
+                        echo json_encode([
+                            "raza" => $categorias[$bestResult["label"]],
+                        ]);
                     } else {
-                        echo "<p>No se pudo determinar la raza.</p>";
+                        echo json_encode([
+                            "error" => "No se pudo determinar la raza.",
+                        ]);
                     }
                 } else {
-                    echo "<p>Error al procesar la respuesta de la API.</p>";
+                    echo json_encode([
+                        "error" => "Error al procesar la respuesta de la API.",
+                    ]);
                 }
             } else {
-                echo "Error al mover el archivo subido";
+                echo json_encode([
+                    "error" => "Error al mover el archivo subido",
+                ]);
             }
         } else {
-            echo "Tipo de archivo no permitido. Solo se permiten archivos JPG, JPEG y PNG.";
+            echo json_encode([
+                "error" =>
+                    "Tipo de archivo no permitido. Solo se permiten archivos JPG, JPEG y PNG.",
+            ]);
         }
     } else {
-        echo "Error al subir el archivo";
+        echo json_encode(["error" => "Error al subir el archivo"]);
     }
 }
-?>

@@ -4,23 +4,22 @@ if (isset($_SESSION["correo"])) {
     $usuario_email = $_SESSION["correo"];
 
     require_once "../config/neon.php";
+    require_once "../datos/adopcion.php";
+    require_once "../datos/examenAptitud.php";
 
     $conn = getPDOConnection();
 
-    $stmt = $conn->prepare(
-        "SELECT COUNT(*) AS num_adopciones FROM adopcion WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = :email)"
-    );
-    $stmt->bindParam(":email", $usuario_email);
-    $stmt->execute();
-    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    $adopcion = new Adopcion();
+    $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
+    
+    $examen = new ExamenAptitud();
+    $estado_examen = $examen->verificarEstado($_SESSION["correo"]);
 
-    $num_adopciones = $resultado["num_adopciones"];
-
-    $stmt->closeCursor();
-    $conn = null;
 } else {
     $num_adopciones = 0;
-} ?>
+    $estado_examen = "Nulo";
+}
+?>
 
 <aside id="menu" class="fixed inset-y-0 left-0 transform -translate-x-full bg-blue-800 text-white w-64 overflow-auto transition-transform duration-300 ease-in-out mt-20">
     <a href="/lostpaws/presentacion/visualizarCanes.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Adopta</a>
@@ -35,28 +34,32 @@ if (isset($_SESSION["correo"])) {
         <a href="/lostpaws/presentacion/misControles.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Mis Controles</a>
     <?php endif; ?>
 
-    <a href="#" id="crearExamenAptitud" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Examen Aptitud</a>
-    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Editar Perfil</a>
+    <a href="#" id="crearExamenAptitud" class="block p-4">Examen Aptitud</a>
+    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-4">Editar Perfil</a>
 </aside>
+
+<div id="aptitudModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-3/4 md:w-1/2 p-6 rounded-lg h-auto md:h-auto lg:h-3/4">
+        <h2 class="text-xl font-bold mb-4">Examen de Aptitud</h2>
+        <iframe src="https://forms.gle/gubJhn4UUnbt3gEf7" class="w-full h-96 mb-4"></iframe>
+        <form id="aptitudForm" action="/lostpaws/negocio/crearExamenAptitud.php" method="POST" class="flex justify-end space-x-2">
+            <button type="button" id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded">Cerrar</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enviar examen</button>
+        </form>
+    </div>
+</div>
 
 <script>
 document.getElementById("crearExamenAptitud").addEventListener("click", function(event) {
     event.preventDefault();
+    document.getElementById("aptitudModal").classList.remove("hidden");
+});
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/lostpaws/negocio/crearExamenAptitud.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+document.getElementById("closeModal").addEventListener("click", function() {
+    document.getElementById("aptitudModal").classList.add("hidden");
+});
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                alert(xhr.responseText);
-            } else {
-                alert(xhr.responseText + "Hubo un problema al crear el examen de aptitud.");
-            }
-        }
-    };
-
-    xhr.send();
+document.getElementById("submitExam").addEventListener("click", function() {
+    window.location.href = '/lostpaws/negocio/crearExamenAptitud.php';
 });
 </script>

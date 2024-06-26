@@ -74,6 +74,7 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
 <body>
 
 <?php include "../components/header2.html"; ?>
+<?php include "../components/sidebar2.php"; ?>
 <br>
 <br>
     <div class="form-container">

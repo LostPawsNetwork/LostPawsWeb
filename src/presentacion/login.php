@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body class="bg-black h-screen font-sans relative overflow-hidden">
-    
+
     <?php
     session_start();
 
@@ -50,9 +50,9 @@
                     </div>
 
                     <div class="flex flex-col items-center space-y-4">
-                        <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Ingresar</button>
-                        <a href="registroUsuario.php" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Registrarse</a>
-                        <a href="recuperarPassword.php" class="text-green-600 hover:underline">¿Has olvidado tu contraseña?</a>
+                        <button type="submit" class="bg-blue-400 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-500">Ingresar</button>
+                        <a href="registroUsuario.php" class="text-center bg-teal-500	 text-white w-full sm:w-40 p-2 rounded-md hover:bg-teal-600">Registrarse</a>
+                        <a href="recuperarPassword.php" class="text-teal-500 hover:underline">¿Has olvidado tu contraseña?</a>
                     </div>
                 </form>
             </div>

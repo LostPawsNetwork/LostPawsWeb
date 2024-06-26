@@ -1,10 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['tipoUsuario'] !== 'user') 
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    $_SESSION["tipoUsuario"] !== "user"
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 ?>
 
@@ -30,11 +33,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
                 <div class="w-4/5 max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center">
                     <h1 class="text-2xl font-bold mb-4">Gracias por donar</h1>
                     <div class="flex justify-center">
-                    <img src="../assets/images/qr.png" alt="QR" style="width: 250px;">
+                        <img src="../assets/images/qr.png" alt="QR" style="width: 250px;">
                     </div>
                     <div class="pl-3 pr-2 text-center">
                         <fieldset>
-                            <form action="" method="post" target="_self">
+                            <form action="../negocio/crearDonacion.php" method="post" enctype="multipart/form-data">
                                 <div>
                                     <br>
                                     <label>Ingresar monto:</label>

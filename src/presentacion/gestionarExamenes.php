@@ -64,7 +64,7 @@ $examenes = $examenAptitud->obtenerExamenesAptitud();
             <div class="">
                 <h1 class="text-3xl font-bold mb-6">Exámenes</h1>
                 <div class="overflow-x-auto">
-                    <a href='https://docs.google.com/forms/d/1NVCjJMX96Nbc48Axl1c5gSrdz9c6I9LD-cyf8VOegpk/edit#response=ACYDBNgTtMvBHnrwMXZXQ_ioCTurUsX0hZfCzrMOQrDxP9aGZkjtkyq4yhGz8J4OPQ' class='text-blue-600 hover:underline'>Ver respuestas</a>
+                <a href="https://docs.google.com/forms/d/14hm1OzFjjb7r6ol2VSea5h8c9fWQHjI0_D8rv2a8hdc/edit#response=ACYDBNh21KQVFfxu9cXFhjdG8VlTZQ-kz2LL8XMczl9W9oqPo6iJwTDXaRwLDEvhyA" class="text-blue-600 hover:underline" target="_blank">Ver respuestas</a>
                     <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
                         <thead class="bg-gray-200">
                             <tr>

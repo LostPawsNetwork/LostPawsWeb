@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_SESSION["idUsuario"])) {
-        $estado = "pendiente";
+        $estado = "Pendiente";
         $idUsuario = $_SESSION["idUsuario"];
         require_once "../datos/examenAptitud.php";
 
@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $examenAptitud->registrarExamenAptitud($estado, $idUsuario);
 
         if ($result) {
-            echo "Examen de aptitud creado exitosamente.";
+            header("Location: ../presentacion/landingPage.php");
         } else {
             echo "Error al crear el examen de aptitud.";
         }

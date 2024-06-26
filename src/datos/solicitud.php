@@ -32,8 +32,8 @@ class Solicitud
     function registrarSolicitud($idUsuario, $idCan) 
     {
         try {
-            $estado = 'En revisión';
-            $link = 'NULL'; // Suponiendo que el link puede ser nulo
+            $estado = 'Pendiente';
+            $link = 'NULL';
             $sql = "INSERT INTO solicitud (idUsuario, idCan, estado, link) VALUES (:idUsuario, :idCan, :estado, :link)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':idUsuario', $idUsuario);

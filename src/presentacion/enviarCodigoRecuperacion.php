@@ -1,8 +1,21 @@
 <?php
+require_once "../config/neon.php";
+require_once "../datos/usuario.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST["correo"];
-    $command = escapeshellcmd("python3 ../utils/correo.py $correo");
+    $usuario = new Usuario();
 
+    // Verificar si el correo está registrado
+    $resultado = $usuario->obtenerUsuario($correo);
+
+    if (empty($resultado)) {
+        // Redirigir con un mensaje de error si el correo no está registrado
+        header("Location: recuperarPassword.php?error=correo_no_registrado");
+        exit();
+    }
+
+    $command = escapeshellcmd("python3 ../utils/correo.py $correo");
     $output = shell_exec($command . " 2>&1");
 
     if ($output !== null) {
@@ -11,7 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $codigoEnviado = false;
     }
-} ?>
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body class="bg-gray-100 h-screen font-sans">
-
     <div class="container mx-auto p-4">
         <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
             <h1 class="text-2xl font-bold mb-4">Enviar Código de Recuperación</h1>
@@ -57,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="recuperarPassword.php" class="text-blue-600 hover:underline">Volver</a>
         </div>
     </div>
-
 </body>
 
 </html>
