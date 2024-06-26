@@ -29,7 +29,8 @@ class Donacion
 
     function listarDonaciones()
     {
-        $sql = "SELECT * FROM Donacion";
+        $sql =
+            "SELECT * FROM Donacion INNER JOIN Usuario ON Donacion.idusuario = Usuario.idusuario";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

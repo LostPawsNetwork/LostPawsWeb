@@ -82,7 +82,7 @@ $examenes = $examenAptitud->obtenerExamenesAptitud();
                                                     ) {
                                                         echo "<tr>";
                                                         echo "<td class='py-2 px-4 border-b'>{$examen["idexamen"]}</td>";
-                                                        echo "<td class='py-2 px-4 border-b'>{$examen["idusuario"]}</td>";
+                                                        echo "<td class='py-2 px-4 border-b'>{$examen["nombre"]}</td>";
                                                         echo "<td class='py-2 px-4 border-b'>{$examen["estado"]}</td>";
                                                         echo "<td class='py-2 px-4 border-b'>";
                                                         if (

@@ -13,84 +13,163 @@ if (
 ?>
 
 <!doctype html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Panel de Administración - LostPaws</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Muli", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      background-color: #f3f4f6;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90vw;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .panel-container {
+      display: flex;
+      width: 100%;
+    }
+
+    .panel {
+      background-size: auto 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 80vh;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      flex: 0.5;
+      margin: 10px;
+      position: relative;
+      transition: flex 0.7s ease-in;
+      -webkit-transition: all 700ms ease-in;
+    }
+
+    .panel h3 {
+      font-size: 24px;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      margin: 0;
+      opacity: 0;
+    }
+
+    .panel.active {
+      flex: 5;
+    }
+
+    .panel.active h3 {
+      opacity: 1;
+      transition: opacity 0.3s ease-in 0.4s;
+    }
+
+    @media (max-width: 480px) {
+      .panel-container {
+        flex-direction: column;
+      }
+
+      .panel:nth-of-type(4),
+      .panel:nth-of-type(5) {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100">
+<body>
 
-    <div class='flex'>
-        <?php include "../components/header3.html"; ?>
-
-        <div class="flex-1">
-            <!-- Contenido principal de la página -->
-            <div id="main-content" class='flex min-h-screen p-4 mt-20 text-center'>
-                <div class="container mx-auto p-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-                        <a href="gestionarCan.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                Gestionar Can
-                            </div>
-                        </div></a>
-                        <a href="gestionarSolicitudUsuario.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <button type="submit">Gestionar Solicitudes</button>
-                            </div>
-                        </div></a>
-                        <a href="gestionarExamenes.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <button type="submit">Gestionar Exámenes</button>
-                            </div>
-                        </div></a>
-                        <a href="gestionarControl.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <button type="submit">Gestionar Controles</button>
-                            </div>
-                        </div></a>
-                        <a href="gestionarTestimonios.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                            <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                <button type="submit">Gestionar Testimonios</button>
-                            </div>
-                        </div></a>
-                        <a href="reportes.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                    <button type="submit">Reportes </button>
-                                </div>
-                        </div></a>
-
-                        <a href="gestionarContacto.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                    <button type="submit">Solicitudes de Contacto</button>
-                                </div>
-                        </div></a>
-
-                        <?php if (
-                            $_SESSION["tipoUsuario"] === "superadmin"
-                        ) { ?>
-                            <a href="gestionarAdministradores.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                    <button type="submit">Gestionar Administradores</button>
-                                </div>
-                            </div></a>
-                            <a href="reporteDonaciones.php"><div class="bg-blue-500 hover:bg-blue-600 p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
-                                <div class="bg-white text-black font-bold py-2 px-4 rounded">
-                                    <button type="submit">Reporte Donaciones</button>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <h1>Panel de Administrador</h1>
+    <div class="panel-container">
+      <div class="panel active" style="background-image: url('../assets/images/canes/bella.jpg');">
+        <a href="gestionarCan.php">
+          <h3>Gestionar Can</h3>
+        </a>
+      </div>
+      <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+        <a href="gestionarSolicitudUsuario.php">
+          <h3>Gestionar Solicitudes</h3>
+        </a>
+      </div>
+      <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+        <a href="gestionarExamenes.php">
+          <h3>Gestionar Exámenes</h3>
+        </a>
+      </div>
+      <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+        <a href="gestionarControl.php">
+          <h3>Gestionar Controles</h3>
+        </a>
+      </div>
+      <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+        <a href="gestionarTestimonios.php">
+          <h3>Gestionar Testimonios</h3>
+        </a>
+      </div>
+      <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+        <a href="reportes.php">
+          <h3>Reportes</h3>
+        </a>
+      </div>
+      <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+        <a href="gestionarContacto.php">
+          <h3>Solicitudes de Contacto</h3>
+        </a>
+      </div>
+      <?php if ($_SESSION["tipoUsuario"] === "superadmin") { ?>
+        <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+          <a href="gestionarAdministradores.php">
+            <h3>Gestionar Administradores</h3>
+          </a>
         </div>
+        <div class="panel" style="background-image: url('../assets/images/canes/bella.jpg');">
+          <a href="reporteDonaciones.php">
+            <h3>Reporte Donaciones</h3>
+          </a>
+        </div>
+      <?php } ?>
     </div>
+  </div>
 
-    <?php include "../components/footer.html"; ?>
+  <script>
+    const panels = document.querySelectorAll(".panel");
 
-    <script src="../scripts/dynamic.js"></script>
+    panels.forEach((panel) => {
+      panel.addEventListener("click", () => {
+        removeActiveClasses();
+        panel.classList.add("active");
+      });
+    });
+
+    function removeActiveClasses() {
+      panels.forEach((panel) => {
+        panel.classList.remove("active");
+      });
+    }
+  </script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="../scripts/map.js"></script>
 </body>
