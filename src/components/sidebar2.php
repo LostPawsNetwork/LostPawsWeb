@@ -34,8 +34,8 @@ if (isset($_SESSION["correo"])) {
         <a href="/lostpaws/presentacion/misControles.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Mis Controles</a>
     <?php endif; ?>
 
-    <a href="#" id="crearExamenAptitud" class="block p-4">Examen Aptitud</a>
-    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-4">Editar Perfil</a>
+    <a href="#" id="crearExamenAptitud" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Examen Aptitud</a>
+    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Editar Perfil</a>
 </aside>
 
 <div id="aptitudModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
