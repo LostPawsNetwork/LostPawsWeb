@@ -20,6 +20,19 @@ class Usuario
         $this->conn = getPDOConnection();
     }
 
+    public function obtenerIdUsuarioPorCorreo($correo) {
+        try {
+            $stmt = $this->conn->prepare("SELECT idusuario FROM usuario WHERE email = :correo");
+            $stmt->bindParam(':correo', $correo);
+            $stmt->execute();
+            $idUsuario = $stmt->fetchColumn();
+            return $idUsuario;
+        } catch (PDOException $e) {
+            echo "Error al obtener el ID del usuario: " . $e->getMessage();
+            return null;
+        }
+    }
+
     function validarUsuario($correo, $passwd)
     {
         $sql =
@@ -155,6 +168,14 @@ class Usuario
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)["total"];
+    }
+
+    public function obtenerCorreoPorId($idUsuario) {
+        $stmt = $this->conn->prepare("SELECT email FROM usuario WHERE idusuario = :id");
+        $stmt->bindValue(':id', $idUsuario, PDO::PARAM_INT);
+        $stmt->execute();
+        $correo = $stmt->fetchColumn();
+        return $correo;
     }
 
     function obtenerUsuariosDesaprobados()

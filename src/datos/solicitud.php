@@ -15,6 +15,18 @@ class Solicitud
         $this->conn = getPDOConnection();
     }
 
+    public function obtenerIdUsuarioPorSolicitud($idSolicitud) {
+        try {
+            $stmt = $this->conn->prepare("SELECT idusuario FROM solicitud WHERE idsolicitud = :idSolicitud");
+            $stmt->bindValue(':idSolicitud', $idSolicitud, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
+
     function listarSolicitudes() 
     {
         $sql = "SELECT * FROM solicitud";

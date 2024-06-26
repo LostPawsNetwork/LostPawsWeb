@@ -22,6 +22,19 @@ $solicitud = new Solicitud();
 $resultado = $solicitud->registrarSolicitud($idUsuario, $idCan);
 
 if ($resultado) {
+    // Obtener el correo electrónico del usuario
+    require_once '../datos/usuario.php';
+    $usuario = new Usuario();
+    $correoUsuario = $usuario->obtenerCorreoPorId($idUsuario);
+
+    if ($correoUsuario !== null) {
+        // Llamar al script de Python para enviar el correo
+        $command = escapeshellcmd("python3 ../utils/adopcionRevision.py $correoUsuario");
+        shell_exec($command);
+    } else {
+        echo "ERROR: No se pudo obtener el correo del usuario.";
+    }
+
     // Redirigir a landingPage.php si la solicitud se registra correctamente
     header("Location: /lostpaws/presentacion/landingPage.php");
     exit;

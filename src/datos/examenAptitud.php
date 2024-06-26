@@ -13,6 +13,7 @@ class ExamenAptitud
     {
         $this->conn = getPDOConnection();
     }
+    
     // cambiar link al de la aplicacion despues
     function registrarExamenAptitud($estado, $idUsuario)
     {
@@ -58,6 +59,13 @@ class ExamenAptitud
         return $stmt->execute();
     }
 
+    public function obtenerIdUsuarioPorExamen($idexamen) {
+        $stmt = $this->conn->prepare("SELECT idusuario FROM examenaptitud WHERE idexamen = :idexamen");
+        $stmt->bindValue(':idexamen', $idexamen, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
     function rechazarExamenAptitud($idExamen)
     {
         $sql =
