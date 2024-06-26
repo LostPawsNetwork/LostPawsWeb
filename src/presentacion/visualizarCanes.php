@@ -14,7 +14,7 @@ require_once "../datos/can.php";
 require_once "../datos/examenAptitud.php";
 
 $can = new Can();
-$listaDeCans = $can->listarCanes();
+$listaDeCans = $can->listarCanesPorAdoptar();
 
 $examenAptitud = new ExamenAptitud();
 $examenUsuario = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"]);

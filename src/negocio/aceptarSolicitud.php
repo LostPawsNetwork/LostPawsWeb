@@ -4,6 +4,7 @@ require_once '../datos/adopcion.php';
 require_once '../datos/control.php';
 require_once '../datos/solicitud.php';
 require_once '../datos/usuario.php';
+require_once '../datos/can.php'; // Importa la clase Can y su método actualizarCan()
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idUsuario = $_POST['id_usuario'];
@@ -33,8 +34,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $idAdopcion = $adopcion->registrarAdopcion($idUsuario, $idCan);
 
                 if ($idAdopcion !== null) {
-                    $control = new Control();
-                    $control->habilitarControles($idAdopcion);
+                    // Paso 4: Actualizar el estado del can a "Adoptado"
+                    $can = new Can();
+                    $canActualizado = $can->actualizarCan($idCan, 'Adoptado');
+
+                    if ($canActualizado) {
+                        // Habilitar controles para la adopción
+                        $control = new Control();
+                        $control->habilitarControles($idAdopcion);
+                    } else {
+                        echo "ERROR: No se pudo actualizar el estado del can.";
+                    }
                 } else {
                     echo "ERROR: Adopción NULL.";
                 }
