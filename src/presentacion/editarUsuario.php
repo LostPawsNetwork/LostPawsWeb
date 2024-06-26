@@ -32,26 +32,15 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
     <title>Editar Perfil de Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-         body {
+        body {
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; 
             align-items: flex-start;
             min-height: 100vh;
             position: relative;
-        }
-
-        #video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: blur(10px);
         }
 
         .form-container {
@@ -61,24 +50,30 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
-            margin-top:270px; /* Asegura que el formulario no se superponga con el encabezado */
+            margin-top: 270px; 
             z-index: 1;
+            margin-left: 560px; 
+            margin-right: 2000px; 
         }
 
         .header {
             width: 100%;
             z-index: 2;
+            align-items: center;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100">
+    <div class='flex '>
 
-<?php include "../components/header2.html"; ?>
-<?php include "../components/sidebar2.php"; ?>
-<br>
-<br>
-    <div class="form-container">
-        <h2 class="text-2xl font-bold mb-6 text-center">Editar Perfil de Usuario</h2>
+        <?php include "../components/header2.html"; ?>
+
+        <div class="flex-1 ">
+
+            <?php include "../components/sidebar2.php"; ?>
+
+        <div class="form-container">
+            <h2 class="text-2xl font-bold mb-6 text-center">Editar Perfil de Usuario</h2>
         <form action="../negocio/procesarEditarUsuario.php" method="post" class="space-y-4">
             <div>
                 <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico:</label>
@@ -106,6 +101,10 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
             </div>
         </form>
     </div>
+        </div>
+    </div>
 
+    <?php include "../components/footer.html"; ?>
+    <script src="../scripts/dynamic.js"></script>
 </body>
 </html>
