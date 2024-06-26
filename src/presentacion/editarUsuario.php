@@ -32,14 +32,13 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
     <title>Editar Perfil de Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            background-color: #f0f0f0; 
+         body {
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
-            overflow: hidden; 
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
             position: relative;
         }
@@ -52,25 +51,32 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
             height: 100%;
             object-fit: cover;
             z-index: -1;
-            filter: blur(10px); 
+            filter: blur(10px);
+        }
 
         .form-container {
-            background-color: rgba(255, 255, 255, 0.8); 
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px; 
+            max-width: 400px;
             width: 100%;
-            z-index: 1; 
+            margin-top:270px; /* Asegura que el formulario no se superponga con el encabezado */
+            z-index: 1;
+        }
+
+        .header {
+            width: 100%;
+            z-index: 2;
         }
     </style>
 </head>
 <body>
 
-
-    <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-    <div class="form-container ">
+<?php include "../components/header3.html"; ?>
+<br>
+<br>
+    <div class="form-container">
         <h2 class="text-2xl font-bold mb-6 text-center">Editar Perfil de Usuario</h2>
         <form action="../negocio/procesarEditarUsuario.php" method="post" class="space-y-4">
             <div>
@@ -99,5 +105,6 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
             </div>
         </form>
     </div>
+
 </body>
 </html>
