@@ -28,11 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     
     if ($registroExitoso)
     {
-        $_SESSION['loggedin'] = true;
-        $_SESSION['correo'] = $correo;
-        $_SESSION['tipoUsuario'] = "user";
-
-        header("Location: ../presentacion/landingPage.php");
+        header("Location: ../presentacion/login.php");
         exit();
     } 
     else 
