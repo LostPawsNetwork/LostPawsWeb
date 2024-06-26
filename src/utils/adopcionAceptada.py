@@ -12,17 +12,14 @@ email_sender = 'lostpaws7@gmail.com'
 email_password = os.getenv('EMAIL_PASSWORD')
 email_receiver = sys.argv[1]
 
-print(f"Email sender: {email_sender}")
-print(f"Email receiver: {email_receiver}")
-
 # Enviar el correo electrónico
-subject = 'Solicitud de Adopción Aceptada'
+subject = 'Adopción Aceptada en Lost Paws'
 body = """
-¡Felicidades!
+Hola,
 
-Nos complace informarte que tu solicitud de adopción ha sido aceptada. Pronto te contactaremos para los siguientes pasos.
+¡Felicidades! Tu solicitud de adopción ha sido aceptada. Pronto recibirás más información sobre los siguientes pasos.
 
-Gracias por tu interés en adoptar con Lost Paws.
+Gracias por adoptar con nosotros.
 """
 
 em = EmailMessage()

@@ -16,11 +16,11 @@ print(f"Email sender: {email_sender}")
 print(f"Email receiver: {email_receiver}")
 
 # Enviar el correo electrónico
-subject = 'Solicitud de Adopción en Revisión'
+subject = 'Revisión de Solicitud de Adopción'
 body = """
 Hola,
 
-Tu solicitud de adopción está actualmente en revisión. Te notificaremos una vez que tengamos una decisión final.
+Tu solicitud de adopción ha sido recibida y está en proceso de revisión. Te notificaremos cuando haya alguna novedad.
 
 Gracias por tu paciencia.
 """

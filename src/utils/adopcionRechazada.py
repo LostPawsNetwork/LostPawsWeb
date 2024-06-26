@@ -18,11 +18,11 @@ print(f"Email receiver: {email_receiver}")
 # Enviar el correo electrónico
 subject = 'Solicitud de Adopción Rechazada'
 body = """
-Lo sentimos.
+Hola,
 
-Lamentablemente, tu solicitud de adopción ha sido rechazada. Agradecemos tu interés en adoptar con Lost Paws.
+Lamentamos informarte que tu solicitud de adopción ha sido rechazada. Por favor, contacta con nosotros para más detalles.
 
-Si tienes alguna pregunta, no dudes en contactarnos.
+Gracias por tu comprensión.
 """
 
 em = EmailMessage()
