@@ -47,41 +47,63 @@ $solicitudes = $solicitud->listarSolicitudes();
         <div class="">
             <h1 class="text-3xl font-bold mb-6">Solicitudes</h1>
             <div class="overflow-x-auto">
-            <a href="https://docs.google.com/forms/d/1NVCjJMX96Nbc48Axl1c5gSrdz9c6I9LD-cyf8VOegpk/edit#response=ACYDBNgTtMvBHnrwMXZXQ_ioCTurUsX0hZfCzrMOQrDxP9aGZkjtkyq4yhGz8J4OPQ" class="text-blue-600 hover:underline" target="_blank">Ver respuestas</a>
-            <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
+                <a href="https://docs.google.com/forms/d/1NVCjJMX96Nbc48Axl1c5gSrdz9c6I9LD-cyf8VOegpk/edit#response=ACYDBNgTtMvBHnrwMXZXQ_ioCTurUsX0hZfCzrMOQrDxP9aGZkjtkyq4yhGz8J4OPQ" class="text-blue-600 hover:underline" target="_blank">Ver respuestas</a>
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
                     <thead class="bg-gray-200">
                         <tr>
                             <th class="py-2 px-4 border-b">ID Solicitud</th>
+                            <th class="py-2 px-4 border-b">Usuario</th>
+                            <th class="py-2 px-4 border-b">Correo</th>
+                            <th class="py-2 px-4 border-b">Can solicitado</th>
                             <th class="py-2 px-4 border-b">Estado</th>
-                            <th class="py-2 px-4 border-b">Link</th>
-                            <th class="py-2 px-4 border-b">ID Usuario</th>
-                            <th class="py-2 px-4 border-b">ID Can</th>
                             <th class="py-2 px-4 border-b">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         if ($solicitudes) {
-                            foreach ($solicitudes as $solicitud) {
+                            foreach ($solicitudes as $solicitudAdopcion) {
+                                // Obtener datos del usuario y el can
+                                $usuario = "No disponible";
+                                $email = "No disponible";
+                                $can = "No disponible";
+
+                                // Verificar y obtener los detalles del usuario y del can
+                                if ($solicitudAdopcion["idusuario"]) {
+                                    $usuarioDetails = $solicitud->getUsuarioById($solicitudAdopcion['idusuario']);
+                                    if ($usuarioDetails) {
+                                        $usuario = $usuarioDetails['nombre'];
+                                        $email = $usuarioDetails['email'];
+                                    }
+                                }
+                                
+                                if ($solicitudAdopcion["idcan"]) {
+                                    $canDetails = $solicitud->getCanById($solicitudAdopcion['idcan']);
+                                    if ($canDetails) {
+                                        $can = $canDetails['nombre'];
+                                    }
+                                }
+
+                                // Imprimir fila de la tabla con los datos obtenidos
                                 echo "<tr>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["idsolicitud"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["estado"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'><a href='{$solicitud["link"]}' class='text-blue-600 hover:underline'>Ver Solicitud</a></td>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["idusuario"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$solicitud["idcan"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$solicitudAdopcion["idsolicitud"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$usuario}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$email}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$can}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$solicitudAdopcion["estado"]}</td>";
                                 ?>
                                 <td class="py-2 px-4 border-b">
-                                    <?php if ($solicitud["estado"] === 'Pendiente'): ?>
+                                    <?php if ($solicitudAdopcion["estado"] === 'Pendiente'): ?>
                                         <form action="../negocio/aceptarSolicitud.php" method="post" style="display: inline;">
-                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
-                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
-                                            <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
+                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitudAdopcion['idsolicitud']; ?>">
+                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitudAdopcion['idusuario']; ?>">
+                                            <input type="hidden" name="id_can" value="<?php echo $solicitudAdopcion['idcan']; ?>">
                                             <button type="submit" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button>
                                         </form>
                                         <form action="../negocio/rechazarSolicitud.php" method="post" style="display: inline;">
-                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['idsolicitud']; ?>">
-                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitud['idusuario']; ?>">
-                                            <input type="hidden" name="id_can" value="<?php echo $solicitud['idcan']; ?>">
+                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitudAdopcion['idsolicitud']; ?>">
+                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitudAdopcion['idusuario']; ?>">
+                                            <input type="hidden" name="id_can" value="<?php echo $solicitudAdopcion['idcan']; ?>">
                                             <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button>
                                         </form>
                                     <?php else: ?>
