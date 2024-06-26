@@ -6,7 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function validarFormulario() {
+            var passwd = document.getElementById('passwd').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (passwd !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body class="bg-black h-screen font-sans relative overflow-hidden">
@@ -20,13 +32,13 @@
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full px-4">
         <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
             <div class="flex justify-center items-center">
-                <img src="../assets/imagenes/logoLostPaws.png" alt="Logo" class="h-20" />
+                <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
             </div>
             <br>
             <div class="bg-blue-100 p-6 rounded-lg">
                 <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Registrar Usuario</h2>
 
-                <form action="../negocio/procesarRegistro.php" method="post" class="space-y-6">
+                <form action="../negocio/procesarRegistro.php" method="post" class="space-y-6" onsubmit="return validarFormulario()">
                     <div>
                         <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
                         <input type="text" name="nombre" id="nombre" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
@@ -39,7 +51,7 @@
                         <label for="tipoDocumento" class="block text-sm font-medium text-gray-700">Tipo de Documento</label>
                         <select name="tipoDocumento" id="tipoDocumento" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
                             <option value="dni">DNI</option>
-                            <option value="cedula de identidad">Cedula de Identidad</option>
+                            <option value="cedula de identidad">Cédula de Identidad</option>
                             <option value="pasaporte">Pasaporte</option>
                         </select>
                     </div>
@@ -65,8 +77,8 @@
                     </div>
 
                     <div class="flex flex-col items-center space-y-4">
-                        <button type="submit" class="bg-blue-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-700">Registrar</button>
-                        <a href="login.php" class="text-center bg-green-600 text-white w-full sm:w-40 p-2 rounded-md hover:bg-green-700">Iniciar Sesión</a>
+                        <button type="submit" class="bg-blue-400 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-500">Registrar</button>
+                        <a href="login.php" class="text-center bg-teal-500 text-white w-full sm:w-40 p-2 rounded-md hover:bg-teal-600">Volver</a>
                     </div>
                 </form>
             </div>
