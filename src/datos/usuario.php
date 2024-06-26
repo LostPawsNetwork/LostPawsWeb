@@ -20,10 +20,13 @@ class Usuario
         $this->conn = getPDOConnection();
     }
 
-    public function obtenerIdUsuarioPorCorreo($correo) {
+    public function obtenerIdUsuarioPorCorreo($correo)
+    {
         try {
-            $stmt = $this->conn->prepare("SELECT idusuario FROM usuario WHERE email = :correo");
-            $stmt->bindParam(':correo', $correo);
+            $stmt = $this->conn->prepare(
+                "SELECT idusuario FROM usuario WHERE email = :correo"
+            );
+            $stmt->bindParam(":correo", $correo);
             $stmt->execute();
             $idUsuario = $stmt->fetchColumn();
             return $idUsuario;
@@ -55,8 +58,6 @@ class Usuario
         } else {
             return ["success" => false, "tipoUsuario" => null];
         }
-
-        $conn->close();
     }
 
     function obtenerUsuario($correo)
@@ -170,9 +171,12 @@ class Usuario
         return $stmt->fetch(PDO::FETCH_ASSOC)["total"];
     }
 
-    public function obtenerCorreoPorId($idUsuario) {
-        $stmt = $this->conn->prepare("SELECT email FROM usuario WHERE idusuario = :id");
-        $stmt->bindValue(':id', $idUsuario, PDO::PARAM_INT);
+    public function obtenerCorreoPorId($idUsuario)
+    {
+        $stmt = $this->conn->prepare(
+            "SELECT email FROM usuario WHERE idusuario = :id"
+        );
+        $stmt->bindValue(":id", $idUsuario, PDO::PARAM_INT);
         $stmt->execute();
         $correo = $stmt->fetchColumn();
         return $correo;
