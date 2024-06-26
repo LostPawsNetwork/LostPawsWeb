@@ -73,7 +73,7 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
 </head>
 <body>
 
-<?php include "../components/header3.html"; ?>
+<?php include "../components/header2.html"; ?>
 <br>
 <br>
     <div class="form-container">
