@@ -32,7 +32,6 @@ if (
       height: 100vh;
       overflow: hidden;
       margin: 0;
-      background-color: #f3f4f6;
     }
 
     .container {
@@ -99,11 +98,11 @@ if (
   </style>
 </head>
 
-<body>
-  <div class="flex">
+<body class="bg-gray-100">
+  <div class="">
     <?php include "../components/header3.html"; ?>
     <div class="bodydash">
-      <div class="container mt-20">
+      <div class="container mt-20 ml-32 text-center">
         <h1>Panel de Administrador</h1>
         <div class="panel-container">
           <div class="panel active" style="background-image: url('../assets/images/gestionarCan.jpg');">
