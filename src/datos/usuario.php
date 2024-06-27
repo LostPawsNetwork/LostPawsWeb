@@ -132,22 +132,27 @@ class Usuario
         $fechaNacimiento,
         $tipoUsuario
     ) {
-        $sql = "INSERT INTO usuario (email, contrasena, nombre, apellido, tipoDocumento, numeroDocumento,  fechaNacimiento, tipoUsuario)
-                VALUES (:correo, :passwd, :nombre, :apellido, :tipoDocumento, :numeroDocumento, :fechaNacimiento, :tipoUsuario)";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":correo", $correo);
-        $hashedPassword = password_hash($passwd, PASSWORD_BCRYPT);
-        $stmt->bindParam(":passwd", $hashedPassword);
-        $stmt->bindParam(":nombre", $nombre);
-        $stmt->bindParam(":apellido", $apellido);
-        $stmt->bindParam(":tipoDocumento", $tipoDocumento);
-        $stmt->bindParam(":numeroDocumento", $numeroDocumento);
-        $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
-        $stmt->bindParam(":tipoUsuario", $tipoUsuario);
-
-        return $stmt->execute();
-    }
+        try {
+            $sql = "INSERT INTO usuario (email, contrasena, nombre, apellido, tipoDocumento, numeroDocumento, fechaNacimiento, tipoUsuario)
+                    VALUES (:correo, :passwd, :nombre, :apellido, :tipoDocumento, :numeroDocumento, :fechaNacimiento, :tipoUsuario)";
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":correo", $correo);
+            $hashedPassword = password_hash($passwd, PASSWORD_BCRYPT);
+            $stmt->bindParam(":passwd", $hashedPassword);
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":apellido", $apellido);
+            $stmt->bindParam(":tipoDocumento", $tipoDocumento);
+            $stmt->bindParam(":numeroDocumento", $numeroDocumento);
+            $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
+            $stmt->bindParam(":tipoUsuario", $tipoUsuario);
+    
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }    
 
     function editarUsuario($idUsuario, $correo, $nombre, $apellido)
     {

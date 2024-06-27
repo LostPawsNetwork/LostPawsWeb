@@ -33,43 +33,45 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-100">
+<?php include "../components/header3.html"; ?>
+<br><br><br><br>
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold mb-6">Reportes</h1>
+
+        <div class="flex justify-end mb-6">
+            <a href="../presentacion/dashAdmin.php">
+                <button class="bg-bluey-dark text-white w-full p-3 rounded-md hover-darken">Volver</button>
+            </a>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Total de Usuarios -->
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <canvas id="totalUsuariosChart"></canvas>
             </div>
-
             <!-- Total de Canes adoptados -->
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <canvas id="totalCanesadoptadosChart"></canvas>
             </div>
-
             <!-- Usuarios Rechazados examen aptitud-->
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <canvas id="usuariosDesaprobadosChart"></canvas>
             </div>
-
             <!-- Usuarios aprobados examenes aptitud -->
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <canvas id="usuariosAprobadosChart"></canvas>
             </div>
-
             <!-- Usuarios solicitudes aprobadas -->
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <canvas id="solicitudesAprobadasChart"></canvas>
             </div>
-
             <!-- Usuarios rechazados solicitud -->
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <canvas id="usuariosRechazadosChart"></canvas>
             </div>
-
-        <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
     </div>
-
+    <br>
+    <?php include "../components/footer.html"; ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var ctxTotalUsuarios = document.getElementById('totalUsuariosChart').getContext('2d');
@@ -92,7 +94,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
             var ctxTotalCanesadoptados = document.getElementById('totalCanesadoptadosChart').getContext('2d');
             var totalCanesadoptadosChart = new Chart(ctxTotalCanesadoptados, {
                 type: 'bar',
@@ -113,7 +114,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
             var ctxUsuariosDesaprobados = document.getElementById('usuariosDesaprobadosChart').getContext('2d');
             var usuariosDesaprobadosChart = new Chart(ctxUsuariosDesaprobados, {
                 type: 'bar',
@@ -134,8 +134,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
-
             var ctxUsuariosAprobados = document.getElementById('usuariosAprobadosChart').getContext('2d');
                         var usuariosAprobadosChart = new Chart(ctxUsuariosAprobados, {
                             type: 'bar',
@@ -156,7 +154,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                                 }
                             }
                         });
-
             var ctxUsuariosRechazados = document.getElementById('usuariosRechazadosChart').getContext('2d');
             var usuariosRechazadosChart = new Chart(ctxUsuariosRechazados, {
                 type: 'bar',
@@ -177,7 +174,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
             var ctxSolicitudesAprobadas = document.getElementById('solicitudesAprobadasChart').getContext('2d');
             var solicitudesAprobadasChart = new Chart(ctxSolicitudesAprobadas, {
                 type: 'bar',
@@ -198,7 +194,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
         });
     </script>
 </body>

@@ -10,33 +10,48 @@ if (isset($_SESSION["correo"])) {
 
     $adopcion = new Adopcion();
     $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
-    
+
     $examen = new ExamenAptitud();
     $estado_examen = $examen->verificarEstado($_SESSION["correo"]);
-
 } else {
     $num_adopciones = 0;
-}
-?>
+} ?>
 
 <aside id="menu" class="fixed inset-y-0 left-0 transform -translate-x-full bg-blue-800 text-white w-64 overflow-auto transition-transform duration-300 ease-in-out mt-20">
-    <a href="/lostpaws/presentacion/visualizarCanes.php" class="block p-4">Adopta</a>
-    <a href="#nosotros" class="block p-4">Nosotros</a>
-    <a href="#sedes" class="block p-4">Sede</a>
-    <a href="/lostpaws/presentacion/formDonar.php" class="block p-4">Donar</a>
-    <a href="#contacto" class="block p-4">Contactos</a>
-    <a href="#testimonios" class="block p-4">Testimonios</a>
-    <a href="#redes" class="block p-4">Redes</a>
+    <style>
+        .bg-blue-800 {
+            background-color: #2c3e50;
+        }
+
+        .hover-darken:hover {
+            filter: brightness(0.9);
+        }
+
+        .sidebar-link {
+            font-size: 16px;
+        }
+    </style>
+
+    <a href="/lostpaws/presentacion/visualizarCanes.php" class="block p-4 hover-darken sidebar-link">Adopta</a>
+    <a href="#nosotros" class="block p-4 hover-darken sidebar-link">Nosotros</a>
+    <a href="#sedes" class="block p-4 hover-darken sidebar-link">Sede</a>
+    <a href="/lostpaws/presentacion/formDonar.php" class="block p-4 hover-darken sidebar-link">Donar</a>
+    <a href="#contacto" class="block p-4 hover-darken sidebar-link">Contactos</a>
+    <a href="#testimonios" class="block p-4 hover-darken sidebar-link">Testimonios</a>
+    <a href="#redes" class="block p-4 hover-darken sidebar-link">Redes</a>
 
     <?php if ($num_adopciones > 0): ?>
-        <a href="/lostpaws/presentacion/misControles.php" class="block p-4">Mis Controles</a>
+        <a href="/lostpaws/presentacion/misControles.php" class="block p-4 hover-darken sidebar-link">Mis Controles</a>
     <?php endif; ?>
 
-    <?php if ($estado_examen == "Desaprobado" || $estado_examen == "Sin examen"): ?>
-        <a href="#" id="crearExamenAptitud" class="block p-4">Examen Aptitud</a>
+    <?php if (
+        $estado_examen == "Desaprobado" ||
+        $estado_examen == "Sin examen"
+    ): ?>
+        <a href="#" id="crearExamenAptitud" class="block p-4 hover-darken sidebar-link">Examen Aptitud</a>
     <?php endif; ?>
 
-    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-4">Editar Perfil</a>
+    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-4 hover-darken sidebar-link">Editar Perfil</a>
 </aside>
 
 <div id="aptitudModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">

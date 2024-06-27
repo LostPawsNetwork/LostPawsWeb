@@ -69,8 +69,8 @@ if (
                             </div>
                         </div>
                         <div class="flex flex-col items-center space-y-4">
-                            <button type="submit" class="bg-blue-400 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-500">Donar</button>
-                            <a href="/lostpaws/presentacion/landingPage.php" class="text-center bg-teal-500 text-white w-full sm:w-40 p-2 rounded-md hover:bg-teal-600">Volver</a>
+                            <button type="submit" class="bg-bluey-medium hover-darken text-white w-full sm:w-40 p-2 rounded-md">Donar</button>
+                            <a href="/lostpaws/presentacion/landingPage.php" class="text-center bg-bluey-dark hover-darken text-white w-full sm:w-40 p-2 rounded-md">Volver</a>
                         </div>
                     </form>
                 </div>
@@ -81,6 +81,5 @@ if (
     <?php include "../components/footer.html"; ?>
 
     <script src="../scripts/dynamic.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </html>

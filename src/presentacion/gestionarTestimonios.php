@@ -46,40 +46,38 @@ $testimonios = $testimonio->obtenerTestimonios();
     <div id="header">
         <?php include "../components/header3.html"; ?>
     </div>
-        <br>
+    <br>
     <div id="main-content" class='min-h-screen'>
         <div class="container mx-auto p-4">
-            <div class="">
-                <div class="flex justify-between items-center mb-4">
-                    <h1 class="text-3xl font-bold mb-6">Gestionar Testimonios</h1>
-                    <a href="formularioTestimonio.php" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Agregar Testimonio</a>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center mt-8">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b">ID Testimonio</th>
-                                <th class="py-2 px-4 border-b">Fecha</th>
-                                <th class="py-2 px-4 border-b">Texto</th>
-                                <th class="py-2 px-4 border-b">idUsuario</th>
-                                <th class="py-2 px-4 border-b">Foto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($testimonios as $testimonio) {
-                                echo "<tr>";
-                                echo "<td class='py-2 px-4 border-b'>{$testimonio["idtestimonio"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$testimonio["fecha"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$testimonio["texto"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'>{$testimonio["idusuario"]}</td>";
-                                echo "<td class='py-2 px-4 border-b'><img src='{$testimonio["foto"]}' alt='Foto del Testimonio' class='h-12 w-12 object-cover'></td>";
-                                echo "</tr>";
-                            } ?>
-                        </tbody>
-                    </table>
-                </div>
+            <h1 class="text-3xl font-bold mb-6">Gestionar Testimonios</h1>
+            <div class="flex justify-end space-x-2 mb-4">
+                <a href="formularioTestimonio.php" class="bg-blue-400 hover:bg-blue-500 text-white p-2 rounded-md ">Agregar Testimonio</a>
+                <a href="dashAdmin.php" class="bg-bluey-dark hover:bg-bluey-medium text-white p-2 rounded-md">Volver</a>
             </div>
-        <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center mt-8">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-2 px-4 border-b">ID Testimonio</th>
+                            <th class="py-2 px-4 border-b">Fecha</th>
+                            <th class="py-2 px-4 border-b">Texto</th>
+                            <th class="py-2 px-4 border-b">idUsuario</th>
+                            <th class="py-2 px-4 border-b">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($testimonios as $testimonio) {
+                            echo "<tr>";
+                            echo "<td class='py-2 px-4 border-b'>{$testimonio["idtestimonio"]}</td>";
+                            echo "<td class='py-2 px-4 border-b'>{$testimonio["fecha"]}</td>";
+                            echo "<td class='py-2 px-4 border-b'>{$testimonio["texto"]}</td>";
+                            echo "<td class='py-2 px-4 border-b'>{$testimonio["idusuario"]}</td>";
+                            echo "<td class='py-2 px-4 border-b'><img src='{$testimonio["foto"]}' alt='Foto del Testimonio' class='h-12 w-12 object-cover'></td>";
+                            echo "</tr>";
+                        } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
