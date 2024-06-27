@@ -11,7 +11,7 @@ if (
     exit();
 }
 
-require_once '../datos/solicitud.php';
+require_once "../datos/solicitud.php";
 $solicitud = new Solicitud();
 $solicitudes = $solicitud->listarSolicitudes();
 ?>
@@ -41,8 +41,12 @@ $solicitudes = $solicitud->listarSolicitudes();
         }
     </style>
 </head>
-<body>
-<div id="main-content" class='min-h-screen'>
+<body class="bg-gray-100">
+    <div id="header">
+        <?php include "../components/header3.html"; ?>
+    </div>
+        <br><br>
+    <div id="main-content" class='min-h-screen'>
     <div class="container mx-auto p-4">
         <div class="">
             <h1 class="text-3xl font-bold mb-6">Solicitudes</h1>
@@ -60,9 +64,9 @@ $solicitudes = $solicitud->listarSolicitudes();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        if ($solicitudes) {
+                        <?php if ($solicitudes) {
                             foreach ($solicitudes as $solicitudAdopcion) {
+
                                 // Obtener datos del usuario y el can
                                 $usuario = "No disponible";
                                 $email = "No disponible";
@@ -70,17 +74,21 @@ $solicitudes = $solicitud->listarSolicitudes();
 
                                 // Verificar y obtener los detalles del usuario y del can
                                 if ($solicitudAdopcion["idusuario"]) {
-                                    $usuarioDetails = $solicitud->getUsuarioById($solicitudAdopcion['idusuario']);
+                                    $usuarioDetails = $solicitud->getUsuarioById(
+                                        $solicitudAdopcion["idusuario"]
+                                    );
                                     if ($usuarioDetails) {
-                                        $usuario = $usuarioDetails['nombre'];
-                                        $email = $usuarioDetails['email'];
+                                        $usuario = $usuarioDetails["nombre"];
+                                        $email = $usuarioDetails["email"];
                                     }
                                 }
-                                
+
                                 if ($solicitudAdopcion["idcan"]) {
-                                    $canDetails = $solicitud->getCanById($solicitudAdopcion['idcan']);
+                                    $canDetails = $solicitud->getCanById(
+                                        $solicitudAdopcion["idcan"]
+                                    );
                                     if ($canDetails) {
-                                        $can = $canDetails['nombre'];
+                                        $can = $canDetails["nombre"];
                                     }
                                 }
 
@@ -93,18 +101,33 @@ $solicitudes = $solicitud->listarSolicitudes();
                                 echo "<td class='py-2 px-4 border-b'>{$solicitudAdopcion["estado"]}</td>";
                                 ?>
                                 <td class="py-2 px-4 border-b">
-                                    <?php if ($solicitudAdopcion["estado"] === 'Pendiente'): ?>
+                                    <?php if (
+                                        $solicitudAdopcion["estado"] ===
+                                        "Pendiente"
+                                    ): ?>
                                         <form action="../negocio/aceptarSolicitud.php" method="post" style="display: inline;">
-                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitudAdopcion['idsolicitud']; ?>">
-                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitudAdopcion['idusuario']; ?>">
-                                            <input type="hidden" name="id_can" value="<?php echo $solicitudAdopcion['idcan']; ?>">
-                                            <button type="submit" class="bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600">Aceptar</button>
+                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitudAdopcion[
+                                                "idsolicitud"
+                                            ]; ?>">
+                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitudAdopcion[
+                                                "idusuario"
+                                            ]; ?>">
+                                            <input type="hidden" name="id_can" value="<?php echo $solicitudAdopcion[
+                                                "idcan"
+                                            ]; ?>">
+                                            <button type="submit" class="bg-green-400 mr-2 text-white p-2 rounded-md hover:bg-green-500">Aceptar</button>
                                         </form>
                                         <form action="../negocio/rechazarSolicitud.php" method="post" style="display: inline;">
-                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitudAdopcion['idsolicitud']; ?>">
-                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitudAdopcion['idusuario']; ?>">
-                                            <input type="hidden" name="id_can" value="<?php echo $solicitudAdopcion['idcan']; ?>">
-                                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Rechazar</button>
+                                            <input type="hidden" name="id_solicitud" value="<?php echo $solicitudAdopcion[
+                                                "idsolicitud"
+                                            ]; ?>">
+                                            <input type="hidden" name="id_usuario" value="<?php echo $solicitudAdopcion[
+                                                "idusuario"
+                                            ]; ?>">
+                                            <input type="hidden" name="id_can" value="<?php echo $solicitudAdopcion[
+                                                "idcan"
+                                            ]; ?>">
+                                            <button type="submit" class="bg-red-400 text-white p-2 rounded-md hover:bg-red-500">Rechazar</button>
                                         </form>
                                     <?php else: ?>
                                         <button disabled class="bg-gray-300 text-white p-2 rounded-md cursor-not-allowed">Aceptar</button>
@@ -116,8 +139,7 @@ $solicitudes = $solicitud->listarSolicitudes();
                             }
                         } else {
                             echo "<tr><td colspan='6' class='py-2 px-4 border-b'>No hay solicitudes disponibles.</td></tr>";
-                        }
-                        ?>
+                        } ?>
                     </tbody>
                 </table>
             </div>
