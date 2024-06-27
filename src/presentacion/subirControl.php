@@ -21,25 +21,29 @@ $nroControl = $_GET['nroControl'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Control</title>
+    <title>Mis Controles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+        #main-content {
+            margin-top: 80px; 
             padding: 20px;
+            min-height: calc(100vh - 80px); 
         }
-        .container {
-            background-color: #fff;
+ .container {
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 600px;
-            margin: 0 auto;
+            margin: 10px auto;
         }
-        h1 {
-            margin-bottom: 20px;
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px; 
         }
-        .control-section {
+
+  
+       .control-section {
             margin-bottom: 20px;
         }
         .control-section label {
@@ -70,8 +74,21 @@ $nroControl = $_GET['nroControl'];
         }
     </style>
 </head>
-<body>
-    <div class="container">
+<body class="bg-gray-100">
+    <div class='flex '>
+
+        <?php include "../components/header2.html"; ?>
+
+        <div class="flex-1 ">
+
+            <?php include "../components/sidebar2.php"; ?>
+
+            <div class="container mx-auto p-4">
+                <br>
+                <br>
+                <br>
+                <br>
+<div class="container mx-auto p-4">
         <h1>Subir Control <?php echo htmlspecialchars($nroControl); ?></h1>
         <form action="../negocio/procesarControl.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="idControl" value="<?php echo htmlspecialchars($idControl); ?>">
@@ -95,5 +112,17 @@ $nroControl = $_GET['nroControl'];
             <button type="submit" class="submit-btn">Enviar</button>
         </form>
     </div>
+
+
+
+                        </div>
+
+            <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
+
+        </div>
+        <?php include "../components/footer.html"; ?>
+        <script src="../scripts/dynamic.js"></script>
+    </div>
+
 </body>
 </html>

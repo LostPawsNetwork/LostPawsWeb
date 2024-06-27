@@ -33,7 +33,7 @@ $listaDeCans = $can->listarCanes();
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffff; /* Color de fondo del header */
+            background-color: #4a4e78; /* Color de fondo del header */
             z-index: 9999; /* Asegura que el header esté por encima del contenido */
         }
 
@@ -41,24 +41,39 @@ $listaDeCans = $can->listarCanes();
         #main-content {
             margin-top: 60px; /* Ajusta el margen superior para que empiece después del header */
         }
+
+        /* Estilo para las tarjetas de los perros */
+        .dog-card {
+            background-color: #d4eaf7;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .dog-card:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-white">
     <div id="header">
         <?php include "../components/header3.html"; ?>
     </div>
-        <br>
+    <br>
     <div id="main-content" class='flex min-h-screen'>
         <div class="container mx-auto p-4">
             <div class="flex justify-between items-center mb-4">
-                <h1 class="text-2xl font-bold">Listado de Perros</h1>
-                <a href="agregarPerro.php" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Agregar Perro</a>
-                <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
+                <h1 class="text-3xl font-bold">Listado de Canes</h1>
             </div>
+            <br>
+            <div class="flex justify-end mb-4 space-x-2">
+                <a href="agregarPerro.php" class="bg-blue-400 hover:bg-blue-500 text-white p-2 rounded-md">Agregar Perro</a>
+                <a href="dashAdmin.php" class="bg-bluey-dark hover:bg-bluey-medium text-white p-2 rounded-md">Volver</a>
+
+            </div>
+            <br>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <?php foreach ($listaDeCans as $can): ?>
-                    <div class="bg-white p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105">
+                    <div class="dog-card p-4 rounded-lg shadow-md">
                         <?php if ($can["foto1"]): ?>
                             <img src="<?php echo htmlspecialchars(
                                 $can["foto1"]
@@ -91,7 +106,7 @@ $listaDeCans = $can->listarCanes();
                             <input type="hidden" name="idcan" value="<?php echo $can[
                                 "idcan"
                             ]; ?>">
-                            <button type="submit" class="mt-4 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Editar</button>
+                            <button type="submit" class="mt-4 bg-bluey-medium text-white p-2 rounded-md hover:bg-bluey-dark">Editar</button>
                         </form>
                     </div>
                 <?php endforeach; ?>

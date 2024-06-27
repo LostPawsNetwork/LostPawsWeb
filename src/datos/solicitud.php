@@ -15,6 +15,36 @@ class Solicitud
         $this->conn = getPDOConnection();
     }
 
+    public function getUsuarioById($idUsuario)
+    {
+        $query = "SELECT nombre, email FROM usuario WHERE idusuario = :idUsuario";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getCanById($idCan)
+    {
+        $query = "SELECT nombre FROM can WHERE idcan = :idCan";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idCan', $idCan, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerIdUsuarioPorSolicitud($idSolicitud) {
+        try {
+            $stmt = $this->conn->prepare("SELECT idusuario FROM solicitud WHERE idsolicitud = :idSolicitud");
+            $stmt->bindValue(':idSolicitud', $idSolicitud, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
+
     function listarSolicitudes() 
     {
         $sql = "SELECT * FROM solicitud";

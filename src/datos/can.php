@@ -39,6 +39,25 @@ class Can
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function actualizarCan($idCan, $nuevoEstado) {
+        $sql = "UPDATE can SET estado = :estado WHERE idcan = :idCan";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':estado', $nuevoEstado, PDO::PARAM_STR);
+        $stmt->bindParam(':idCan', $idCan, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    function listarCanesPorAdoptar($size, $sexo, $edad_min, $edad_max)
+    {
+        $f_size = isset($size)? ($size != ''? " and tamano = '$size'" : '') : '';
+        $f_sexo = isset($sexo)? ($sexo != ''? " and genero = '$sexo'" : '') : '';
+        $f_edad = isset($edad_min)? ($edad_min != ''? " and edad BETWEEN '$edad_min' AND '$edad_max'" : '') : '';
+        $sql = "SELECT * FROM can WHERE estado = 'Por adoptar' ". $f_size . ' ' . $f_sexo . ' ' . $f_edad;
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }    
+
     function editarCan(
         $idCan,
         $nombre,

@@ -62,7 +62,7 @@ $donaciones = $donacionObj->listarDonaciones();
                                 foreach ($donaciones as $donacion) {
                                     echo "<tr>";
                                     echo "<td class='py-2 px-4 border-b'>{$donacion["iddonacion"]}</td>";
-                                    echo "<td class='py-2 px-4 border-b'>{$donacion["idusuario"]}</td>";
+                                    echo "<td class='py-2 px-4 border-b'>{$donacion["nombre"]}</td>";
                                     echo "<td class='py-2 px-4 border-b'>{$donacion["fecha"]}</td>";
                                     echo "<td class='py-2 px-4 border-b'>{$donacion["monto"]}</td>";
                                     echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white p-2 rounded-md hover:bg-blue-600 verComprobante' data-comprobante='{$donacion["comprobante"]}'>Ver Comprobante</button></td>";

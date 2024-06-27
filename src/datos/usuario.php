@@ -20,6 +20,22 @@ class Usuario
         $this->conn = getPDOConnection();
     }
 
+    public function obtenerIdUsuarioPorCorreo($correo)
+    {
+        try {
+            $stmt = $this->conn->prepare(
+                "SELECT idusuario FROM usuario WHERE email = :correo"
+            );
+            $stmt->bindParam(":correo", $correo);
+            $stmt->execute();
+            $idUsuario = $stmt->fetchColumn();
+            return $idUsuario;
+        } catch (PDOException $e) {
+            echo "Error al obtener el ID del usuario: " . $e->getMessage();
+            return null;
+        }
+    }
+
     function validarUsuario($correo, $passwd)
     {
         $sql =
@@ -42,8 +58,6 @@ class Usuario
         } else {
             return ["success" => false, "tipoUsuario" => null];
         }
-
-        $conn->close();
     }
 
     function obtenerUsuario($correo)
@@ -118,22 +132,27 @@ class Usuario
         $fechaNacimiento,
         $tipoUsuario
     ) {
-        $sql = "INSERT INTO usuario (email, contrasena, nombre, apellido, tipoDocumento, numeroDocumento,  fechaNacimiento, tipoUsuario)
-                VALUES (:correo, :passwd, :nombre, :apellido, :tipoDocumento, :numeroDocumento, :fechaNacimiento, :tipoUsuario)";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":correo", $correo);
-        $hashedPassword = password_hash($passwd, PASSWORD_BCRYPT);
-        $stmt->bindParam(":passwd", $hashedPassword);
-        $stmt->bindParam(":nombre", $nombre);
-        $stmt->bindParam(":apellido", $apellido);
-        $stmt->bindParam(":tipoDocumento", $tipoDocumento);
-        $stmt->bindParam(":numeroDocumento", $numeroDocumento);
-        $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
-        $stmt->bindParam(":tipoUsuario", $tipoUsuario);
-
-        return $stmt->execute();
-    }
+        try {
+            $sql = "INSERT INTO usuario (email, contrasena, nombre, apellido, tipoDocumento, numeroDocumento, fechaNacimiento, tipoUsuario)
+                    VALUES (:correo, :passwd, :nombre, :apellido, :tipoDocumento, :numeroDocumento, :fechaNacimiento, :tipoUsuario)";
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":correo", $correo);
+            $hashedPassword = password_hash($passwd, PASSWORD_BCRYPT);
+            $stmt->bindParam(":passwd", $hashedPassword);
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":apellido", $apellido);
+            $stmt->bindParam(":tipoDocumento", $tipoDocumento);
+            $stmt->bindParam(":numeroDocumento", $numeroDocumento);
+            $stmt->bindParam(":fechaNacimiento", $fechaNacimiento);
+            $stmt->bindParam(":tipoUsuario", $tipoUsuario);
+    
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }    
 
     function editarUsuario($idUsuario, $correo, $nombre, $apellido)
     {
@@ -155,6 +174,17 @@ class Usuario
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)["total"];
+    }
+
+    public function obtenerCorreoPorId($idUsuario)
+    {
+        $stmt = $this->conn->prepare(
+            "SELECT email FROM usuario WHERE idusuario = :id"
+        );
+        $stmt->bindValue(":id", $idUsuario, PDO::PARAM_INT);
+        $stmt->execute();
+        $correo = $stmt->fetchColumn();
+        return $correo;
     }
 
     function obtenerUsuariosDesaprobados()

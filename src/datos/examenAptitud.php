@@ -13,6 +13,7 @@ class ExamenAptitud
     {
         $this->conn = getPDOConnection();
     }
+
     // cambiar link al de la aplicacion despues
     function registrarExamenAptitud($estado, $idUsuario)
     {
@@ -26,7 +27,8 @@ class ExamenAptitud
 
     function obtenerExamenesAptitud()
     {
-        $sql = "SELECT * FROM ExamenAptitud";
+        $sql =
+            "SELECT * FROM ExamenAptitud INNER JOIN Usuario ON ExamenAptitud.idusuario = Usuario.idusuario";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -40,14 +42,13 @@ class ExamenAptitud
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if ($resultado) {
             return $resultado["estado"];
         } else {
             return "Sin examen";
         }
     }
-    
 
     function aprobarExamenAptitud($idExamen)
     {
@@ -56,6 +57,16 @@ class ExamenAptitud
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":idExamen", $idExamen);
         return $stmt->execute();
+    }
+
+    public function obtenerIdUsuarioPorExamen($idexamen)
+    {
+        $stmt = $this->conn->prepare(
+            "SELECT idusuario FROM examenaptitud WHERE idexamen = :idexamen"
+        );
+        $stmt->bindValue(":idexamen", $idexamen, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 
     function rechazarExamenAptitud($idExamen)

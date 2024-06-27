@@ -11,31 +11,31 @@ if (isset($_SESSION["correo"])) {
 
     $adopcion = new Adopcion();
     $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
-    
+
     $examen = new ExamenAptitud();
     $estado_examen = $examen->verificarEstado($_SESSION["correo"]);
-
 } else {
     $num_adopciones = 0;
-    $estado_examen = "Nulo";
-}
-?>
+} ?>
 
 <aside id="menu" class="fixed inset-y-0 left-0 transform -translate-x-full bg-blue-800 text-white w-64 overflow-auto transition-transform duration-300 ease-in-out mt-20">
-    <a href="/lostpaws/presentacion/visualizarCanes.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Adopta</a>
-    <a href="#nosotros" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Nosotros</a>
-    <a href="#sedes" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Sede</a>
-    <a href="/lostpaws/presentacion/formDonar.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Donar</a>
-    <a href="#contacto" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Contactos</a>
-    <a href="#testimonios" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Testimonios</a>
-    <a href="#redes" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Redes</a>
+    <a href="/lostpaws/presentacion/visualizarCanes.php" class="block p-4">Adopta</a>
+    <a href="#nosotros" class="block p-4">Nosotros</a>
+    <a href="#sedes" class="block p-4">Sede</a>
+    <a href="/lostpaws/presentacion/formDonar.php" class="block p-4">Donar</a>
+    <a href="#contacto" class="block p-4">Contactos</a>
+    <a href="#testimonios" class="block p-4">Testimonios</a>
+    <a href="#redes" class="block p-4">Redes</a>
 
     <?php if ($num_adopciones > 0): ?>
-        <a href="/lostpaws/presentacion/misControles.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Mis Controles</a>
+        <a href="/lostpaws/presentacion/misControles.php" class="block p-4">Mis Controles</a>
     <?php endif; ?>
 
-    <a href="#" id="crearExamenAptitud" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Examen Aptitud</a>
-    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-5 hover:bg-blue-700 hover:bg-opacity-75 hover:outline-offset-2 shadow-indigo-500/70 hover:shadow-blue-500/70 hover:shadow-lg">Editar Perfil</a>
+    <?php if ($estado_examen == "Desaprobado" || $estado_examen == "Sin examen"): ?>
+        <a href="#" id="crearExamenAptitud" class="block p-4">Examen Aptitud</a>
+    <?php endif; ?>
+
+    <a href="/lostpaws/presentacion/editarUsuario.php" class="block p-4">Editar Perfil</a>
 </aside>
 
 <div id="aptitudModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
