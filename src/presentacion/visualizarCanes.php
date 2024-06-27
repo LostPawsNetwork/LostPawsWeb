@@ -14,7 +14,13 @@ require_once "../datos/can.php";
 require_once "../datos/examenAptitud.php";
 
 $can = new Can();
-$listaDeCans = $can->listarCanesPorAdoptar();
+$size = $_POST["dog-size"] ?? "";
+$sexo = $_POST["dog-sex"] ?? "";
+$edad_min = $_POST["dog-edad-min"] ?? "";
+$edad_max = $_POST["dog-edad-max"] ?? "";
+
+// var_dump($size, $sexo, $edad_min, $edad_max);
+$listaDeCans = $can->listarCanesPorAdoptar($size, $sexo, $edad_min, $edad_max);
 
 $examenAptitud = new ExamenAptitud();
 $examenUsuario = $examenAptitud->obtenerExamenPorUsuario($_SESSION["idUsuario"]);
@@ -30,10 +36,6 @@ require_once "../datos/adopcion.php";
 $adopcion = new Adopcion();
 $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
 
-$size = $_POST["dog-size"] ?? "";
-$sexo = $_POST["dog-sex"] ?? "";
-$edad_min = $_POST["dog-edad-min"] ?? "";
-$edad_max = $_POST["dog-edad-max"] ?? "";
 ?>
 
 <!DOCTYPE html>
@@ -120,44 +122,44 @@ $edad_max = $_POST["dog-edad-max"] ?? "";
                                     <div>
                                         <select name="dog-size" id="dog-size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                             <option value="">...</option>
-                                            <option value="xl" <?php echo isset(
+                                            <option value="Grande" <?php echo isset(
                                                 $size
                                             )
-                                                ? ($size == "xl"
+                                                ? ($size == "Grande"
                                                     ? "selected"
                                                     : "")
                                                 : ""; ?>>Grande</option>
-                                            <option value="x" <?php echo isset(
+                                            <option value="Mediano" <?php echo isset(
                                                 $size
                                             )
-                                                ? ($size == "x"
+                                                ? ($size == "Mediano"
                                                     ? "selected"
                                                     : "")
                                                 : ""; ?>>Mediano</option>
-                                            <option value="xs" <?php echo isset(
+                                            <option value="Toy" <?php echo isset(
                                                 $size
                                             )
-                                                ? ($size == "xs"
+                                                ? ($size == "Toy"
                                                     ? "selected"
                                                     : "")
-                                                : ""; ?>>Pequeño</option>
+                                                : ""; ?>>Toy</option>
                                         </select>
                                     </div>
                                     <label>Sexo</label>
                                     <div>
                                         <select name="dog-sex" id="dog-sex" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                             <option value="">...</option>
-                                            <option value="macho" <?php echo isset(
+                                            <option value="Macho" <?php echo isset(
                                                 $sexo
                                             )
-                                                ? ($sexo == "macho"
+                                                ? ($sexo == "Macho"
                                                     ? "selected"
                                                     : "")
                                                 : ""; ?>>Macho</option>
-                                            <option value="hembra" <?php echo isset(
+                                            <option value="Hembra" <?php echo isset(
                                                 $sexo
                                             )
-                                                ? ($sexo == "hembra"
+                                                ? ($sexo == "Hembra"
                                                     ? "selected"
                                                     : "")
                                                 : ""; ?>>Hembra</option>
