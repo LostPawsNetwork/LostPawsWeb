@@ -58,7 +58,7 @@ $examenes = $examenAptitud->obtenerExamenesAptitud();
     <div id="header">
         <?php include "../components/header3.html"; ?>
     </div>
-        <br>
+        <br><br>
     <div id="main-content" class='min-h-screen'>
         <div class="container mx-auto p-4">
             <div class="">

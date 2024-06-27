@@ -7,6 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-bluey-light {
+            background-color: #d4eaf7; /* Color del primer bloque */
+        }
+
+        .bg-bluey-medium {
+            background-color: #80c4f4; /* Color del segundo bloque */
+        }
+
+        .bg-bluey-dark {
+            background-color: #4a4e78; /* Color del tercer bloque */
+        }
+
+        .hover-lighten:hover {
+            filter: brightness(1.1); /* Aclara el elemento un 10% */
+        }
+
+        .text-bluey-dark {
+            color: #4a4e78;
+        }
+    </style>
     <script>
         function validarFormulario() {
             var passwd = document.getElementById('passwd').value;
@@ -21,7 +42,7 @@
     </script>
 </head>
 
-<body class="bg-black h-screen font-sans relative overflow-hidden">
+<body class="bg-bluey-dark h-screen font-sans relative overflow-hidden">
 
     <video id="video-background" autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 filter blur-lg">
         <source src="../assets/videos/login.mp4" type="video/mp4">
@@ -30,55 +51,55 @@
     <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
 
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full px-4">
-        <div class="bg-blue-300 p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
-            <div class="flex justify-center items-center">
+        <div class="bg-bluey-dark p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+            <div class="flex justify-center items-center bg-bluey-light p-4 rounded-lg">
                 <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
             </div>
             <br>
-            <div class="bg-blue-100 p-6 rounded-lg">
-                <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 text-center">Registrar Usuario</h2>
+            <div class="bg-bluey-light p-6 rounded-lg">
+                <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-bluey-dark text-center">Registrar Usuario</h2>
 
                 <form action="../negocio/procesarRegistro.php" method="post" class="space-y-6" onsubmit="return validarFormulario()">
                     <div>
-                        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="nombre" class="block text-sm font-medium text-bluey-dark">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                     </div>
                     <div>
-                        <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido</label>
-                        <input type="text" name="apellido" id="apellido" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="apellido" class="block text-sm font-medium text-bluey-dark">Apellido</label>
+                        <input type="text" name="apellido" id="apellido" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                     </div>
                     <div>
-                        <label for="tipoDocumento" class="block text-sm font-medium text-gray-700">Tipo de Documento</label>
-                        <select name="tipoDocumento" id="tipoDocumento" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="tipoDocumento" class="block text-sm font-medium text-bluey-dark">Tipo de Documento</label>
+                        <select name="tipoDocumento" id="tipoDocumento" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                             <option value="dni">DNI</option>
                             <option value="cedula de identidad">Cédula de Identidad</option>
                             <option value="pasaporte">Pasaporte</option>
                         </select>
                     </div>
                     <div>
-                        <label for="dni" class="block text-sm font-medium text-gray-700">Número de Documento</label>
-                        <input type="text" name="dni" id="dni" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="dni" class="block text-sm font-medium text-bluey-dark">Número de Documento</label>
+                        <input type="text" name="dni" id="dni" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                     </div>
                     <div>
-                        <label for="fechaNacimiento" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
-                        <input type="date" name="fechaNacimiento" id="fechaNacimiento" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="fechaNacimiento" class="block text-sm font-medium text-bluey-dark">Fecha de Nacimiento</label>
+                        <input type="date" name="fechaNacimiento" id="fechaNacimiento" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                     </div>
                     <div>
-                        <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                        <input type="email" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="correo" class="block text-sm font-medium text-bluey-dark">Correo Electrónico</label>
+                        <input type="email" name="correo" id="correo" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                     </div>
                     <div>
-                        <label for="passwd" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                        <input type="password" name="passwd" id="passwd" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="passwd" class="block text-sm font-medium text-bluey-dark">Contraseña</label>
+                        <input type="password" name="passwd" id="passwd" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                     </div>
                     <div>
-                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200 focus:border-blue-300">
+                        <label for="confirmPassword" class="block text-sm font-medium text-bluey-dark">Confirmar Contraseña</label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" required class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-bluey-medium focus:border-bluey-dark">
                     </div>
 
                     <div class="flex flex-col items-center space-y-4">
-                        <button type="submit" class="bg-blue-400 text-white w-full sm:w-40 p-2 rounded-md hover:bg-blue-500">Registrar</button>
-                        <a href="login.php" class="text-center bg-teal-500 text-white w-full sm:w-40 p-2 rounded-md hover:bg-teal-600">Volver</a>
+                        <button type="submit" class="bg-bluey-medium text-white w-full sm:w-40 p-2 rounded-md hover:bg-bluey-dark">Registrar</button>
+                        <a href="login.php" class="text-center bg-bluey-dark text-white w-full sm:w-40 p-2 rounded-md hover-lighten">Volver</a>
                     </div>
                 </form>
             </div>
