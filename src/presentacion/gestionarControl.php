@@ -1,12 +1,17 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || ($_SESSION["tipoUsuario"] !== "admin" && $_SESSION["tipoUsuario"] !== "superadmin")) {
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    ($_SESSION["tipoUsuario"] !== "admin" &&
+        $_SESSION["tipoUsuario"] !== "superadmin")
+) {
     header("Location: /lostpaws/presentacion/login.php");
     exit();
 }
 
-require_once '../datos/control.php';
+require_once "../datos/control.php";
 $controlObj = new Control();
 $controles = $controlObj->listarControlesEnRevision();
 ?>
@@ -21,14 +26,13 @@ $controles = $controlObj->listarControlesEnRevision();
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* Estilo para el header */
         #header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffff; /* Color de fondo del header */
-            z-index: 9999; /* Asegura que el header esté por encima del contenido */
+            background-color: #ffffff;
+            z-index: 9999;
         }
     </style>
 </head>
@@ -36,10 +40,10 @@ $controles = $controlObj->listarControlesEnRevision();
     <div id="header">
         <?php include "../components/header3.html"; ?>
     </div>
-    <br>
+    <br><br>
     <div id="main-content" class='min-h-screen'>
         <div class="container mx-auto p-4">
-            <div class="">
+            <div class=""><br><br>
                 <h1 class="text-3xl font-bold mb-6">Control adopciones</h1>
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
@@ -52,40 +56,46 @@ $controles = $controlObj->listarControlesEnRevision();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                if (!empty($controles)) {
-                                    foreach ($controles as $control) {
-                                        echo "<tr>";
-                                        echo "<td class='py-2 px-4 border-b'>{$control["idadopcion"]}</td>";
-                                        echo "<td class='py-2 px-4 border-b'>{$control["fechacontrol"]}</td>";
-                                        echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white 
+                            <?php if (!empty($controles)) {
+                                foreach ($controles as $control) {
+                                    echo "<tr>";
+                                    echo "<td class='py-2 px-4 border-b'>{$control["idadopcion"]}</td>";
+                                    echo "<td class='py-2 px-4 border-b'>{$control["fechacontrol"]}</td>";
+                                    echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white
                                         p-2 rounded-md hover:bg-blue-600 verControl'
                                         data-id='{$control["idcontrol"]}'
                                         data-nrocontrol='{$control["nrocontrol"]}'
-                                        data-foto1='{$control["foto1"]}' data-archivo='{$control["archivo"]}' 
-                                        data-foto2='{$control["foto2"]}' data-foto3='{$control["foto3"]}' 
+                                        data-foto1='{$control["foto1"]}' data-archivo='{$control["archivo"]}'
+                                        data-foto2='{$control["foto2"]}' data-foto3='{$control["foto3"]}'
                                         data-foto4='{$control["foto4"]}'>Ver control</button></td>";
-                                    
-                                        echo "<td class='py-2 px-4 border-b'>";
-                                        echo "<a href='../negocio/aceptarControl.php?idcontrol=" . htmlspecialchars($control["idcontrol"]) . "' class='bg-green-500 mr-2 text-white p-2 rounded-md hover:bg-green-600'>Aceptar</a>";
-                                        echo "<a href='../negocio/rechazarControl.php?idcontrol=" . htmlspecialchars($control["idcontrol"]) . "' class='bg-red-500 text-white p-2 rounded-md hover:bg-red-600'>Rechazar</a>";
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                } else {
-                                    echo "<tr><td colspan='4' class='py-2 px-4 border-b'>No hay controles en revisión.</td></tr>";
+
+                                    echo "<td class='py-2 px-4 border-b'>";
+                                    echo "<a href='../negocio/aceptarControl.php?idcontrol=" .
+                                        htmlspecialchars(
+                                            $control["idcontrol"]
+                                        ) .
+                                        "' class='bg-green-400 mr-2 text-white p-2 rounded-md hover:bg-green-500'>Aceptar</a>";
+                                    echo "<a href='../negocio/rechazarControl.php?idcontrol=" .
+                                        htmlspecialchars(
+                                            $control["idcontrol"]
+                                        ) .
+                                        "' class='bg-red-400 text-white p-2 rounded-md hover:bg-red-500'>Rechazar</a>";
+                                    echo "</td>";
+                                    echo "</tr>";
                                 }
-                            ?>
+                            } else {
+                                echo "<tr><td colspan='4' class='py-2 px-4 border-b'>No hay controles en revisión.</td></tr>";
+                            } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
+            <br><br><a href="dashAdmin.php" class="bg-bluey-dark hover:bg-bluey-medium text-white p-2 rounded-md">Volver</a>
         </div>
     </div>
 
     <?php include "../components/footer.html"; ?>
-    
+
     <div id="modalControl" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pb-20 text-center xl:block xl:p-20">
             <div class="fixed inset-0 bg-gray-300 bg-opacity-80 transition-opacity" aria-hidden="true"></div>
