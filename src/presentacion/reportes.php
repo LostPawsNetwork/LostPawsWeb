@@ -23,6 +23,7 @@ $solicitudesAprobadas = $usuario->obtenerSolicitudesAprobadadas();
 $totalCanesAdoptados = $can->listarCanesAdoptados();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,8 +34,16 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-100">
+<?php include "../components/header3.html"; ?>
+<br><br><br><br>
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold mb-6">Reportes</h1>
+
+        <div class="flex justify-end mb-6">
+            <a href="../presentacion/dashAdmin.php">
+                <button class="bg-bluey-dark text-white w-full p-3 rounded-md hover-darken">Volver</button>
+            </a>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Total de Usuarios -->
