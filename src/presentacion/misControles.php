@@ -53,28 +53,32 @@ usort($controles, function($a, $b) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Controles</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
+        .bg-bluey-light {
+            background-color: #d4eaf7; /* Color del primer bloque */
+        }
+
+        .bg-bluey-medium {
+            background-color: #80c4f4; /* Color del segundo bloque */
+        }
+
+        .bg-bluey-dark {
+            background-color: #4a4e78; /* Color del tercer bloque */
+        }
+
+        .hover-lighten:hover {
+            filter: brightness(1.1); /* Aclara el elemento un 10% */
+        }
+
+        .text-bluey-dark {
+            color: #4a4e78;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            padding: 20px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+
         .subir-control-btn {
             padding: 8px 12px;
             background-color: #4CAF50;
@@ -82,13 +86,15 @@ usort($controles, function($a, $b) {
             border: none;
             cursor: pointer;
             border-radius: 4px;
-            text-decoration: none; /* Eliminar el subrayado */
-            display: inline-block; /* Asegurar que se comporte como un botón */
-            text-align: center; /* Centrar el texto */
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
+
         .subir-control-btn:hover {
             background-color: #45a049;
         }
+
         .subir-control-btn[disabled] {
             background-color: #cccccc;
             color: #666666;
@@ -96,52 +102,65 @@ usort($controles, function($a, $b) {
         }
     </style>
 </head>
-<body>
-    <h1>Mis Controles</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Número de Control</th>
-                <th>Fecha de Control</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($controles)) : ?>
-                <?php foreach ($controles as $control) : ?>
-                    <?php
-                        $fechaControl = new DateTime($control['fechacontrol']);
-                        $fechaActual = new DateTime();
-                        $estado = $control['estado'];
-                        $deshabilitarBoton = $fechaControl > $fechaActual || $estado === 'En revisión' || $estado === 'Aceptado';
-                        if ($estado === 'Aceptado') {
-                            $textoBoton = 'Aceptado';
-                        } elseif ($estado === 'En revisión') {
-                            $textoBoton = 'En revisión';
-                        } else {
-                            $textoBoton = 'Subir Control';
-                        }
-                    ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($control['nrocontrol']); ?></td>
-                        <td><?php echo htmlspecialchars($control['fechacontrol']); ?></td>
-                        <td><?php echo htmlspecialchars($control['estado']); ?></td>
-                        <td>
-                            <?php if ($deshabilitarBoton) : ?>
-                                <button class="subir-control-btn" disabled><?php echo htmlspecialchars($textoBoton); ?></button>
-                            <?php else : ?>
-                                <a href="subirControl.php?idControl=<?php echo htmlspecialchars($control['idcontrol']); ?>&nroControl=<?php echo htmlspecialchars($control['nrocontrol']); ?>" class="subir-control-btn">Subir Control</a>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <tr>
-                    <td colspan="4">No hay controles registrados.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+<body class="bg-bluey-dark h-screen font-sans relative overflow-hidden">
+    <div id="header">
+        <?php include "../components/header3.html"; ?>
+    </div>
+    <br><br><br><br>
+    <div class="flex h-full overflow-hidden">
+        <?php include "../components/sidebar2.php"; ?>
+        <div class="flex-1 overflow-y-auto p-4">
+            <h1 class="text-3xl font-bold mb-4 text-white">Mis Controles</h1>
+            <div class="overflow-x-auto bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full border border-gray-200 rounded-lg text-center">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-2 px-4 border-b">Número de Control</th>
+                            <th class="py-2 px-4 border-b">Fecha de Control</th>
+                            <th class="py-2 px-4 border-b">Estado</th>
+                            <th class="py-2 px-4 border-b">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($controles)) : ?>
+                            <?php foreach ($controles as $control) : ?>
+                                <?php
+                                    $fechaControl = new DateTime($control['fechacontrol']);
+                                    $fechaActual = new DateTime();
+                                    $estado = $control['estado'];
+                                    $deshabilitarBoton = $fechaControl > $fechaActual || $estado === 'En revisión' || $estado === 'Aceptado';
+                                    if ($estado === 'Aceptado') {
+                                        $textoBoton = 'Aceptado';
+                                    } elseif ($estado === 'En revisión') {
+                                        $textoBoton = 'En revisión';
+                                    } else {
+                                        $textoBoton = 'Subir Control';
+                                    }
+                                ?>
+                                <tr class="<?php echo $estado === 'Aceptado' ? 'bg-green-100' : ($estado === 'En revisión' ? 'bg-yellow-100' : 'bg-white'); ?>">
+                                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($control['nrocontrol']); ?></td>
+                                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($control['fechacontrol']); ?></td>
+                                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($control['estado']); ?></td>
+                                    <td class="py-2 px-4 border-b">
+                                        <?php if ($deshabilitarBoton) : ?>
+                                            <button class="subir-control-btn" disabled><?php echo htmlspecialchars($textoBoton); ?></button>
+                                        <?php else : ?>
+                                            <a href="subirControl.php?idControl=<?php echo htmlspecialchars($control['idcontrol']); ?>&nroControl=<?php echo htmlspecialchars($control['nrocontrol']); ?>" class="subir-control-btn">Subir Control</a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="4" class="py-2 px-4 border-b">No hay controles registrados.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <?php include "../components/footer.html"; ?>
+    <script src="../scripts/dynamic.js"></script>
 </body>
 </html>
