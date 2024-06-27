@@ -62,7 +62,7 @@ $examenes = $examenAptitud->obtenerExamenesAptitud();
             <div class="">
                 <h1 class="text-3xl font-bold mb-6">Exámenes</h1>
                 <div class="flex justify-end space-x-2 mb-4">
-                    <a href="https://docs.google.com/forms/d/14hm1OzFjjb7r6ol2VSea5h8c9fWQHjI0_D8rv2a8hdc/edit#response=ACYDBNh21KQVFfxu9cXFhjdG8VlTZQ-kz2LL8XMczl9W9oqPo6iJwTDXaRwLDEvhyA" class="bg-blue-400 hover:bg-blue-500 text-white p-2 rounded-md" target="_blank">Ver respuestas</a>
+                 <a href="https://docs.google.com/forms/d/14hm1OzFjjb7r6ol2VSea5h8c9fWQHjI0_D8rv2a8hdc/edit#response=ACYDBNh21KQVFfxu9cXFhjdG8VlTZQ-kz2LL8XMczl9W9oqPo6iJwTDXaRwLDEvhyA" class="bg-blue-400 hover:bg-blue-500 text-white p-2 rounded-md" target="_blank">Ver respuestas</a>
                     <a href="dashAdmin.php" class="bg-bluey-dark hover:bg-bluey-medium text-white p-2 rounded-md">Volver</a>
                 </div>
                 <div class="overflow-x-auto">
