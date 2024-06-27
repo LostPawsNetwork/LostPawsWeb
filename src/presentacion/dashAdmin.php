@@ -34,7 +34,7 @@ if (
       margin: 0;
     }
 
-    .container {
+    .containerdash {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -102,7 +102,7 @@ if (
   <div class="">
     <?php include "../components/header3.html"; ?>
     <div class="bodydash">
-      <div class="container mt-20 ml-32 text-center">
+      <div class="containerdash mt-20 text-center">
         <h1>Panel de Administrador</h1>
         <div class="panel-container">
           <div class="panel active" style="background-image: url('../assets/images/gestionarCan.jpg');">
