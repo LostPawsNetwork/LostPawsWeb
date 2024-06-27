@@ -9,23 +9,28 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bg-bluey-light {
-            background-color: #d4eaf7; /* Color del primer bloque */
+            background-color: #d4eaf7;
         }
 
         .bg-bluey-medium {
-            background-color: #80c4f4; /* Color del segundo bloque */
+            background-color: #80c4f4;
         }
 
         .bg-bluey-dark {
-            background-color: #4a4e78; /* Color del tercer bloque */
+            background-color: #4a4e78;
         }
 
         .hover-lighten:hover {
-            filter: brightness(1.1); /* Aclara el elemento un 10% */
+            filter: brightness(1.1);
         }
 
         .text-bluey-dark {
             color: #4a4e78;
+        }
+
+        .form-container {
+            max-height: calc(100vh - 10rem);
+            overflow-y: auto;
         }
     </style>
     <script>
@@ -51,7 +56,7 @@
     <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
 
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full px-4">
-        <div class="bg-bluey-dark p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+        <div class="bg-bluey-dark p-4 sm:p-8 rounded-lg shadow-md w-full max-w-md mx-auto form-container">
             <div class="flex justify-center items-center bg-bluey-light p-4 rounded-lg">
                 <img src="../assets/images/logoLostPaws.png" alt="Logo" class="h-20" />
             </div>

@@ -110,7 +110,7 @@ if (
         </a>
       </div>
       <div class="panel" style="background-image: url('../assets/images/gestionarSolicitud.jpeg');">
-        <a href="gestionarSolicitudUsuario.php">
+        <a href="gestionarSolicitud.php">
           <h3>Gestionar Solicitudes</h3>
         </a>
       </div>
