@@ -112,7 +112,7 @@ if ($datosUsuario !== false && !empty($datosUsuario)) {
         </div>
 
         <div class="flex justify-center">
-            <button type="submit" class="bg-blue-600 text-white w-full p-3 rounded-md hover:bg-blue-700">Actualizar Perfil</button>
+            <button type="submit" class="bg-bluey-dark text-white w-full p-3 rounded-md hover-darken">Actualizar Perfil</button>
         </div>
     </form>
 </div>

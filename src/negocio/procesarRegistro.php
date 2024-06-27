@@ -32,7 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../presentacion/landingPage.php");
         exit();
     } else {
-        echo "Error al registrar el usuario.";
+        echo "<script>
+                alert('Hubo un error al registrar el usuario. Por favor, intente de nuevo.');
+                window.location.href = '../presentacion/registroUsuario.php';
+              </script>";
+        exit();
     }
 }
 ?>

@@ -130,52 +130,38 @@
                     <div class="container mx-auto text-center mt-16 mb-16">
                         <h2 class="text-3xl font-bold mb-4 text-bluey-dark">Historias de Éxito</h2>
                         <p class="text-bluey-dark">Descubre las historias de mascotas y dueños felices gracias a nuestra ayuda.</p>
-                        <div id="carousel-historias" class="owl-carousel flex flex-row">
-                            <div class="max-w-lg w-full lg:flex rounded shadow m-5 bg-white">
-                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/perro1.jpg')">
-                                </div>
+                        <br>
+                        <div class="flex justify-center gap-6">
+                            <div class="w-full sm:w-1/2 md:w-1/3 p-2 flex flex-col items-center testimonial-card bg-white rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-105">
+                                <img src="assets/images/canes/perro1.jpg" alt="Chocolate" class="w-48 h-48 object-cover rounded-lg">
                                 <div class="p-4 flex flex-col justify-between leading-normal text-left">
-                                    <div class="mb-8">
-                                        <div class="text-bluey-dark font-bold text-xl mb-2">Chocolate</div>
-                                        <p class="text-bluey-dark text-base">Chocolate era un can que se encontraba en situación de calle hasta que un equipo de rescatistas lo pudieron llevar a Cruz Azul, donde se le dió la atención necesaria para poder ser adoptado por una gran familia</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="text-sm">
-                                            <p class="text-bluey-dark leading-none">Jonathan Reinink</p>
-                                            <p class="text-gray-600">Aug 18</p>
-                                        </div>
+                                    <h3 class="text-xl font-bold mt-4 text-bluey-dark">Chocolate</h3>
+                                    <p class="text-bluey-dark">Chocolate era un can que se encontraba en situación de calle hasta que un equipo de rescatistas lo pudieron llevar a Cruz Azul, donde se le dió la atención necesaria para poder ser adoptado por una gran familia.</p>
+                                    <div class="text-sm mt-4">
+                                        <p class="text-bluey-dark leading-none">Jonathan Reinink</p>
+                                        <p class="text-gray-600">Aug 18</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="max-w-lg w-full lg:flex rounded shadow m-5 bg-white">
-                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/perro2.jpg')">
-                                </div>
+                            <div class="w-full sm:w-1/2 md:w-1/3 p-2 flex flex-col items-center testimonial-card bg-white rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-105">
+                            <img src="assets/images/canes/perro2.jpg" alt="Rocko" class="w-48 h-48 object-cover rounded-lg">
                                 <div class="p-4 flex flex-col justify-between leading-normal text-left">
-                                    <div class="mb-8">
-                                        <div class="text-bluey-dark font-bold text-xl mb-2">Luna</div>
-                                        <p class="text-bluey-dark text-base">Luna era una perra que se encontraba en una situación de abandono hasta que fue rescatada por un equipo de voluntarios</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="text-sm">
-                                            <p class="text-bluey-dark leading-none">Maria Pérez</p>
-                                            <p class="text-gray-600">Sep 10</p>
-                                        </div>
+                                    <h3 class="text-xl font-bold mt-4 text-bluey-dark">Rocko</h3>
+                                    <p class="text-bluey-dark">Rocko, un hermoso labrador de 5 años fue encontrado abandonado en un parque, después de su rescate y rehabilitación, encontró una familia amorosa que le dió una segunda oportunidad.</p>
+                                    <div class="text-sm mt-4">
+                                        <p class="text-bluey-dark leading-none">Sarah Finn</p>
+                                        <p class="text-gray-600">Sept 22</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="max-w-lg w-full lg:flex rounded shadow m-5 bg-white">
-                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/perro3.jpg')">
-                                </div>
+                            <div class="w-full sm:w-1/2 md:w-1/3 p-2 flex flex-col items-center testimonial-card bg-white rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-105">
+                            <img src="assets/images/canes/perro3.jpg" alt="Canela" class="w-48 h-48 object-cover rounded-lg">
                                 <div class="p-4 flex flex-col justify-between leading-normal text-left">
-                                    <div class="mb-8">
-                                        <div class="text-bluey-dark font-bold text-xl mb-2">Lucas</div>
-                                        <p class="text-bluey-dark text-base">Era un perro que se encontraba en una situación de maltrato hasta que fue rescatado por una organización de protección animal</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="text-sm">
-                                            <p class="text-bluey-dark leading-none">Mauricio García</p>
-                                            <p class="text-gray-600">Jun 29</p>
-                                        </div>
+                                    <h3 class="text-xl font-bold mt-4 text-bluey-dark">Canela</h3>
+                                    <p class="text-bluey-dark">Canela fue encontrada herida y asustada en las calles. Después de recibir tratamiento médico y mucho cariño, se convirtió en la mascota favorita de su nueva familia.</p>
+                                    <div class="text-sm mt-4">
+                                        <p class="text-bluey-dark leading-none">Mark Johnson</p>
+                                        <p class="text-gray-600">Oct 11</p>
                                     </div>
                                 </div>
                             </div>
