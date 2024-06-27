@@ -100,11 +100,31 @@ usort($controles, function($a, $b) {
             color: #666666;
             cursor: not-allowed;
         }
+
+        .sidebar {
+            background-color: #4a4e78;
+            color: white;
+            min-height: 100vh;
+            width: 250px;
+            padding: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px 0;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #80c4f4;
+        }
+
     </style>
 </head>
 <body class="bg-bluey-dark h-screen font-sans relative overflow-hidden">
     <div id="header">
-        <?php include "../components/header3.html"; ?>
+        <?php include "../components/header2.html"; ?>
     </div>
     <br><br><br><br>
     <div class="flex h-full overflow-hidden">
