@@ -1,5 +1,5 @@
 <?php
-require_once '../config/neon.php';
+require_once "../config/neon.php";
 
 class Control
 {
@@ -15,7 +15,7 @@ class Control
     private $archivo;
     private $estado;
 
-    function __construct() 
+    function __construct()
     {
         $this->conn = getPDOConnection();
     }
@@ -24,8 +24,10 @@ class Control
     {
         $fechaActual = new DateTime();
         $estado = "Pendiente";
-    
-        $stmt = $this->conn->prepare("INSERT INTO control (fechaControl, idAdopcion, nroControl, foto1, foto2, foto3, foto4, archivo, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $stmt = $this->conn->prepare(
+            "INSERT INTO control (fechaControl, idAdopcion, nroControl, foto1, foto2, foto3, foto4, archivo, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
         $stmt->bindParam(1, $fechaControl);
         $stmt->bindParam(2, $idAdopcion, PDO::PARAM_INT);
         $stmt->bindParam(3, $nroControl, PDO::PARAM_INT);
@@ -35,31 +37,35 @@ class Control
         $stmt->bindParam(7, $foto4);
         $stmt->bindParam(8, $archivo);
         $stmt->bindParam(9, $estado);
-    
+
         for ($i = 1; $i <= 12; $i++) {
-            $fechaControl = $fechaActual->modify('+1 month')->format('Y-m-d');
+            $fechaControl = $fechaActual->modify("+1 month")->format("Y-m-d");
             $nroControl = $i;
             $foto1 = null;
             $foto2 = null;
             $foto3 = null;
             $foto4 = null;
             $archivo = null;
-    
+
             if ($stmt->execute()) {
             } else {
-                echo "Error al registrar el control $nroControl: " . $stmt->errorInfo()[2] . "<br>";
+                echo "Error al registrar el control $nroControl: " .
+                    $stmt->errorInfo()[2] .
+                    "<br>";
             }
         }
 
-        header("Location: /lostpaws/presentacion/gestionarSolicitudUsuario.php");
+        header("Location: /lostpaws/presentacion/gestionarSolicitud.php");
         exit();
-    
+
         $stmt->closeCursor();
     }
 
     public function listarControles($idAdopcion)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM control WHERE idAdopcion = ?");
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM control WHERE idAdopcion = ?"
+        );
         $stmt->bindParam(1, $idAdopcion, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
@@ -73,7 +79,9 @@ class Control
 
     public function obtenerControl($idAdopcion)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM control WHERE idAdopcion = ?");
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM control WHERE idAdopcion = ?"
+        );
         $stmt->bindParam(1, $idAdopcion, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
@@ -85,19 +93,26 @@ class Control
         }
     }
 
-    public function rellenarControl($idControl, $foto1Path, $archivoPath, $foto2Path, $foto3Path, $foto4Path)
-    {
-        $estado = 'En revisión';
+    public function rellenarControl(
+        $idControl,
+        $foto1Path,
+        $archivoPath,
+        $foto2Path,
+        $foto3Path,
+        $foto4Path
+    ) {
+        $estado = "En revisión";
 
-        $sql = "UPDATE control SET foto1 = :foto1, archivo = :archivo, foto2 = :foto2, foto3 = :foto3, foto4 = :foto4, estado = :estado WHERE idControl = :idControl";
+        $sql =
+            "UPDATE control SET foto1 = :foto1, archivo = :archivo, foto2 = :foto2, foto3 = :foto3, foto4 = :foto4, estado = :estado WHERE idControl = :idControl";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':foto1', $foto1Path);
-        $stmt->bindParam(':archivo', $archivoPath);
-        $stmt->bindParam(':foto2', $foto2Path);
-        $stmt->bindParam(':foto3', $foto3Path);
-        $stmt->bindParam(':foto4', $foto4Path);
-        $stmt->bindParam(':estado', $estado);
-        $stmt->bindParam(':idControl', $idControl);
+        $stmt->bindParam(":foto1", $foto1Path);
+        $stmt->bindParam(":archivo", $archivoPath);
+        $stmt->bindParam(":foto2", $foto2Path);
+        $stmt->bindParam(":foto3", $foto3Path);
+        $stmt->bindParam(":foto4", $foto4Path);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":idControl", $idControl);
 
         if ($stmt->execute()) {
             return true;
@@ -105,10 +120,12 @@ class Control
             return false;
         }
     }
-    
+
     public function listarControlesEnRevision()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM control WHERE estado = 'En revisión'");
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM control WHERE estado = 'En revisión'"
+        );
         if ($stmt->execute()) {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
@@ -118,37 +135,43 @@ class Control
 
     public function aceptarControl($idControl)
     {
-        $stmt = $this->conn->prepare("UPDATE control SET estado = 'Aceptado' WHERE idcontrol = :idControl");
-        $stmt->bindParam(':idControl', $idControl, PDO::PARAM_INT);
-        
+        $stmt = $this->conn->prepare(
+            "UPDATE control SET estado = 'Aceptado' WHERE idcontrol = :idControl"
+        );
+        $stmt->bindParam(":idControl", $idControl, PDO::PARAM_INT);
+
         try {
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            
-            error_log('Error al aceptar el control: ' . $e->getMessage());
+            error_log("Error al aceptar el control: " . $e->getMessage());
             return false;
         }
     }
 
     public function rechazarControl($idControl)
     {
-        $stmt = $this->conn->prepare("UPDATE control SET estado = 'Rechazado' WHERE idcontrol = :idControl");
-        $stmt->bindParam(':idControl', $idControl, PDO::PARAM_INT);
-        
+        $stmt = $this->conn->prepare(
+            "UPDATE control SET estado = 'Rechazado' WHERE idcontrol = :idControl"
+        );
+        $stmt->bindParam(":idControl", $idControl, PDO::PARAM_INT);
+
         try {
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            error_log('Error al rechazar el control: ' . $e->getMessage());
+            error_log("Error al rechazar el control: " . $e->getMessage());
             return false;
         }
     }
 
-    public function obtenerControlPorId($idcontrol) {
-        $stmt = $this->conn->prepare("SELECT * FROM control WHERE idcontrol = :idcontrol");
-        $stmt->bindParam(':idcontrol', $idcontrol, PDO::PARAM_INT);
-        
+    public function obtenerControlPorId($idcontrol)
+    {
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM control WHERE idcontrol = :idcontrol"
+        );
+        $stmt->bindParam(":idcontrol", $idcontrol, PDO::PARAM_INT);
+
         if ($stmt->execute()) {
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
