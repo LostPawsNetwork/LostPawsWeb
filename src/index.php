@@ -132,7 +132,7 @@
                         <p class="text-bluey-dark">Descubre las historias de mascotas y dueños felices gracias a nuestra ayuda.</p>
                         <div id="carousel-historias" class="owl-carousel flex flex-row">
                             <div class="max-w-lg w-full lg:flex rounded shadow m-5 bg-white">
-                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/adoptados/perro1.jpg')">
+                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/perro1.jpg')">
                                 </div>
                                 <div class="p-4 flex flex-col justify-between leading-normal text-left">
                                     <div class="mb-8">
@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="max-w-lg w-full lg:flex rounded shadow m-5 bg-white">
-                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/adoptados/perro2.jpg')">
+                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/perro2.jpg')">
                                 </div>
                                 <div class="p-4 flex flex-col justify-between leading-normal text-left">
                                     <div class="mb-8">
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             <div class="max-w-lg w-full lg:flex rounded shadow m-5 bg-white">
-                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/adoptados/perro3.jpg')">
+                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded text-center overflow-hidden" style="background-image: url('assets/images/canes/perro3.jpg')">
                                 </div>
                                 <div class="p-4 flex flex-col justify-between leading-normal text-left">
                                     <div class="mb-8">
