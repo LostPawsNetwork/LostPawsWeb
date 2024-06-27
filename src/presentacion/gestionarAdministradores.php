@@ -1,11 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true 
-|| ($_SESSION['tipoUsuario'] !== 'superadmin')) 
-{
+if (
+    !isset($_SESSION["loggedin"]) ||
+    $_SESSION["loggedin"] !== true ||
+    $_SESSION["tipoUsuario"] !== "superadmin"
+) {
     header("Location: /lostpaws/presentacion/login.php");
-    exit;
+    exit();
 }
 
 include "../datos/usuario.php";
@@ -21,19 +23,17 @@ include "../datos/usuario.php";
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* Estilo para el header */
         #header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffff; /* Color de fondo del header */
-            z-index: 9999; /* Asegura que el header esté por encima del contenido */
+            background-color: #ffffff;
+            z-index: 9999;
         }
 
-        /* Estilo para el contenido principal */
         #main-content {
-            margin-top: 60px; /* Ajusta el margen superior para que empiece después del header */
+            margin-top: 60px;
         }
     </style>
 </head>
@@ -44,43 +44,41 @@ include "../datos/usuario.php";
         <br>
     <div id="main-content" class='min-h-screen'>
         <div class="container mx-auto p-4">
-            <div class="">
-                <h1 class="text-3xl font-bold mb-6">Gestionar Administradores</h1>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b">ID Administración</th>
-                                <th class="py-2 px-4 border-b">Nombre</th>
-                                <th class="py-2 px-4 border-b">Correo</th>
-                                <th class="py-2 px-4 border-b">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $usuario = new Usuario();
-                            $administradores = $usuario->listarAdministradores();
-
-                            if (!empty($administradores)) {
-                                foreach ($administradores as $administrador) {
-                                    echo "<tr>";
-                                    echo "<td class='py-2 px-4 border-b'>{$administrador['idusuario']}</td>";
-                                    echo "<td class='py-2 px-4 border-b'>{$administrador['nombre']}</td>";
-                                    echo "<td class='py-2 px-4 border-b'>{$administrador['email']}</td>";
-                                    echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 
-                                    text-white p-2 rounded-md hover:bg-blue-600 editarCorreo' 
-                                    data-correo='{$administrador['email']}'>Editar</button></td>";
-                                    echo "</tr>";
-                                }
-                            } else {
-                                echo "<tr><td colspan='5' class='py-2 px-4 border-b'>No hay administradores registrados.</td></tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold">Gestionar Administradores</h1>
+                <a href="dashAdmin.php"><button class="bg-bluey-dark hover:bg-bluey-medium text-white p-2 rounded-md">Volver</button></a>
             </div>
-        <a href="dashAdmin.php"><button class="mt-5 px-4 py-2 bg-white hover:bg-gray-200 rounded-md">Volver</button></a>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg text-center">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-2 px-4 border-b">ID Administración</th>
+                            <th class="py-2 px-4 border-b">Nombre</th>
+                            <th class="py-2 px-4 border-b">Correo</th>
+                            <th class="py-2 px-4 border-b">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $usuario = new Usuario();
+                        $administradores = $usuario->listarAdministradores();
+
+                        if (!empty($administradores)) {
+                            foreach ($administradores as $administrador) {
+                                echo "<tr>";
+                                echo "<td class='py-2 px-4 border-b'>{$administrador["idusuario"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$administrador["nombre"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'>{$administrador["email"]}</td>";
+                                echo "<td class='py-2 px-4 border-b'><button class='bg-blue-500 mr-2 text-white p-2 rounded-md hover:bg-blue-600 editarCorreo' data-correo='{$administrador["email"]}'>Editar</button></td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5' class='py-2 px-4 border-b'>No hay administradores registrados.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
