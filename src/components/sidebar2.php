@@ -28,7 +28,7 @@ if (isset($_SESSION["correo"])) {
         }
 
         .sidebar-link {
-            font-size: 1.25rem;
+            font-size: 16px;
         }
     </style>
 
