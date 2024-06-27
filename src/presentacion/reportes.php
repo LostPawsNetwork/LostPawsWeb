@@ -23,7 +23,6 @@ $solicitudesAprobadas = $usuario->obtenerSolicitudesAprobadadas();
 $totalCanesAdoptados = $can->listarCanesAdoptados();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,40 +31,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
     <title>Reportes</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Estilo para el header */
-        #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ffffff;
-            z-index: 9999;
-        }
-
-        .btn-dark {
-            background-color: #4a4e78;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn-dark:hover {
-            background-color: #3b4161;
-        }
-
-        .container {
-            margin-top: 60px;
-        }
-
-        .header-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    </style>
 </head>
 <body class="bg-gray-100">
 <?php include "../components/header3.html"; ?>
@@ -79,42 +44,34 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
             </a>
         </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Total de Usuarios -->
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <canvas id="totalUsuariosChart"></canvas>
-                </div>
-
-                <!-- Total de Canes adoptados -->
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <canvas id="totalCanesadoptadosChart"></canvas>
-                </div>
-
-                <!-- Usuarios Rechazados examen aptitud-->
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <canvas id="usuariosDesaprobadosChart"></canvas>
-                </div>
-
-                <!-- Usuarios aprobados examenes aptitud -->
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <canvas id="usuariosAprobadosChart"></canvas>
-                </div>
-
-                <!-- Usuarios solicitudes aprobadas -->
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <canvas id="solicitudesAprobadasChart"></canvas>
-                </div>
-
-                <!-- Usuarios rechazados solicitud -->
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <canvas id="usuariosRechazadosChart"></canvas>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Total de Usuarios -->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <canvas id="totalUsuariosChart"></canvas>
             </div>
-        </div>
+            <!-- Total de Canes adoptados -->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <canvas id="totalCanesadoptadosChart"></canvas>
+            </div>
+            <!-- Usuarios Rechazados examen aptitud-->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <canvas id="usuariosDesaprobadosChart"></canvas>
+            </div>
+            <!-- Usuarios aprobados examenes aptitud -->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <canvas id="usuariosAprobadosChart"></canvas>
+            </div>
+            <!-- Usuarios solicitudes aprobadas -->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <canvas id="solicitudesAprobadasChart"></canvas>
+            </div>
+            <!-- Usuarios rechazados solicitud -->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <canvas id="usuariosRechazadosChart"></canvas>
+            </div>
     </div>
-
+    <br>
     <?php include "../components/footer.html"; ?>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var ctxTotalUsuarios = document.getElementById('totalUsuariosChart').getContext('2d');
@@ -137,7 +94,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
             var ctxTotalCanesadoptados = document.getElementById('totalCanesadoptadosChart').getContext('2d');
             var totalCanesadoptadosChart = new Chart(ctxTotalCanesadoptados, {
                 type: 'bar',
@@ -158,7 +114,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
             var ctxUsuariosDesaprobados = document.getElementById('usuariosDesaprobadosChart').getContext('2d');
             var usuariosDesaprobadosChart = new Chart(ctxUsuariosDesaprobados, {
                 type: 'bar',
@@ -179,8 +134,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
-
             var ctxUsuariosAprobados = document.getElementById('usuariosAprobadosChart').getContext('2d');
                         var usuariosAprobadosChart = new Chart(ctxUsuariosAprobados, {
                             type: 'bar',
@@ -201,7 +154,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                                 }
                             }
                         });
-
             var ctxUsuariosRechazados = document.getElementById('usuariosRechazadosChart').getContext('2d');
             var usuariosRechazadosChart = new Chart(ctxUsuariosRechazados, {
                 type: 'bar',
@@ -222,7 +174,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
             var ctxSolicitudesAprobadas = document.getElementById('solicitudesAprobadasChart').getContext('2d');
             var solicitudesAprobadasChart = new Chart(ctxSolicitudesAprobadas, {
                 type: 'bar',
@@ -243,7 +194,6 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     }
                 }
             });
-
         });
     </script>
 </body>
