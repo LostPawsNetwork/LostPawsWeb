@@ -61,7 +61,7 @@ $testimonios = $testimonio->obtenerTestimonios();
                             <th class="py-2 px-4 border-b">ID Testimonio</th>
                             <th class="py-2 px-4 border-b">Fecha</th>
                             <th class="py-2 px-4 border-b">Texto</th>
-                            <th class="py-2 px-4 border-b">idUsuario</th>
+                            <th class="py-2 px-4 border-b">Usuario</th>
                             <th class="py-2 px-4 border-b">Foto</th>
                         </tr>
                     </thead>
@@ -71,7 +71,7 @@ $testimonios = $testimonio->obtenerTestimonios();
                             echo "<td class='py-2 px-4 border-b'>{$testimonio["idtestimonio"]}</td>";
                             echo "<td class='py-2 px-4 border-b'>{$testimonio["fecha"]}</td>";
                             echo "<td class='py-2 px-4 border-b'>{$testimonio["texto"]}</td>";
-                            echo "<td class='py-2 px-4 border-b'>{$testimonio["idusuario"]}</td>";
+                            echo "<td class='py-2 px-4 border-b'>{$testimonio["nombre"]} {$testimonio["apellido"]}</td>";
                             echo "<td class='py-2 px-4 border-b'><img src='{$testimonio["foto"]}' alt='Foto del Testimonio' class='h-12 w-12 object-cover'></td>";
                             echo "</tr>";
                         } ?>
