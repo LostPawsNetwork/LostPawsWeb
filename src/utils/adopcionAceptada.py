@@ -17,7 +17,8 @@ subject = 'Adopción Aceptada en Lost Paws'
 body = """
 Hola,
 
-¡Felicidades! Tu solicitud de adopción ha sido aceptada. Pronto recibirás más información sobre los siguientes pasos.
+¡Felicidades! Tu solicitud de adopción ha sido aceptada. Se han habilitado los controles para tu can.
+En la barra lateral izquierda se habilitó la opción de "Mis controles" en tu cuenta, accede para subir los controles mensuales.
 
 Gracias por adoptar con nosotros.
 """
