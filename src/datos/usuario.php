@@ -211,7 +211,7 @@ class Usuario
     {
         $sql = "SELECT COUNT(*) as rechazados FROM usuario
                 INNER JOIN solicitud ON usuario.idUsuario = solicitud.idUsuario
-                WHERE solicitud.estado = 'Rechazado'";
+                WHERE solicitud.estado = 'Rechazada'";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)["rechazados"];
@@ -221,7 +221,7 @@ class Usuario
     {
         $sql = "SELECT COUNT(*) as aprobadas FROM usuario
                 INNER JOIN solicitud ON usuario.idUsuario = solicitud.idUsuario
-                WHERE solicitud.estado = 'Aprobado'";
+                WHERE solicitud.estado = 'Aceptada'";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)["aprobadas"];

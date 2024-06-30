@@ -145,9 +145,10 @@ usort($controles, function($a, $b) {
                         <?php if (!empty($controles)) : ?>
                             <?php foreach ($controles as $control) : ?>
                                 <?php
-                                    $fechaControl = new DateTime($control['fechacontrol']);
+                                    $fechaControl = new DateTime($control['fechacontrol']);      
                                     $fechaActual = new DateTime();
                                     $estado = $control['estado'];
+                                    
                                     $deshabilitarBoton = $fechaControl > $fechaActual || $estado === 'En revisión' || $estado === 'Aceptado';
                                     if ($estado === 'Aceptado') {
                                         $textoBoton = 'Aceptado';
