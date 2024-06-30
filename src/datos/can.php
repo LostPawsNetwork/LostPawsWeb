@@ -13,8 +13,6 @@ class Can
     private $observacionesMedicas;
     private $descripcion;
     private $foto1;
-    private $foto2;
-    private $foto3;
     private $estado;
 
     function __construct()
