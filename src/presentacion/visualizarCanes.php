@@ -35,7 +35,6 @@ require_once "../datos/adopcion.php";
 
 $adopcion = new Adopcion();
 $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
-
 ?>
 
 <!DOCTYPE html>
@@ -282,7 +281,8 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
 
         $('.verDetalle').on('click', function(){
             let estadoExamen = "<?php echo $estadoExamen; ?>";
-
+            let num_adopciones = "<?php echo $num_adopciones; ?>";
+            
             idCan = $(this).data('id');
             let img = $(this).data('img');
             let datos = $(this).data('datos');
@@ -292,9 +292,14 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
             // Verificar el estado del examen
             if (estadoExamen !== "Aprobado") {
                 alert("Necesitas aprobar el examen de aptitud para adoptar un can.");
-                return; // Salir de la función si el examen no está aprobado
+                return;
             }
 
+            if (num_adopciones > 0) {
+                alert("Ya adoptó a un can.");
+                return;
+            }
+            
             // Llenar el modal con los datos del perro si el examen está aprobado
             $('#foto-can').attr('src', img);
             $('#det-descripcion').text(descripcion);
