@@ -99,6 +99,7 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
                                         data-id="<?php echo $perro["idcan"]; ?>"
                                         data-descrip="<?php echo $perro["descripcion"]; ?>"
                                         data-img="<?php echo $perro["foto1"]; ?>"
+                                        data-proceso="../assets/images/proceso.png";
                                         data-obsmed="<?php echo $perro["observacionesmedicas"]; ?>"
                                         data-datos="<?php echo $perro["genero"] . " - " . $perro["edad"] . " - " . $perro["tamano"]; ?>"
                                         onclick="verDetallesHandler()"
@@ -209,33 +210,40 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
             <div class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all xl:my-8 xl:align-middle xl:max-w-2xl xl:w-full">
                 <div class="bg-white px-4 pt-4 pb-2 xl:p-6 xl:pb-2">
                     <h3 class="text-xl leading-6 font-large text-gray-900 " id="modal-title">Adoptar</h3>
+                    <br>
                     <hr>
                     <div class="xl:items-start w-full">
                         <div class="mt-3 xl:mt-0 xl:ml-4 xl:text-left">
                             <div class="mt-2 flex flex-row">
                                 <div class="basis-2/5 border border-black-30">
-                                    <!--<img class='rounded-md size-full' alt='Imagen del canino'>-->
                                     <img id="foto-can"></img>
                                 </div>
                                 <div class="basis-3/5 pl-3">
-                                    <h5>Descripción:</h5>
+                                <br>
+                                    <h5><b>Descripción:</b></h5>
                                     <span id="det-descripcion"></span>
+                                    <br>
                                 </div>
                             </div>
                             <div>
                                 <div class="pb-1 pt-2">
-                                    <h5>Datos:</h5>
+                                    <h5><b>Datos:</b></h5>
                                     <span id="det-datos"></span>
+                                    <br>
                                 </div>
                                 <hr>
+                                <br>
                                 <div class="pb-1">
-                                    <h5>Observaciones médicas:</h5>
+                                    <h5><b>Observaciones médicas:</b></h5>
                                     <span id="ob-medicas"></span>
+                                    <br>
                                 </div>
                             </div>
                             <hr>
-                            <div id="img_process">
-                                Proceso de adopción:
+                            <br>
+                            <div id="img-proceso">
+                            <b>Proceso de adopción:</b>
+                                <img id="foto-proceso"></img>
                             </div>
                         </div>
                     </div>
@@ -288,6 +296,7 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
             let datos = $(this).data('datos');
             let observaciones = $(this).data('obsmed');
             let descripcion = $(this).data('descrip');
+            let proceso = $(this).data('proceso');
 
             // Verificar el estado del examen
             if (estadoExamen !== "Aprobado") {
@@ -302,6 +311,7 @@ $num_adopciones = $adopcion->verificarAdopcion($_SESSION["idUsuario"]);
             
             // Llenar el modal con los datos del perro si el examen está aprobado
             $('#foto-can').attr('src', img);
+            $('#foto-proceso').attr('src', proceso);
             $('#det-descripcion').text(descripcion);
             $('#det-datos').text(datos);
             $('#ob-medicas').text(observaciones);
