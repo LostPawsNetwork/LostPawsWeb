@@ -138,7 +138,7 @@
                                     <h3 class="text-xl font-bold mt-4 text-bluey-dark">Chocolate</h3>
                                     <p class="text-bluey-dark">Chocolate era un can que se encontraba en situación de calle hasta que un equipo de rescatistas lo pudieron llevar a Cruz Azul, donde se le dió la atención necesaria para poder ser adoptado por una gran familia.</p>
                                     <div class="text-sm mt-4">
-                                        <p class="text-bluey-dark leading-none">Jonathan Reinink</p>
+                                        <p class="text-bluey-dark leading-none">Marco Condori</p>
                                         <p class="text-gray-600">Aug 18</p>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                     <h3 class="text-xl font-bold mt-4 text-bluey-dark">Rocko</h3>
                                     <p class="text-bluey-dark">Rocko, un hermoso labrador de 5 años fue encontrado abandonado en un parque, después de su rescate y rehabilitación, encontró una familia amorosa que le dió una segunda oportunidad.</p>
                                     <div class="text-sm mt-4">
-                                        <p class="text-bluey-dark leading-none">Sarah Finn</p>
+                                        <p class="text-bluey-dark leading-none">Andrea Diaz</p>
                                         <p class="text-gray-600">Sept 22</p>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                                     <h3 class="text-xl font-bold mt-4 text-bluey-dark">Canela</h3>
                                     <p class="text-bluey-dark">Canela fue encontrada herida y asustada en las calles. Después de recibir tratamiento médico y mucho cariño, se convirtió en la mascota favorita de su nueva familia.</p>
                                     <div class="text-sm mt-4">
-                                        <p class="text-bluey-dark leading-none">Mark Johnson</p>
+                                        <p class="text-bluey-dark leading-none">Jose Meneses</p>
                                         <p class="text-gray-600">Oct 11</p>
                                     </div>
                                 </div>

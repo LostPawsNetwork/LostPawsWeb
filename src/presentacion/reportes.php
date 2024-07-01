@@ -36,11 +36,11 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
 <?php include "../components/header3.html"; ?>
 <br><br><br><br>
     <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold mb-6">Reportes</h1>
-
-        <div class="flex justify-end mb-6">
-            <a href="../presentacion/dashAdmin.php">
-                <button class="bg-bluey-dark text-white w-full p-3 rounded-md hover-darken">Volver</button>
+        
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">Reportes</h1>
+            <a href="../presentacion/dashAdmin.php" class="ml-auto">
+                <button class="bg-bluey-dark text-white px-4 py-2 rounded-md hover-darken">Volver</button>
             </a>
         </div>
 
@@ -82,7 +82,7 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     datasets: [{
                         label: 'Total de Usuarios',
                         data: [<?php echo $totalUsuarios; ?>],
-                        backgroundColor: ['#4CAF50']
+                        backgroundColor: ['#C39BD3']
                     }]
                 },
                 options: {
@@ -102,7 +102,7 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     datasets: [{
                         label: 'Total de Canes adoptados',
                         data: [<?php echo $totalCanesAdoptados; ?>],
-                        backgroundColor: ['#4CAF50']
+                        backgroundColor: ['#F7DC6F']
                     }]
                 },
                 options: {
@@ -122,7 +122,7 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     datasets: [{
                         label: 'Examenes Desaprobados',
                         data: [<?php echo $usuariosDesaprobados; ?>],
-                        backgroundColor: ['#FF6384']
+                        backgroundColor: ['#76D7C4']
                     }]
                 },
                 options: {
@@ -142,7 +142,7 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                                 datasets: [{
                                     label: 'Examenes Aprobados',
                                     data: [<?php echo $usuariosAprobados; ?>],
-                                    backgroundColor: ['#4CAF50']
+                                    backgroundColor: ['#85C1E9']
                                 }]
                             },
                             options: {
@@ -162,7 +162,7 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     datasets: [{
                         label: 'Solicitudes Rechazadas',
                         data: [<?php echo $usuariosRechazados; ?>],
-                        backgroundColor: ['#FF6384']
+                        backgroundColor: ['#F8C471']
                     }]
                 },
                 options: {
@@ -182,7 +182,7 @@ $totalCanesAdoptados = $can->listarCanesAdoptados();
                     datasets: [{
                         label: 'Solicitudes Aprobadas',
                         data: [<?php echo $solicitudesAprobadas; ?>],
-                        backgroundColor: ['#4CAF50']
+                        backgroundColor: ['#85929E ']
                     }]
                 },
                 options: {

@@ -29,7 +29,7 @@ class Testimonio
 
     function obtenerTestimonios()
     {
-        $sql = "SELECT * FROM Testimonio";
+        $sql = "SELECT * FROM Testimonio inner join Usuario on Testimonio.idusuario = Usuario.idusuario";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
